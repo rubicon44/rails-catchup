@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # 認証（devise）
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions'   
@@ -11,6 +12,10 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
+  # post機能
   root 'goals#index'
   resources :goals
+
+  # ユーザープロフィール機能
+  resources :users, only: [:show]
 end
