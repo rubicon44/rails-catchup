@@ -10,6 +10,17 @@
   </head>
 
   <body>
+    <header>
+      <nav>
+        <ul>
+          <% if user_signed_in? %>
+            <li>ユーザー</li>
+            <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </header>
+    
     <%= yield %>
   </body>
 </html>
