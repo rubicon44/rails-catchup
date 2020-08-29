@@ -8,21 +8,18 @@
 <% if @comments.any? %>
   <% @comments.each do |comment| %>
     <div>
-        <div>
+      <div>
         <%= link_to comment.user.username, user_path(comment.user.username) unless comment.user.blank? %>
-        </div>
-        <div><%= comment.content %></div>
-        <div>
-          <%= comment.created_at %>
-          <% if comment.user == current_user %>
-            <%= link_to "削除", goal_comment_path(@goal, comment), method: :delete, data: { confirm: "本当に削除しても良いですか?" } %>
-          <% end %>
-        </div>
-        </div>
+      </div>
+      <div><%= comment.content %></div>
+      <div>
+        <%= comment.created_at %>
+        <% if comment.user == current_user %>
+          <%= link_to "削除", goal_comment_path(@goal, comment), method: :delete, data: { confirm: "本当に削除しても良いですか?" } %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 <% else %>
-  <div class="no-contents d-flex align-items-center justify-content-center mx-auto">
-    まだコメントがありません
-  </div>
+  <div>まだコメントがありません。</div>
 <% end %>
