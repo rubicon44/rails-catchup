@@ -11,6 +11,9 @@ class GoalsController < ApplicationController
     # コメント機能に使用
     @comments = @goal.comments
     @comment = @goal.comments.build
+
+    # いいね機能に使用
+    @like = Like.new
   end
 
   def new

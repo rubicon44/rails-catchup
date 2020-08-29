@@ -14,6 +14,8 @@
   <%= @goal.description %>
 </p>
 
+<%= render 'like', goal: @goal %>
+
 <%= render 'comment', comments: @comments %>
 
 <%= link_to 'Back', goals_path %>

@@ -12,11 +12,14 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
-  # post機能
+  # goal機能
   root 'goals#index'
   resources :goals
   resources :goals, only: [:index, :show, :create] do
+    # コメント機能
     resources :comments, only: [:create, :destroy]
+    # いいね機能
+    resources :likes, only: [:create, :destroy]
   end
 
   # ユーザープロフィール機能
