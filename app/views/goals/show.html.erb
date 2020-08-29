@@ -4,10 +4,38 @@
   <strong>Title:</strong>
   <%= @goal.name %>
 </p>
-
 <p>
   <strong>Text:</strong>
   <%= @goal.description %>
 </p>
+
+<h2>コメント一覧</h2>
+<%= form_with(model:[@goal, @comment], local: true) do |f| =%>
+  <%= f.text_area :content %>
+  <br>
+  <%= f.submit 'コメントする' %>
+<% end %>
+
+<% if @comments.any? %>
+  <% @comments.each do |comment| %>
+    <div>
+        <div>
+        <%= link_to comment.user.username, user_path(comment.user.username) unless comment.user.blank? %>
+        </div>
+        <div><%= comment.content %></div>
+        <div>
+          <%= comment.created_at %>
+          <% if comment.user == current_user %>
+            <a class="comment-delete" id="comment-delete-<%= comment.id %>" data-toggle="modal" data-target="#comment_modal_<%= comment.id %>">削除</a>
+          <% end %>
+        </div>
+        </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="no-contents d-flex align-items-center justify-content-center mx-auto">
+    まだコメントがありません
+  </div>
+<% end %>
 
 <%= link_to 'Back', goals_path %>

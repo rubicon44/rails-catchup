@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   # post機能
   root 'goals#index'
   resources :goals
+  resources :goals, only: [:index, :show, :create] do
+    resources :comments, only: [:create]
+  end
 
   # ユーザープロフィール機能
   resources :users, only: [:show]

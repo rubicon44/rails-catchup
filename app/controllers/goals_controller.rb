@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def index
     @goals = Goal.all
@@ -7,6 +7,11 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
+
+    # 目標詳細画面でコメント機能を使用するため。
+    @comments = @goal.comments
+    @comment = @goal.comments.build
+    # @comment = current_user.comments.new 
   end
 
   def new
