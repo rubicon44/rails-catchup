@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     @goals = Goal.all
@@ -8,10 +8,9 @@ class GoalsController < ApplicationController
   def show
     @goal = Goal.find(params[:id])
 
-    # 目標詳細画面でコメント機能を使用するため。
+    # コメント機能に使用
     @comments = @goal.comments
     @comment = @goal.comments.build
-    # @comment = current_user.comments.new 
   end
 
   def new
@@ -20,6 +19,8 @@ class GoalsController < ApplicationController
 
   def create
     @goal = Goal.new(goal_params)
+    # 下記記述を追記することによって、goalを作成した時に同時に、作成した人のidも一緒に保存される。
+    @goal.user_id = current_user.id
     @goal.save
 
     redirect_to root_url
