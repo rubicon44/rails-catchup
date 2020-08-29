@@ -16,8 +16,8 @@
       <td><%= goal.description %></td>
       
       <td><%= link_to 'Show', goal_path(goal) %></td>
-      <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
       <% if goal.user == current_user %>
+        <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
         <td><%= link_to 'Destroy', goal_path(goal), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
       <% end %>
     </tr>
