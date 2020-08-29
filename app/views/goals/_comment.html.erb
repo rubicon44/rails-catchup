@@ -5,8 +5,8 @@
   <%= f.submit 'コメントする' %>
 <% end %>
 
-<% if @comments.any? %>
-  <% @comments.each do |comment| %>
+<% if comments.any? %>
+  <% comments.each do |comment| %>
     <div>
       <div>
         <%= link_to comment.user.username, user_path(comment.user.username) unless comment.user.blank? %>
