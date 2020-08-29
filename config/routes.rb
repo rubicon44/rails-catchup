@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   root 'goals#index'
   resources :goals
   resources :goals, only: [:index, :show, :create] do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
   end
 
   # ユーザープロフィール機能

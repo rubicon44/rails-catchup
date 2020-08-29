@@ -15,6 +15,12 @@ class CommentsController < ApplicationController
     end
   end
 
+  def destroy
+    Comment.find(params[:id]).destroy
+    flash[:success] = '投稿へのコメントを削除しました。'
+    redirect_back(fallback_location: root_path)
+  end
+
   private
     def comment_params
     params.require(:comment).permit(:content)

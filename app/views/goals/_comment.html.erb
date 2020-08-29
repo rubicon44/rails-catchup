@@ -15,7 +15,7 @@
         <div>
           <%= comment.created_at %>
           <% if comment.user == current_user %>
-            <a class="comment-delete" id="comment-delete-<%= comment.id %>" data-toggle="modal" data-target="#comment_modal_<%= comment.id %>">削除</a>
+            <%= link_to "削除", goal_comment_path(@goal, comment), method: :delete, data: { confirm: "本当に削除しても良いですか?" } %>
           <% end %>
         </div>
         </div>
