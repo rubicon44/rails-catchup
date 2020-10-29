@@ -24,4 +24,7 @@ Rails.application.routes.draw do
 
   # ユーザープロフィール機能
   resources :users, only: [:show]
+
+  # 通知機能
+  resources :notifications, only: :index
 end
