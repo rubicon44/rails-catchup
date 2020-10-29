@@ -6,7 +6,8 @@ class LikesController < ApplicationController
     redirect_back(fallback_location: root_path)
 
     # いいね通知用メソッドの呼び出し
-    goal.create_notification_like!(current_user)
+    @goal = Goal.find(params[:goal_id])
+    @goal.create_notification_like!(current_user)
   end
 
   def destroy

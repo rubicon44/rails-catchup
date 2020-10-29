@@ -26,5 +26,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   # 通知機能
-  resources :notifications, only: :index
+  resources :notifications, only: [:index]
 end

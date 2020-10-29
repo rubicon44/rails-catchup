@@ -1,0 +1,48 @@
+<% notification.each do |noti| %>
+  <% visitor = noti.visitor %>
+  <% visited = noti.visited %>
+
+  <div class="col-md-6.mx-auto">
+    <div class="form-inline">
+      <span>
+        <%= link_to user_path(visitor) do %>
+          <strong>
+            <%= visitor.username %>
+          </strong>
+          <%= 'さんが' %>
+        <% end %>
+
+        <% case noti.action %>
+          <% when 'follow' %>
+            <%= "あなたをフォローしました" %>
+          <% when 'like' %>
+            <%= link_to 'あなたの投稿', noti.goal, style: "font-weight: bold;" %>
+            <%= "にいいねしました" %>
+          <% when 'comment' %>
+            <% if noti.goal.user_id == visited.id %>
+              <%= link_to "あなたの投稿", noti.goal, style: "font-weight: bold;" %>
+            <% else %>
+              <span>
+                <%= link_to goal_path(noti.goal) do %>
+                  <%= image_tag avatar_url(noti.goal.user).to_s, class: "icon_mini" %>
+                <% end %>
+                <strong>
+                  <%= noti.goal.user.username + 'さんの投稿' %>
+                </strong>
+              </span>
+            <% end %>
+            <%= "にコメントしました" %>
+            <p class="text-muted.mb-0">
+              <%= Comment.find_by(id: noti.comment_id)&.content %>
+          　</p>
+        <% end %>
+      </span>
+    </div>
+
+    <small class="text-muted text-right">
+      <%= time_ago_in_words(noti.created_at).upcase %>
+    </small>
+    <hr>
+  </div>
+
+<% end %>

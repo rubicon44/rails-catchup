@@ -17,11 +17,13 @@
             <li>管理者</li>
             <li><%= link_to "プロフィール", user_path(current_user) %></li>
             <li><%= link_to "プロフィール編集", :edit_user_registration %></li>
+            <li><%= link_to "通知", notifications_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% elsif user_signed_in? %>
             <li>ユーザー</li>
             <li><%= link_to "プロフィール", user_path(current_user) %></li>
             <li><%= link_to "プロフィール編集", :edit_user_registration %></li>
+            <li><%= link_to "通知", notifications_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% end %>
         </ul>
