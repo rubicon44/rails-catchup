@@ -6,4 +6,6 @@ class Goal < ApplicationRecord
   # いいね機能
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
+  # 通知機能
+  has_many :notifications, dependent: :destroy
 end
