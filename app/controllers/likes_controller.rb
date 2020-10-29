@@ -4,6 +4,9 @@ class LikesController < ApplicationController
   def create
     @like = current_user.likes.create(goal_id: params[:goal_id])
     redirect_back(fallback_location: root_path)
+
+    # いいね通知用メソッドの呼び出し
+    goal.create_notification_like!(current_user)
   end
 
   def destroy
