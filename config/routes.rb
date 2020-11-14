@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   # 認証（devise）
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
-    :sessions => 'users/sessions'   
-  } 
+    :sessions => 'users/sessions'
+  }
 
   devise_scope :user do
     get "user/:id", :to => "users/registrations#detail"
