@@ -3,6 +3,10 @@ class RelationshipsController < ApplicationController
     follow = current_user.active_relationships.build(follower_id: params[:user_id])
     follow.save
     redirect_to root_path
+
+    # フォロー通知用メソッドの呼び出し
+    @user = User.find(params[:user_id])
+    @user.create_notification_follow!(current_user)
   end
 
   def destroy
