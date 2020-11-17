@@ -35,7 +35,7 @@ class GoalsController < ApplicationController
 
   def update
     @goal = Goal.find(params[:id])
-  
+
     if @goal.update(goal_params)
       redirect_to @goal
     else
@@ -46,7 +46,7 @@ class GoalsController < ApplicationController
   def destroy
     @goal = Goal.find(params[:id])
     @goal.destroy
-  
+
     redirect_to goals_path
   end
 
