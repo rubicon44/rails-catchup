@@ -2,7 +2,7 @@
 
 <p>
   <strong>投稿者</strong>
-  <%= link_to @goal.user.username, user_path(@goal.user.username) unless @goal.user.blank? %>
+  <%= link_to @goal.user.username, user_path(@goal.user.id) unless @goal.user.blank? %>
 </p>
 
 <p>

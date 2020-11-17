@@ -11,6 +11,13 @@ class User < ApplicationRecord
   # いいね機能
   has_many :likes, dependent: :destroy
   has_many :like_goals, through: :likes, source: :goal
+  # フォロー機能
+  ## 自分がフォローしているユーザーとの関連
+  has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id
+  has_many :followings, through: :active_relationships, source: :follower
+  ## 自分がフォローされるユーザーとの関連
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id
+  has_many :followers, through: :passive_relationships, source: :following
   # 通知機能
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy, inverse_of: 'visitor'
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
@@ -18,5 +25,10 @@ class User < ApplicationRecord
   # いいね判定用メソッド
   def already_liked?(goal)
     self.likes.exists?(goal_id: goal.id)
+  end
+
+  # フォロー判定用メソッド
+  def already_followed?(user)
+    passive_relationships.find_by(following_id: user.id).present?
   end
 end

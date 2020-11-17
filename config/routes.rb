@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'relationships/create'
-  get 'relationships/destroy'
   # 認証（devise）
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
@@ -26,6 +24,12 @@ Rails.application.routes.draw do
 
   # ユーザープロフィール機能
   resources :users, only: [:show]
+  resources :users, only: [:show] do
+    # フォロー機能
+    resource :relationships, only: [:create, :destroy]
+    get :follows, on: :member
+    get :followers, on: :member
+  end
 
   # 通知機能
   resources :notifications, only: [:index]
