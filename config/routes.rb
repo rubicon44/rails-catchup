@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'relationships/create'
+  get 'relationships/destroy'
   # 認証（devise）
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
