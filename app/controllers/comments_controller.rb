@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
     @goal = Goal.find(params[:goal_id])
     @comment = @goal.comments.build(comment_params)
     @comment.user_id = current_user.id
-    
+
     if @comment.save
       # コメント通知用メソッドの呼び出し
       @goal.create_notification_comment!(current_user, @comment.id)
@@ -28,4 +28,4 @@ class CommentsController < ApplicationController
     def comment_params
     params.require(:comment).permit(:content)
   end
-end  
+end
