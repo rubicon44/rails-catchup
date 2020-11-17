@@ -24,7 +24,7 @@
             <% else %>
               <span>
                 <%= link_to goal_path(noti.goal) do %>
-                  <%= image_tag avatar_url(noti.goal.user).to_s, class: "icon_mini" %>
+                  <%= image_tag avatar_url(noti.goal.user).to_s %>
                 <% end %>
                 <strong>
                   <%= noti.goal.user.username + 'さんの投稿' %>

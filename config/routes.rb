@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   # ユーザープロフィール機能
-  resources :users, only: [:show]
+  resources :users, only: [:show, :edit, :update]
   resources :users, only: [:show] do
     # フォロー機能
     resource :relationships, only: [:create, :destroy]
@@ -37,4 +37,8 @@ Rails.application.routes.draw do
 
   # 通知機能
   resources :notifications, only: [:index]
+
+  # チャット機能
+  resources :messages, only: [:create]
+  resources :chat_rooms, only: [:create, :index, :show]
 end
