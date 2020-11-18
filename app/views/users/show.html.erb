@@ -2,6 +2,7 @@
 
 <p>名前：<%= @user.username %></p>
 <p>メールアドレス : <%= @user.email %></p>
+<p>自己紹介 : <%= @user.profile %></p>
 
 <% unless @user.id == current_user.id %>
   <% if (current_user.already_followed? @user) && (@user.already_followed? current_user)  %>
