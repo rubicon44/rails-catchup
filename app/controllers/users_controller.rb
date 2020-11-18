@@ -3,6 +3,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = User.where(id: params[:id])
 
+    # プロフィール用
+    @goals = @user.goals.page(params[:page]).per(24)
+    @likes = @user.like_goals.page(params[:page]).per(24)
+
     # チャット機能用
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)

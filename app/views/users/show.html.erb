@@ -18,17 +18,35 @@
   <% end %>
 <% end %>
 
-<p><%=link_to "フォロー", follows_user_path(@user.id) %></p>
-<p><%=link_to "フォロワー", followers_user_path(@user.id) %></p>
+<p><%=link_to "フォロー", follows_user_path(@user.id) %>
+<%=link_to "フォロワー", followers_user_path(@user.id) %></p>
 
 <% @users.each do |user| %>
   <% if current_user != user %>
       <% if user.already_followed?(current_user) %>
           <p><%=link_to "フォロー中", user_relationships_path(user.id), method: :delete %></p>
       <% else %>
-          <p><%=link_to "フォローする", user_relationships_path(user.id), method: :post %></p>
+          <p><%=link_to "フォローする", user_relationships_path(user.id), method: :goal %></p>
       <% end %>
   <% end %>
 <% end %>
+
+<div>
+  <h3>目標</h3>
+  <% if @user.goals.any? %>
+    <%= render 'show_goals', group: @goals %>
+  <% else %>
+    <div>投稿がありません</div>
+  <% end %>
+</div>
+
+<div>
+  <h3>いいね</h3>
+  <% if @user.likes.any? %>
+    <%= render 'show_likes', group: @likes %>
+  <% else %>
+    <div>"いいね！" した投稿がありません</div>
+  <% end %>
+</div>
 
 <%= link_to 'Back', goals_path %>

@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th>UserName</th>
+    <th>Name</th>
+  </tr>
+
+  <% group.each do |goal| %>
+    <tr>
+      <td><%= link_to "@#{goal.user.username}", user_path(goal.user) %></td>
+      <td><%= link_to goal.name, goal_path(goal) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<div>
+  <%= paginate group %>
+  <div">
+    <button>さらに表示</button>
+  </div>
+</div>
