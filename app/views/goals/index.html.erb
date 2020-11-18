@@ -1,3 +1,9 @@
+<%= search_form_for @search do |f| %>
+  <%= f.label :name, "名前 & 内容検索" %>
+  <%= f.search_field :name_or_description_cont %>
+  <%= f.submit "検索" %>
+<% end %>
+
 <h1>Goals#index</h1>
 
 <div><%= link_to '目標追加', new_goal_path(@goals) %></div>

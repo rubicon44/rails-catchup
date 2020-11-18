@@ -2,7 +2,9 @@ class GoalsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @goals = Goal.all
+    # @goals = Goal.all
+    @search = Goal.ransack(params[:q])
+    @goals = @search.result
   end
 
   def show
