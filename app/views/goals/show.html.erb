@@ -14,6 +14,20 @@
   <%= @goal.description %>
 </p>
 
+<p>
+  <strong>Status:</strong>
+  <% case @goal.status %>
+  <% when 0 then %>
+    <td>未対応</td>
+  <% when 1 then %>
+    <td>処理中</td>
+  <% when 2 then %>
+    <td>処理済み</td>
+  <% when 3 then %>
+    <td>完了</td>
+  <% end %>
+</p>
+
 <%= render 'like', goal: @goal %>
 <%= render 'comment', comments: @comments %>
 

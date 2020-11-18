@@ -3,6 +3,7 @@ class GoalsController < ApplicationController
 
   def index
     # @goals = Goal.all
+    # 目標の検索機能
     @search = Goal.ransack(params[:q])
     @goals = @search.result
   end
@@ -54,6 +55,6 @@ class GoalsController < ApplicationController
 
   private
   def goal_params
-    params.require(:goal).permit(:name, :description)
+    params.require(:goal).permit(:name, :description, :status)
   end
 end
