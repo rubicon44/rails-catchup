@@ -1,5 +1,6 @@
 <h1>プロフィール</h1>
 
+<p><%= image_tag(@user.avatar.url, size: "250x250", alt: "avatar image") %></p>
 <p>名前：<%= @user.username %></p>
 <p>メールアドレス : <%= @user.email %></p>
 <p>自己紹介 : <%= @user.profile %></p>

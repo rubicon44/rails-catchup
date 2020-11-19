@@ -4,6 +4,7 @@ RUN apk update && \
     apk upgrade && \
     apk add --no-cache \
     build-base \
+    imagemagick \
     mariadb-dev \
     tzdata \
     nodejs \

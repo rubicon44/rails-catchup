@@ -6,15 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(
+# 管理者ユーザー作成
+admin = User.create!(
   username:  "管理者",
   email: "admin@admin.com",
   password:  "adminadmin",
   admin: true
 )
+admin.avatar = open("#{Rails.root}/db/fixtures/admin.jpg")
+admin.save
 
-User.create!(
+# テストユーザー作成
+user = User.create!(
    username: 'testtest',
    email: 'test@test.com',
    password: 'testtest'
 )
+user.avatar = open("#{Rails.root}/db/fixtures/avatar-1.jpg")
+user.save

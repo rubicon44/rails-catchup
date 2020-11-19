@@ -3,6 +3,16 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "users/shared/error_messages", resource: resource %>
 
+  <div>
+    <%= image_tag resource.avatar.url, size: "150x150", alt: "avatar image" %>
+    <div>
+      <label for="post_img">
+        <div>画像を変更</div>
+        <%= f.file_field :avatar, id: 'post_img' %>
+      </label>
+    </div>
+  </div>
+
   <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username, autofocus: true %>

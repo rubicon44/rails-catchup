@@ -35,10 +35,12 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'carrierwave'
 gem 'devise'
-gem 'kaminari'
-gem 'ransack'
 gem "dotenv-rails"
+gem 'kaminari'
+gem 'mini_magick'
+gem 'ransack'
 gem 'rubocop', require: false
 
 group :development, :test do
