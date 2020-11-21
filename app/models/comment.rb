@@ -1,7 +1,9 @@
 class Comment < ApplicationRecord
     belongs_to :user
     belongs_to :goal
-
-    # 通知機能
     has_many :notifications, dependent: :destroy
+
+    validates :user_id, presence: true
+    validates :goal_id, presence: true
+    validates :content, presence: true, length: { maximum: 280}
 end

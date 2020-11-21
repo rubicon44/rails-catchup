@@ -6,15 +6,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # プロフィール用
-  validates :username, presence: true
-  validates :profile, length: { maximum: 200 }
-
-  # 目標機能
   has_many :goals, dependent: :destroy
-  # コメント機能
   has_many :comments, dependent: :destroy
-  # いいね機能
   has_many :likes, dependent: :destroy
   has_many :like_goals, through: :likes, source: :goal
   # フォロー機能
@@ -24,12 +17,17 @@ class User < ApplicationRecord
   ## 自分がフォローされるユーザーとの関連
   has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id
   has_many :followers, through: :passive_relationships, source: :following
-  # 通知機能
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy, inverse_of: 'visitor'
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
   # チャット機能
-  has_many :messages, dependent: :destroy
-  has_many :entries, dependent: :destroy
+  # has_many :messages, dependent: :destroy
+  # has_many :entries, dependent: :destroy
+
+  validates :username, presence: true, length: { in: 4..20 }, format: { with: /\A[a-z0-9_]+\z/ }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, presence: true, length: { maximum: 200 }, format: { with: VALID_EMAIL_REGEX }
+  validates :password, presence: true
+  validates :profile, length: { maximum: 140 }
 
   # いいね判定用メソッド
   def already_liked?(goal)

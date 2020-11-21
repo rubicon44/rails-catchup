@@ -9,7 +9,7 @@ RUN apk update && \
     tzdata \
     nodejs \
     yarn
-# コンテナへ追加
+
 RUN mkdir /rails-catchup
 ENV APP_ROOT /rails-catchup
 WORKDIR $APP_ROOT
