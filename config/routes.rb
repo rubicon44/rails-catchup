@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  get 'messages/create'
-  get 'chat_rooms/create'
-  get 'chat_rooms/index'
-  get 'chat_rooms/show'
+  # get 'messages/create'
+  # get 'chat_rooms/create'
+  # get 'chat_rooms/index'
+  # get 'chat_rooms/show'
   # 認証（devise）
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
