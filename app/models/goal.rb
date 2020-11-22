@@ -8,6 +8,8 @@ class Goal < ApplicationRecord
 
   validates :user_id, presence: true
 
+  before_create :set_untitled
+
   # いいね通知用メソッド
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
@@ -51,5 +53,13 @@ class Goal < ApplicationRecord
       notification.checked = true
     end
     notification.save if notification.valid?
+  end
+
+  private
+
+  def set_untitled
+    if self.name == ""
+      self.name = "無題"
+    end
   end
 end
