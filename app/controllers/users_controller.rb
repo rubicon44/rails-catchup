@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def show
-    # @user = User.find(params[:username])
     @user = User.find_by!(username: params[:username])
     @users = User.where(username: params[:username])
 
@@ -9,22 +8,22 @@ class UsersController < ApplicationController
     @likes = @user.like_goals.page(params[:page]).per(24)
 
     # チャット機能用
-    @currentUserEntry = Entry.where(user_id: current_user.id)
-    @userEntry = Entry.where(user_id: @user.id)
-    unless @user.id == current_user.id
-      @currentUserEntry.each do |cu|
-        @userEntry.each do |u|
-          if cu.chat_room_id == u.chat_room_id
-            @isRoom = true
-            @roomId = cu.chat_room_id
-          end
-        end
-      end
-      unless @isRoom
-        @room = ChatRoom.new
-        @entry = Entry.new
-      end
-    end
+    # @currentUserEntry = Entry.where(user_id: current_user.id)
+    # @userEntry = Entry.where(user_id: @user.id)
+    # unless @user.id == current_user.id
+    #   @currentUserEntry.each do |cu|
+    #     @userEntry.each do |u|
+    #       if cu.chat_room_id == u.chat_room_id
+    #         @isRoom = true
+    #         @roomId = cu.chat_room_id
+    #       end
+    #     end
+    #   end
+    #   unless @isRoom
+    #     @room = ChatRoom.new
+    #     @entry = Entry.new
+    #   end
+    # end
   end
 
   # フォロー機能

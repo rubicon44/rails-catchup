@@ -1,21 +1,15 @@
 class GoalsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[index show search]
 
   def index
-    # @goals = Goal.all
-    # 目標の検索機能
     @search = Goal.ransack(params[:q])
     @goals = @search.result
   end
 
   def show
     @goal = Goal.find(params[:id])
-
-    # コメント機能に使用
     @comments = @goal.comments
     @comment = @goal.comments.build
-
-    # いいね機能に使用
     @like = Like.new
   end
 
@@ -25,7 +19,6 @@ class GoalsController < ApplicationController
 
   def create
     @goal = Goal.new(goal_params)
-    # 下記記述を追記することによって、goalを作成した時に同時に、作成した人のidも一緒に保存される。
     @goal.user_id = current_user.id
     @goal.save
 
