@@ -1,3 +1,5 @@
+require 'url_constrainer'
+
 Rails.application.routes.draw do
   # get 'messages/create'
   # get 'chat_rooms/create'
@@ -27,7 +29,9 @@ Rails.application.routes.draw do
   end
 
   # ユーザープロフィール機能
-  resources :users, only: [:show, :edit, :update]
+  constraints(UrlConstrainer.new) do
+    resources :users, param: :username, only: [:show, :edit, :update]
+  end
   resources :users, only: [:show] do
     # フォロー機能
     resource :relationships, only: [:create, :destroy]
@@ -39,6 +43,6 @@ Rails.application.routes.draw do
   resources :notifications, only: [:index]
 
   # チャット機能
-  resources :messages, only: [:create]
-  resources :chat_rooms, only: [:create, :index, :show]
+  # resources :messages, only: [:create]
+  # resources :chat_rooms, only: [:create, :index, :show]
 end

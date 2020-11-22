@@ -5,7 +5,7 @@ class Goal < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
   has_many :notifications, dependent: :destroy
 
-  validates :goal_id, presence: true
+  validates :user_id, presence: true
 
   # いいね通知用メソッド
   def create_notification_like!(current_user)

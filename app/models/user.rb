@@ -23,11 +23,15 @@ class User < ApplicationRecord
   # has_many :messages, dependent: :destroy
   # has_many :entries, dependent: :destroy
 
-  validates :username, presence: true, length: { in: 4..20 }, format: { with: /\A[a-z0-9_]+\z/ }
+  validates :username, presence: true, namespace: true, uniqueness: true, length: { in: 4..20 }, format: { with: /\A[a-z0-9_]+\z/ }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 200 }, format: { with: VALID_EMAIL_REGEX }
   validates :password, presence: true
   validates :profile, length: { maximum: 140 }
+
+  def to_param
+    username
+  end
 
   # いいね判定用メソッド
   def already_liked?(goal)

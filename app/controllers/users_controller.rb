@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
-    @users = User.where(id: params[:id])
+    # @user = User.find(params[:username])
+    @user = User.find_by!(username: params[:username])
+    @users = User.where(username: params[:username])
 
     # プロフィール用
     @goals = @user.goals.page(params[:page]).per(24)
