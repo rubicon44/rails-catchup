@@ -58,7 +58,7 @@ class Goal < ApplicationRecord
   private
 
   def set_untitled
-    if self.name == ""
+    if self.name.blank?
       self.name = "無題"
     end
   end
