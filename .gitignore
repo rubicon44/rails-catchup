@@ -28,9 +28,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-mysql_data
 .env
 /public
 
 # Ignore local db data.
-mysql_data
+db_data
