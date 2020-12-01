@@ -6,7 +6,9 @@
 
 <h1>Goals#index</h1>
 
-<div><%= link_to '目標追加', new_goal_path(@goals) %></div>
+<% if user_signed_in? %>
+  <div><%= link_to '目標追加', new_goal_path(@goals) %></div>
+<% end %>
 
 <table>
   <tr>

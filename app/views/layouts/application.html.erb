@@ -15,16 +15,22 @@
         <ul>
           <% if user_signed_in? && current_user.admin? %>
             <li>管理者</li>
+            <li><%= link_to "Top", goals_path %></li>
             <li><%= link_to "プロフィール", user_path(current_user) %></li>
             <li><%= link_to "プロフィール編集", :edit_user_registration %></li>
             <li><%= link_to "通知", notifications_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
           <% elsif user_signed_in? %>
             <li>ユーザー</li>
+            <li><%= link_to "Top", goals_path %></li>
             <li><%= link_to "プロフィール", user_path(current_user) %></li>
             <li><%= link_to "プロフィール編集", :edit_user_registration %></li>
             <li><%= link_to "通知", notifications_path %></li>
             <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Top", goals_path %></li>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+            <li><%= link_to "新規登録", new_user_registration_path %></li>
           <% end %>
         </ul>
       </nav>
