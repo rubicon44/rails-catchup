@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :relationship do
-    created_at { "2020年11月16日" }
+    following_id { 1 }
+    follower_id { 1 }
   end
 end
