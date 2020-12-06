@@ -43,6 +43,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
     @goal.destroy
 
+    flash[:success] = '投稿は正常に削除されました'
     redirect_to goals_path
   end
 

@@ -22,12 +22,12 @@ RSpec.describe Comment, type: :model do
   end
 
   it '新しい順に並んでいること' do
-    post = FactoryBot.create(:post)
-    most_recent_comment = FactoryBot.create(:comment, post: post, created_at: Time.zone.now)
-    FactoryBot.create(:comment, post: post, created_at: 10.minutes.ago)
-    FactoryBot.create(:comment, post: post, created_at: 3.years.ago)
-    FactoryBot.create(:comment, post: post, created_at: 2.hours.ago)
+    goal = FactoryBot.create(:goal)
+    most_recent_comment = FactoryBot.create(:comment, goal: goal, created_at: Time.zone.now)
+    FactoryBot.create(:comment, goal: goal, created_at: 10.minutes.ago)
+    FactoryBot.create(:comment, goal: goal, created_at: 3.years.ago)
+    FactoryBot.create(:comment, goal: goal, created_at: 2.hours.ago)
 
-    expect(most_recent_comment).to eq post.comments.first
+    expect(most_recent_comment).to eq goal.comments.first
   end
 end

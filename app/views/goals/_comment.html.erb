@@ -1,25 +1,28 @@
-<h2>コメント一覧</h2>
-<%= form_with(model:[@goal, @comment], local: true) do |f| %>
-  <%= f.text_area :content %>
-  <br>
-  <%= f.submit 'コメントする' %>
-<% end %>
-
-<% if comments.any? %>
-  <% comments.each do |comment| %>
-    <div>
-      <div>
-        <%= link_to comment.user.username, user_path(comment.user.username) unless comment.user.blank? %>
-      </div>
-      <div><%= comment.content %></div>
-      <div>
-        <%= comment.created_at %>
-        <% if comment.user == current_user %>
-          <%= link_to "削除", goal_comment_path(@goal, comment), method: :delete, data: { confirm: "本当に削除しても良いですか?" } %>
-        <% end %>
-      </div>
-    </div>
+<% if user_signed_in? %>
+  <h2>コメント一覧</h2>
+  <%= form_with(model:[@goal, @comment], local: true) do |f| %>
+    <%= f.text_area :content %>
+    <br>
+    <%= f.submit 'コメントする' %>
   <% end %>
-<% else %>
-  <div>まだコメントがありません。</div>
+
+  <% if comments.any? %>
+    <div>コメント件数：<%= comments.count %></div>
+    <% comments.each do |comment| %>
+      <div>
+        <div>
+          <%= link_to comment.user.username, user_path(comment.user.username) unless comment.user.blank? %>
+        </div>
+        <div><%= comment.content %></div>
+        <div>
+          <%= comment.created_at %>
+          <% if comment.user == current_user %>
+            <%= link_to "削除", goal_comment_path(@goal, comment), method: :delete, data: { confirm: "コメントを削除しますか？" } %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div>まだコメントがありません。</div>
+  <% end %>
 <% end %>

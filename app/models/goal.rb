@@ -6,6 +6,7 @@ class Goal < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
   has_many :notifications, dependent: :destroy
 
+  validates :description, length: { maximum: 240 }
   validates :user_id, presence: true
 
   before_create :set_untitled

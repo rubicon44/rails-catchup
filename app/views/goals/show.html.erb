@@ -1,4 +1,6 @@
-<h1>Goals#show</h1>
+<%= render 'layouts/flash' %>
+
+<h1>タスク詳細</h1>
 
 <p>
   <strong>投稿者</strong>
@@ -27,6 +29,11 @@
     <td>完了</td>
   <% end %>
 </p>
+
+<% if @goal.user == current_user %>
+  <td><%= link_to '編集', edit_goal_path(@goal) %></td>
+  <td><%= link_to '削除', goal_path(@goal), method: :delete, data: { confirm: '投稿を削除しますか？' } %></td>
+<% end %>
 
 <%= render 'like', goal: @goal %>
 <%= render 'comment', comments: @comments %>

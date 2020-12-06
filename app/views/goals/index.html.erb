@@ -4,10 +4,12 @@
   <%= f.submit "検索" %>
 <% end %>
 
-<h1>Goals#index</h1>
+<%= render 'layouts/flash' %>
+
+<h1>タスク一覧</h1>
 
 <% if user_signed_in? %>
-  <div><%= link_to '目標追加', new_goal_path(@goals) %></div>
+  <div><%= link_to '目標追加', new_goal_path %></div>
 <% end %>
 
 <table>
@@ -36,8 +38,8 @@
 
       <td><%= link_to 'Show', goal_path(goal) %></td>
       <% if goal.user == current_user %>
-        <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
-        <td><%= link_to 'Destroy', goal_path(goal), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+        <td><%= link_to '編集', edit_goal_path(goal) %></td>
+        <td><%= link_to '削除', goal_path(goal), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
       <% end %>
     </tr>
   <% end %>

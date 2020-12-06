@@ -5,36 +5,24 @@
 <p>メールアドレス : <%= @user.email %></p>
 <p>自己紹介 : <%= @user.profile %></p>
 
-<% unless @user.id == current_user.id %>
-  <% if (current_user.already_followed? @user) && (@user.already_followed? current_user)  %>
-  <% if @isRoom == true %>
-    <p class="user-show-room"><a href="/chat_rooms/<%= @roomId %>" class="btn btn-primary btn-lg">チャットへ</a>
-  <% else %>
-    <%= form_for @room do |f| %>
-      <%= fields_for @entry do |e| %>
-        <%= e.hidden_field :user_id, value: @user.id %>
-      <% end %>
-      <%= f.submit "チャットを始める" %>
+<% if user_signed_in? %>
+  <p><%=link_to "フォロー", follows_user_path(@user.id) %>
+  <%=link_to "フォロワー", followers_user_path(@user.id) %></p>
+
+  <% @users.each do |user| %>
+    <% if current_user != user %>
+        <% if user.already_followed?(current_user) %>
+            <p><%=button_to "フォロー中", user_relationships_path(user.id), method: :delete %></p>
+        <% else %>
+            <p><%=button_to "フォローする", user_relationships_path(user.id), method: :goal %></p>
+        <% end %>
     <% end %>
   <% end %>
-  <% end %>
-<% end %>
 
-<p><%=link_to "フォロー", follows_user_path(@user.id) %>
-<%=link_to "フォロワー", followers_user_path(@user.id) %></p>
-
-<% @users.each do |user| %>
-  <% if current_user != user %>
-      <% if user.already_followed?(current_user) %>
-          <p><%=link_to "フォロー中", user_relationships_path(user.id), method: :delete %></p>
-      <% else %>
-          <p><%=link_to "フォローする", user_relationships_path(user.id), method: :goal %></p>
-      <% end %>
-  <% end %>
 <% end %>
 
 <div>
-  <h3>目標</h3>
+  <h3>目標：<%= @goals.count %>件</h3>
   <% if @user.goals.any? %>
     <%= render 'show_goals', group: @goals %>
   <% else %>
@@ -43,7 +31,7 @@
 </div>
 
 <div>
-  <h3>いいね</h3>
+  <h3>いいね：<%= @likes.count %>件</h3>
   <% if @user.likes.any? %>
     <%= render 'show_likes', group: @likes %>
   <% else %>

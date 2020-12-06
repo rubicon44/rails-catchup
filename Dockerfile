@@ -1,8 +1,10 @@
 FROM ruby:2.6.3-alpine
 
+ENV CHROME_PACKAGES="chromium-chromedriver zlib-dev chromium xvfb wait4ports xorg-server dbus ttf-freefont mesa-dri-swrast udev"
+
 RUN apk update && \
     apk upgrade && \
-    apk add --no-cache \
+    apk add --no-cache ${CHROME_PACKAGES} \
     build-base \
     imagemagick \
     mariadb-dev \

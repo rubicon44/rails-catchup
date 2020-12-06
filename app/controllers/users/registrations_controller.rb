@@ -64,6 +64,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     "/users/#{current_user.username}"
   end
 
+  # ユーザー情報の更新が成功した場合、リダイレクト先は編集ページのままにする。
+  def after_update_path_for(_resource)
+    edit_user_registration_path
+  end
+
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)

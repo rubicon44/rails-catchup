@@ -6,5 +6,5 @@ class Comment < ApplicationRecord
 
   validates :user_id, presence: true
   validates :goal_id, presence: true
-  validates :content, presence: true, length: { maximum: 280}
+  validates :content, presence: true, length: { maximum: 240}
 end

@@ -1,0 +1,118 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+# Japanese translation for devise
+
+ja:
+  devise:
+    confirmations:
+      confirmed: "おめでとうございます。メールアドレスは正常に承認されました。"
+      send_instructions: "確認メールを再発行致しました（メールの到着には数分かかる可能性があります）"
+      send_paranoid_instructions: "ご登録のメールアドレスが保存されている場合、アカウントの確認方法をメールでご連絡します。"
+    failure:
+      already_authenticated: "既にログインしています。"
+      inactive: 'アカウントがまだ有効になっていません。'
+      invalid: '入力されたユーザーネームやパスワードが正しくありません。'
+      locked: "アカウントがロックされています。"
+      last_attempt: "あなたのアカウントがロックされる前に、もう1つの試みを持っています。"
+      not_found_in_database: "ユーザーネーム/メールアドレスまたはパスワードが無効です。"
+      timeout: "一定時間が経過したため、再度ログインが必要です。"
+      unauthenticated: "ログインまたは登録が必要です。"
+      unconfirmed: "アカウントが有効化されていません。ユーザー登録の際に送信されたメールをご確認ください。"
+    mailer:
+      confirmation_instructions:
+        subject: "アカウントの登録確認"
+      reset_password_instructions:
+        subject: "パスワードの再設定"
+      unlock_instructions:
+        subject: "アカウントのロック解除"
+    omniauth_callbacks:
+      failure: "%{kind} から承認されませんでした。理由：%{reason}"
+      success: "%{kind} から承認されました。"
+    passwords:
+      no_token: "このページにアクセスする事が出来ません。正しいURLでアクセスしている事を確認して下さい。"
+      send_instructions: "パスワード再設定の為のメールをお送りしました。確認をお願いします。（メールの到着には数分かかる可能性があります）"
+      send_paranoid_instructions: ""
+      updated: "パスワードを変更しました。"
+      updated_not_active: "パスワードを変更しました。"
+    registrations:
+      destroyed: "アカウントを削除しました。またのご利用をお待ちしております。"
+      signed_up: "アカウント登録を受け付けました。"
+      signed_up_but_inactive: "アカウントは登録されていますが、アクティブになっていないため利用できません。"
+      signed_up_but_locked: "アカウントは登録されていますが、ロックされているため利用できません。"
+      signed_up_but_unconfirmed: "確認メールを登録したメールアドレス宛に送信しました。リンクを開いてアカウントを有効にして下さい。"
+      update_needs_confirmation: "アカウント情報が更新されました。更新の確認メールを新しいメールアドレス宛に送信しましたので、リンクを開いて更新を有効にして下さい。"
+      updated: "変更が保存されました"
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+    unlocks:
+      send_instructions: "アカウントのロックを解除する方法を数分以内にメールでご連絡します。"
+      send_paranoid_instructions: "アカウントが存在する場合、ロックを解除する方法をメールでご連絡します。"
+      unlocked: "アカウントのロックが解除されました。ログインしています。"
+
+  errors:
+    messages:
+      already_confirmed: "は既に確認済みです"
+      confirmation_period_expired: "%{period}以内に確認する必要がありますので、新しくリクエストしてください。"
+      expired: "有効期限切れです。新規登録してください。"
+      not_found: "が見つかりませんでした"
+      not_locked: "ロックされていません。"
+      not_saved:
+        one: "入力が正しくありません。確認してやりなおしてください。"
+        other: "入力が正しくありません。確認してやりなおしてください。"
+      taken: "は既に使用されています"
+      blank: "が入力されていません"
+      too_short: "は%{count}文字以上に設定して下さい"
+      too_long: "は%{count}文字以下に設定して下さい"
+      invalid: "は有効でありません"
+      confirmation: "が内容とあっていません"
+
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        username: ユーザーネーム
+        bio: 自己紹介
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワードの再入力
+        current_password: 現在のパスワード
+        confirmation_token: 確認用トークン
+      post:
+        image: 画像
+        caption: キャプション
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
+            username:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "には小文字の半角英数字と'_'(アンダーバー)しか使用できません"
+            email:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
+            password:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
+            password_confirmation:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
+              confirmation: "が一致しません"
+        post:
+          attributes:
+            image:
+              blank: "が選択されていません"
+            caption:
+              too_long: "は%{count}文字以下に設定して下さい"

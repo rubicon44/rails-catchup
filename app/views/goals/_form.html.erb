@@ -1,11 +1,11 @@
 <%= form_with(model: @goal, local: true) do |form| %>
   <p>
-    <%= form.label :name %><br>
+    <%= form.label :name, "題名" %><br>
     <%= form.text_field :name %>
   </p>
 
   <p>
-    <%= form.label :description %><br>
+    <%= form.label :description, "内容" %><br>
     <%= form.text_area :description %>
   </p>
 
