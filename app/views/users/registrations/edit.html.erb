@@ -46,6 +46,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label :current_password %> <i>(パスワードを変更するには、現在のパスワードが必要です。)</i><br />
+    <%= f.password_field :current_password, autocomplete: "current-password" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "変更を保存する" %>
   </div>
