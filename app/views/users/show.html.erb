@@ -6,6 +6,16 @@
 <p>自己紹介 : <%= @user.profile %></p>
 
 <% if user_signed_in? %>
+  <% if current_user.admin? %>
+    <% if @user == current_user %>
+    <% else %>
+      <%= button_to "このユーザーを削除する", @user, method: :delete, data: {confirm: "このユーザーを削除してもよろしいですか?"} %>
+      ※「このユーザーを削除する」ボタンは管理者のみに表示されています。
+    <% end %>
+  <% end %>
+<% end %>
+
+<% if user_signed_in? %>
   <p><%=link_to "フォロー", follows_user_path(@user.id) %>
   <%=link_to "フォロワー", followers_user_path(@user.id) %></p>
 
@@ -18,7 +28,6 @@
         <% end %>
     <% end %>
   <% end %>
-
 <% end %>
 
 <div>

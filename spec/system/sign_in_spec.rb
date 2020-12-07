@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'SignIn', type: :system do
   it 'ユーザーネームとメールアドレスのどちらでもログインできること', js: true do
-    FactoryBot.create(:user, username: 'alice', email: 'alice@alice.com', password: '123456')
+    FactoryBot.create(:user,
+                      username: 'sample',
+                      email: 'sample@sample.com',
+                      profile: 'My name is sample.',
+                      password: '123456')
 
     visit root_path
     click_link 'ログイン'
@@ -10,48 +14,40 @@ RSpec.describe 'SignIn', type: :system do
     # expect(page).to have_content 'ログイン状態を保持'
 
     # ログインに失敗する場合
-    click_button 'ログインする'
+    click_button 'ログイン'
     expect(page).to have_content \
       '入力されたユーザーネームやパスワードが正しくありません。'
 
-    fill_in 'ユーザーネーム/メールアドレス', with: 'sample'
-    fill_in 'パスワード', with: 'foobar'
-    click_button 'ログインする'
+    fill_in 'メールアドレス', with: 'sample@sample.com'
+    fill_in 'パスワード', with: 'abcdef'
+    click_button 'ログイン'
     expect(page).to have_content \
       '入力されたユーザーネームやパスワードが正しくありません。'
 
-    # ユーザーネームを使ってログインする
-    fill_in 'ユーザーネーム/メールアドレス', with: 'sample'
+    # ログインに成功する場合
+    ## メールアドレスを使ってログインする
+    visit current_path
+    fill_in 'メールアドレス', with: 'sample@sample.com'
     fill_in 'パスワード', with: '123456'
-    click_button 'ログインする'
-    expect(page).to have_content 'フィード'
+    click_button 'ログイン'
+    expect(page).to have_content 'タスク一覧'
+    ## ログイン後のフラッシュメッセージを確認
+    expect(page).to have_content 'ログインしました。'
 
-  #   # ログイン後のフラッシュメッセージが生成されないことを確認
-  #   expect(page).to_not have_content 'ログインしました。'
+    ## ログアウト後のフラッシュメッセージを確認
+    expect(page).to have_button 'ログアウト'
+    click_button 'ログアウト'
+    expect(current_path).to eq root_path
+    expect(page).to have_content 'ログアウトしました。'
 
-  #   click_on 'nav avatar image'
-  #   expect(page).to have_content 'ログアウト'
+    # # ユーザーネームを使ってログインする
+    # fill_in 'ユーザーネーム/メールアドレス', with: 'sample'
+    # fill_in 'パスワード', with: '123456'
+    # click_button 'ログイン'
+    # expect(page).to have_content 'フィード'
+  end
 
-  #   find('a.logout').click
-  #   expect(page).to have_content 'ログアウトしますか？'
-
-  #   click_on 'ログアウト'
-  #   expect(current_path).to eq root_path
-
-  #   click_link 'ログイン'
-  #   expect(current_path).to eq new_user_session_path
-  #   expect(page).to have_content 'ログイン状態を保持'
-
-  #   # ログアウト後のフラッシュメッセージが生成されないことを確認
-  #   expect(page).to_not have_content 'ログアウトしました。'
-
-  #   # メールアドレスを使ってログインする
-  #   fill_in 'ユーザーネーム/メールアドレス', with: 'sample@example.com'
-  #   fill_in 'パスワード', with: '123456'
-  #   click_button 'ログインする'
-  #   expect(page).to have_content 'フィード'
-  # end
-
+  # todo: 「メール認証」機能を実装する
   # it 'メールアドレスが未承認のユーザーではログインできないこと' do
   #   FactoryBot.create(:user, :unconfirmed, username: 'sample', password: '123456')
 
@@ -64,6 +60,7 @@ RSpec.describe 'SignIn', type: :system do
   #   expect(page).to have_content 'アカウントが有効化されていません。'
   # end
 
+  # todo: 「ゲストログイン」機能を実装する
   # it 'ゲストユーザーとしてログインする', js: true do
   #   guest = FactoryBot.create(:user, :guest)
 
@@ -87,42 +84,40 @@ RSpec.describe 'SignIn', type: :system do
   #   expect(current_path).to eq root_path
   # end
 
-  # it '管理ユーザーとしてログインする', js: true do
-  #   admin = FactoryBot.create(:user, :admin)
-  #   user = FactoryBot.create(:user)
-  #   guest = FactoryBot.create(:user, :guest)
+  it '管理ユーザーとしてログインする', js: true do
+    admin = FactoryBot.create(:user, :admin)
+    user = FactoryBot.create(:user)
+    # guest = FactoryBot.create(:user, :guest)
 
-  #   visit root_path
+    visit root_path
+    click_link 'ログイン'
+    expect(current_path).to eq new_user_session_path
+    # expect(page).to have_content 'ログイン状態を保持'
+    fill_in 'メールアドレス', with: 'admin@example.com'
+    fill_in 'パスワード', with: '123456'
+    click_button 'ログイン'
+    expect(page).to have_content 'タスク一覧'
 
-  #   click_link 'ログイン'
-  #   expect(current_path).to eq new_user_session_path
-  #   expect(page).to have_content 'ログイン状態を保持'
+    # 管理ユーザーのユーザー詳細ページが正しく表示されていること
+    click_link 'プロフィール'
+    expect(page).to have_content '管理者'
+    expect(page).to have_content '名前：admin'
 
-  #   fill_in 'ユーザーネーム/メールアドレス', with: 'admin'
-  #   fill_in 'パスワード', with: '123456'
-  #   click_button 'ログインする'
-  #   expect(page).to have_content 'フィード'
+    # 管理ユーザーは通常のユーザーを削除できること
+    visit user_path(user)
+    expect(page).to have_button 'このユーザーを削除する'
+    expect(page).to have_button 'フォローする'
 
-  #   # 管理ユーザーのユーザー詳細ページが正しく表示されていること
-  #   click_on 'nav avatar image'
-  #   expect(page).to have_content 'プロフィールを編集'
-  #   expect(page).to have_content 'ログアウト'
+    expect do
+      click_button 'このユーザーを削除する'
+      expect(page.driver.browser.switch_to.alert.text).to eq 'このユーザーを削除してもよろしいですか?'
+      page.driver.browser.switch_to.alert.accept
+      expect(page).to have_content 'ユーザーは正常に削除されました。'
+    end.to change(User, :count).by(-1)
 
-  #   # 管理ユーザーは通常のユーザーを削除できること
-  #   visit user_path(user)
-  #   expect(page).to have_content 'このユーザーを削除する'
-  #   expect(page).to_not have_content 'プロフィールを編集'
-  #   expect(page).to_not have_content 'ログアウト'
-
-  #   find('a.btn.delete').click
-  #   expect do
-  #     click_link '削除'
-  #   end.to change(User, :count).by(-1)
-  #   expect(page).to have_content 'ユーザーは正常に削除されました'
-
-  #   # 管理ユーザーはゲストユーザーを削除できないこと
-  #   visit user_path(guest)
-  #   expect(page).to_not have_content 'このユーザーを削除する'
-  #   expect(page).to_not have_content 'プロフィールを編集'
-  # end
+    # # 管理ユーザーはゲストユーザーを削除できないこと
+    # visit user_path(guest)
+    # expect(page).to_not have_content 'このユーザーを削除する'
+    # expect(page).to_not have_content 'プロフィールを編集'
+  end
 end

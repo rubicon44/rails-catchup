@@ -36,17 +36,17 @@ RSpec.describe 'EditUserRegistration', type: :system do
     end
 
     # パスワードの変更であれば、現在のパスワードの入力を求めること
-    fill_in 'パスワード', with: 'abcdefgh'
-    fill_in 'パスワードの再入力', with: 'abcdefgh'
+    fill_in 'パスワード', with: 'abcdef'
+    fill_in 'パスワードの再入力', with: 'abcdef'
     click_button '変更を保存する'
     expect(page).to have_content '現在のパスワードを入力してください'
-    expect(user.reload.valid_password?('abcdefgh')).to_not eq true
+    expect(user.reload.valid_password?('abcdef')).to_not eq true
 
-    fill_in 'パスワード', with: 'abcdefgh'
-    fill_in 'パスワードの再入力', with: 'abcdefgh'
+    fill_in 'パスワード', with: 'abcdef'
+    fill_in 'パスワードの再入力', with: 'abcdef'
     fill_in '現在のパスワード', with: '123456'
     click_button '変更を保存する'
     expect(page).to have_content '変更が保存されました'
-    expect(user.reload.valid_password?('abcdefgh')).to eq true
+    expect(user.reload.valid_password?('abcdef')).to eq true
   end
 end

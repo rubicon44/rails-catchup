@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :admin_user,     only: :destroy
+
   def show
     @user = User.find_by!(username: params[:username])
     @users = User.where(username: params[:username])
@@ -26,6 +28,13 @@ class UsersController < ApplicationController
     # end
   end
 
+  def destroy
+    User.find_by!(username: params[:username]).destroy
+    flash[:success] = 'ユーザーは正常に削除されました。'
+    # todo: ユーザー検索ページに遷移
+    redirect_to root_path
+  end
+
   # フォロー機能
   def follows
     user = User.find(params[:id])
@@ -35,5 +44,11 @@ class UsersController < ApplicationController
   def followers
     user = User.find(params[:id])
     @users = user.followers
+  end
+
+  private
+
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
   end
 end
