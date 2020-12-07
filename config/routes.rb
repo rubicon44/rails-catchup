@@ -23,6 +23,13 @@ Rails.application.routes.draw do
   constraints(UrlConstrainer.new) do
     resources :users, param: :username, only: [:show, :edit, :update, :destroy]
   end
+
+  resources :users, only: [:index] do
+    collection do
+      get :search
+    end
+  end
+
   resources :users, only: [:show] do
     resource :relationships, only: [:create, :destroy]
     get :follows, on: :member
