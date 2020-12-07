@@ -8,7 +8,7 @@
 
 # 管理者ユーザー作成
 admin = User.create!(
-  username:  "管理者",
+  username:  "admin",
   email: "admin@admin.com",
   password:  "adminadmin",
   admin: true
