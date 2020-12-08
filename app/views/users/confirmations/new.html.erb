@@ -1,16 +1,26 @@
-<h2>Resend confirmation instructions</h2>
+<!-- ユーザー登録時の確認メールを再送するときのページ -->
+<% provide :title, "確認メールの再発行" %>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<div>
+  <h1>確認メールの再発行</h1>
+  <p>
+    登録確認のメッセージが届かない場合は、以下のフォームに登録に使用したメールアドレスを入力してください。確認メールを再発行致します。
+  </p>
+  <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+  <div>
+    <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+
+      <div>
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",
+                          value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control" %>
+      </div>
+
+      <div>
+        <%= f.submit " 再発行する ", { class: "btn submit-btn" }  %>
+      </div>
+    <% end %>
+
   </div>
-
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

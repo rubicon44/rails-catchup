@@ -15,14 +15,14 @@
 <table>
   <tr>
     <th>登録者</th>
-    <th>Name</th>
-    <th>Description</th>
+    <th>Title</th>
+    <th>Content</th>
     <th>Status</th>
   </tr>
 
   <% @goals.each do |goal| %>
     <tr>
-      <td><%= link_to goal.user.username, user_path(goal.user.username) unless goal.user.blank? %></td>
+      <td>@<%= link_to goal.user.username, user_path(goal.user.username) unless goal.user.blank? %></td>
       <td><%= goal.name %></td>
       <td><%= goal.description %></td>
       <% case goal.status %>
