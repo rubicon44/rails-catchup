@@ -2,12 +2,13 @@ require 'rails_helper'
 
 RSpec.describe 'Goals', type: :system, js: true do
   it '新規投稿したあと、その投稿を編集して最後に削除する' do
-    user = FactoryBot.create(:user, email: 'alice@alice.com', password: '123456')
+    user = FactoryBot.create(:user, username: 'alice', email: 'alice@alice.com', password: '123456')
+    user.confirm
 
+    # ログインする
     visit root_path
     click_link 'ログイン'
     expect(current_path).to eq new_user_session_path
-    # expect(page).to have_content 'ログイン状態を保持'
     fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'

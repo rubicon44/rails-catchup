@@ -3,25 +3,21 @@ require 'rails_helper'
 RSpec.describe 'Comments', type: :system do
   it '既存の投稿にコメントをして、削除する', js: true do
     goal = FactoryBot.create(:goal, name: 'テスト タイトル')
+    user = FactoryBot.create(:user, email: 'alice@alice.com', password: '123456')
+    user.confirm
 
     # 未ログイン状態ではコメントのフォームが表示されないこと
     visit goal_path(goal)
     expect(page).to_not have_content 'コメント一覧'
 
     # ログインする
-    user = FactoryBot.create(:user, email: 'alice@alice.com', password: '123456')
     visit root_path
-
     click_link 'ログイン'
     expect(current_path).to eq new_user_session_path
-    # expect(page).to have_content 'ログイン状態を保持'
-
     fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
     expect(page).to have_content 'タスク一覧'
-    # expect(page).to have_content 'フィード'
-
     visit goal_path(goal)
     expect(page).to have_content 'テスト タイトル'
 

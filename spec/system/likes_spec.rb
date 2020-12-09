@@ -4,18 +4,16 @@ RSpec.describe 'Likes', type: :system do
   it '投稿をいいね/いいね解除する', js: true do
     goal = FactoryBot.create(:goal, name: 'テスト タイトル')
     user = FactoryBot.create(:user, username: 'alice', email: 'alice@alice.com', password: '123456')
+    user.confirm
 
     # ログインする
     visit root_path
     click_link 'ログイン'
     expect(current_path).to eq new_user_session_path
-    # expect(page).to have_content 'ログイン状態を保持'
-
     fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
     expect(page).to have_content 'タスク一覧'
-    # expect(page).to have_content 'フィード'
 
     # 投稿にいいねをする
     visit goal_path(goal)
@@ -33,7 +31,6 @@ RSpec.describe 'Likes', type: :system do
     # 現在のユーザーのプロフィールページに遷移
     visit user_path(user)
     expect(page).to have_content "名前：#{user.username}"
-    # expect(page).to have_content 'ログアウト'
     expect(page).to have_content 'いいね：1件'
 
     # 投稿のいいねを解除する
@@ -51,7 +48,6 @@ RSpec.describe 'Likes', type: :system do
     # 現在のユーザーのプロフィールページに遷移
     visit user_path(user)
     expect(page).to have_content "名前：#{user.username}"
-    # expect(page).to have_content 'ログアウト'
     expect(page).to have_content 'いいね：0件'
   end
 end
