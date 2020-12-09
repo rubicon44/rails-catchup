@@ -64,44 +64,4 @@ RSpec.describe 'Goals', type: :system, js: true do
     expect(current_path).to eq goals_path
     expect(page).to_not have_link 'Show', href: "/goals/#{goal.id}"
   end
-
-  # it 'フィードページから正しく投稿を削除できること' do
-  #   user = FactoryBot.create(:user, username: 'alice')
-  #   goal_foo = FactoryBot.create(:goal, caption: 'foo', user: user)
-  #   goal_bar = FactoryBot.create(:goal, caption: 'bar', user: user)
-  #   goal_baz = FactoryBot.create(:goal, caption: 'baz', user: user)
-
-  #   visit root_path
-
-  #   click_link 'ログイン'
-  #   expect(current_path).to eq new_user_session_path
-  #   expect(page).to have_content 'ログイン状態を保持'
-
-  #   fill_in 'ユーザーネーム/メールアドレス', with: 'alice'
-  #   fill_in 'パスワード', with: '123456'
-  #   click_button 'ログインする'
-  #   expect(page).to have_content 'フィード'
-
-  #   expect(page).to have_content 'foo'
-  #   expect(page).to have_content 'bar'
-  #   expect(page).to have_content 'baz'
-
-  #   find("#goal-dropdown-#{goal_foo.id}").click
-  #   expect(page).to have_content '投稿を削除'
-
-  #   find("#goal-dropdown-delete-#{goal_foo.id}").click
-  #   expect(page).to have_content '投稿を削除しますか？'
-
-  #   expect do
-  #     find("a[href='#{goal_path(goal_foo)}']").click
-  #   end.to change(Goal, :count).by(-1)
-  #   expect(current_path).to eq user_path(user)
-  #   expect(page).to have_content '投稿は正常に削除されました'
-
-  #   visit root_path
-
-  #   expect(page).to_not have_content 'foo'
-  #   expect(page).to have_content 'bar'
-  #   expect(page).to have_content 'baz'
-  # end
 end
