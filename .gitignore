@@ -34,3 +34,4 @@
 
 # Ignore local db data.
 db_data
+/coverage
