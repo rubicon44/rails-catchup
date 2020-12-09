@@ -22,7 +22,12 @@ class GoalsController < ApplicationController
     @goal.user_id = current_user.id
     @goal.save
 
-    redirect_to root_url
+    if @goal.save
+      flash[:success] = '投稿が送信されました'
+      redirect_to user_path(current_user)
+    else
+      render 'goals/new'
+    end
   end
 
   def edit
@@ -33,6 +38,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
 
     if @goal.update(goal_params)
+      flash[:success] = '投稿が更新されました'
       redirect_to @goal
     else
       render 'edit'

@@ -20,7 +20,6 @@ class UsersController < ApplicationController
   def destroy
     User.find_by!(username: params[:username]).destroy
     flash[:success] = 'ユーザーは正常に削除されました。'
-    # todo: ユーザー検索ページに遷移
     redirect_to users_path
   end
 
