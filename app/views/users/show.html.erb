@@ -8,6 +8,9 @@
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <% if @user == current_user %>
+      <!-- なにも表示しない -->
+    <% elsif @user.guest? %>
+      <!-- なにも表示しない -->
     <% else %>
       <%= button_to "このユーザーを削除する", @user, method: :delete, data: {confirm: "このユーザーを削除してもよろしいですか?"} %>
       ※「このユーザーを削除する」ボタンは管理者のみに表示されています。

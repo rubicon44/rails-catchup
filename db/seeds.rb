@@ -7,20 +7,33 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 管理者ユーザー作成
-admin = User.create!(
-  username:  "admin",
-  email: "admin@admin.com",
-  password:  "adminadmin",
-  admin: true
+# admin = User.create!(
+#   username:  "admin",
+#   email: "admin@admin.com",
+#   password:  "adminadmin",
+#   admin: true
+# )
+# admin.avatar = open("#{Rails.root}/db/fixtures/admin.jpg")
+# admin.save
+
+# ゲストユーザー作成
+guest = User.create!(
+  username: 'guest',
+  email: 'guest@example.com',
+  password: '123456',
+  password_confirmation: '123456',
+  confirmed_at: Time.zone.now,
+  confirmation_sent_at: Time.zone.now,
+  guest: true
 )
-admin.avatar = open("#{Rails.root}/db/fixtures/admin.jpg")
-admin.save
+guest.avatar = open("#{Rails.root}/db/fixtures/avatar-0.jpg")
+guest.save
 
 # テストユーザー作成
-user = User.create!(
-   username: 'testtest',
-   email: 'test@test.com',
-   password: 'testtest'
-)
-user.avatar = open("#{Rails.root}/db/fixtures/avatar-1.jpg")
-user.save
+# user = User.create!(
+#    username: 'testtest',
+#    email: 'test@test.com',
+#    password: 'testtest'
+# )
+# user.avatar = open("#{Rails.root}/db/fixtures/avatar-1.jpg")
+# user.save
