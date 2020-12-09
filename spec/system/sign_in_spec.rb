@@ -2,18 +2,17 @@ require 'rails_helper'
 
 RSpec.describe 'SignIn', type: :system do
   it 'ユーザーネームとメールアドレスのどちらでもログインできること', js: true do
-    FactoryBot.create(:user,
+    user = FactoryBot.create(:user,
                       username: 'sample',
                       email: 'sample@sample.com',
                       profile: 'My name is sample.',
                       password: '123456')
+    user.confirm
 
+    # ログインに失敗する場合
     visit root_path
     click_link 'ログイン'
     expect(current_path).to eq new_user_session_path
-    # expect(page).to have_content 'ログイン状態を保持'
-
-    # ログインに失敗する場合
     click_button 'ログイン'
     expect(page).to have_content \
       '入力されたユーザーネームやパスワードが正しくありません。'
@@ -26,73 +25,65 @@ RSpec.describe 'SignIn', type: :system do
 
     # ログインに成功する場合
     ## メールアドレスを使ってログインする
-    visit current_path
+    visit current_path # リロード
     fill_in 'ユーザーネーム/メールアドレス', with: 'sample@sample.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
     expect(page).to have_content 'タスク一覧'
-    ## ログイン後のフラッシュメッセージを確認
     expect(page).to have_content 'ログインしました。'
 
-    ## ログアウト後のフラッシュメッセージを確認
     expect(page).to have_button 'ログアウト'
     click_button 'ログアウト'
     expect(current_path).to eq root_path
     expect(page).to have_content 'ログアウトしました。'
 
     # ユーザーネームを使ってログインする
+    click_link 'ログイン'
+    expect(current_path).to eq new_user_session_path
     fill_in 'ユーザーネーム/メールアドレス', with: 'sample'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
     expect(page).to have_content 'タスク一覧'
   end
 
-  # todo: 「メール認証」機能を実装する
-  # it 'メールアドレスが未承認のユーザーではログインできないこと' do
-  #   FactoryBot.create(:user, :unconfirmed, username: 'sample', password: '123456')
+  it 'メールアドレスが未承認のユーザーではログインできないこと' do
+    FactoryBot.create(:user, username: 'sample', password: '123456')
 
-  #   visit new_user_session_path
-  #   expect(page).to have_content 'ログイン状態を保持'
+    visit new_user_session_path
+    fill_in 'ユーザーネーム/メールアドレス', with: 'sample'
+    fill_in 'パスワード', with: '123456'
+    click_button 'ログイン'
+    expect(page).to have_content 'アカウントが有効化されていません。ユーザー登録の際に送信されたメールをご確認ください。'
+  end
 
-  #   fill_in 'ユーザーネーム/メールアドレス', with: 'sample'
-  #   fill_in 'パスワード', with: '123456'
-  #   click_button 'ログインする'
-  #   expect(page).to have_content 'アカウントが有効化されていません。'
-  # end
+  it 'ゲストユーザーとしてログインする', js: true do
+    guest = FactoryBot.create(:user, :guest)
+    guest.confirm
 
-  # todo: 「ゲストログイン」機能を実装する
-  # it 'ゲストユーザーとしてログインする', js: true do
-  #   guest = FactoryBot.create(:user, :guest)
+    visit root_path
+    expect(page).to have_content 'こちらからゲストユーザーとしてログインできます。'
 
-  #   visit root_path
-  #   expect(page).to have_content 'こちらからゲストユーザーとしてログインできます'
+    click_button 'ゲストログイン'
+    # todo: jQueryで実装
+    # expect(page).to have_content 'ゲストユーザーとしてログインしますか？'
+    expect(page).to have_content 'タスク一覧'
 
-  #   find('nav.signin-as-guest').click
-  #   expect(page).to have_content 'ゲストユーザーとしてログインしますか？'
-
-  #   click_button 'ログイン'
-  #   expect(page).to have_content 'フィード'
-
-  #   click_on 'nav avatar image'
-  #   expect(page).to have_content 'ログアウト'
-
-  #   # ゲストユーザーはユーザー情報の編集ができないこと
-  #   click_button 'プロフィールを編集'
-  #   expect(page).to have_content 'ゲストユーザーは利用できません'
-
-  #   visit edit_user_registration_path
-  #   expect(current_path).to eq root_path
-  # end
+    # ゲストユーザーはユーザー情報の編集ができないこと
+    click_link 'プロフィール編集'
+    expect(page).to have_content 'ゲストユーザーは利用できません'
+  end
 
   it '管理ユーザーとしてログインする', js: true do
     admin = FactoryBot.create(:user, :admin)
+    guest = FactoryBot.create(:user, :guest)
     user = FactoryBot.create(:user)
-    # guest = FactoryBot.create(:user, :guest)
+    admin.confirm
+    guest.confirm
+    user.confirm
 
     visit root_path
     click_link 'ログイン'
     expect(current_path).to eq new_user_session_path
-    # expect(page).to have_content 'ログイン状態を保持'
     fill_in 'メールアドレス', with: 'admin@example.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
@@ -115,9 +106,8 @@ RSpec.describe 'SignIn', type: :system do
       expect(page).to have_content 'ユーザーは正常に削除されました。'
     end.to change(User, :count).by(-1)
 
-    # # 管理ユーザーはゲストユーザーを削除できないこと
-    # visit user_path(guest)
-    # expect(page).to_not have_content 'このユーザーを削除する'
-    # expect(page).to_not have_content 'プロフィールを編集'
+    # 管理ユーザーはゲストユーザーを削除できないこと
+    visit user_path(guest)
+    expect(page).to_not have_content 'このユーザーを削除する'
   end
 end
