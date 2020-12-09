@@ -8,7 +8,7 @@ RSpec.describe 'Goals', type: :system, js: true do
     click_link 'ログイン'
     expect(current_path).to eq new_user_session_path
     # expect(page).to have_content 'ログイン状態を保持'
-    fill_in 'メールアドレス', with: 'alice@alice.com'
+    fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
     expect(page).to have_content 'タスク一覧'

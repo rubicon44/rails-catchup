@@ -1,8 +1,4 @@
-<%= search_form_for @search do |f| %>
-  <%= f.label :name, "名前 & 内容検索" %>
-  <%= f.search_field :name_or_description_cont %>
-  <%= f.submit "検索" %>
-<% end %>
+<%= render 'search_form', search: @search %>
 
 <h1>タスク一覧</h1>
 

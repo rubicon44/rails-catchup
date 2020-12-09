@@ -18,7 +18,7 @@ RSpec.describe 'SignIn', type: :system do
     expect(page).to have_content \
       '入力されたユーザーネームやパスワードが正しくありません。'
 
-    fill_in 'メールアドレス', with: 'sample@sample.com'
+    fill_in 'ユーザーネーム/メールアドレス', with: 'sample@sample.com'
     fill_in 'パスワード', with: 'abcdef'
     click_button 'ログイン'
     expect(page).to have_content \
@@ -27,7 +27,7 @@ RSpec.describe 'SignIn', type: :system do
     # ログインに成功する場合
     ## メールアドレスを使ってログインする
     visit current_path
-    fill_in 'メールアドレス', with: 'sample@sample.com'
+    fill_in 'ユーザーネーム/メールアドレス', with: 'sample@sample.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
     expect(page).to have_content 'タスク一覧'
@@ -40,11 +40,11 @@ RSpec.describe 'SignIn', type: :system do
     expect(current_path).to eq root_path
     expect(page).to have_content 'ログアウトしました。'
 
-    # # ユーザーネームを使ってログインする
-    # fill_in 'ユーザーネーム/メールアドレス', with: 'sample'
-    # fill_in 'パスワード', with: '123456'
-    # click_button 'ログイン'
-    # expect(page).to have_content 'フィード'
+    # ユーザーネームを使ってログインする
+    fill_in 'ユーザーネーム/メールアドレス', with: 'sample'
+    fill_in 'パスワード', with: '123456'
+    click_button 'ログイン'
+    expect(page).to have_content 'タスク一覧'
   end
 
   # todo: 「メール認証」機能を実装する

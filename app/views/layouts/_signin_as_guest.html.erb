@@ -17,7 +17,7 @@
         <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
           <%= f.hidden_field :login, value: "guest" %>
           <%= f.hidden_field :password, value: "123456" %>
-          <%= f.submit "ログイン" %>
+          <%= f.submit "ゲストログイン" %>
         <% end %>
       </div>
     </div>
