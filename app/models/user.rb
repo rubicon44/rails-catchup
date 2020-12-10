@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :validatable, :confirmable, :authentication_keys => [:login]
+         :rememberable, :validatable, :confirmable, authentication_keys: [:login]
 
   has_many :goals, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -22,9 +22,8 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   validates :username, presence: true, namespace: true, uniqueness: true, length: { in: 4..20 }, format: { with: /\A[a-z0-9_]+\z/ }
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
-  validates :email, presence: true, length: { maximum: 255 }
-  # , format: { with: VALID_EMAIL_REGEX }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
   validates :password, presence: true, on: :create
   validates :profile, length: { maximum: 140 }
 
