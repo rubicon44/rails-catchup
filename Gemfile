@@ -38,6 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'carrierwave'
 gem 'devise'
 gem 'dotenv-rails'
+gem 'font-awesome-sass'
 gem 'kaminari'
 gem 'mini_magick'
 gem 'rails-i18n'

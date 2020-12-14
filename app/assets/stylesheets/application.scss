@@ -14,7 +14,9 @@
  *= require_self
  */
 
- // Custom SCSS
+// Custom SCSS
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 @import 'reset';
 @import 'base';
 @import 'common';

@@ -20,6 +20,9 @@ nav {
     display: flex;
 
     > li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       margin: 0 10px;
       list-style: none;
     }

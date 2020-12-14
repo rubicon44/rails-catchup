@@ -23,9 +23,6 @@
               <%= link_to "あなたの投稿", noti.goal, style: "font-weight: bold;" %>
             <% else %>
               <span>
-                <%= link_to goal_path(noti.goal) do %>
-                  <%= image_tag avatar_url(noti.goal.user).to_s %>
-                <% end %>
                 <strong>
                   <%= noti.goal.user.username + 'さんの投稿' %>
                 </strong>
