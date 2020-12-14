@@ -1,22 +1,17 @@
 <% group.each do |user| %>
-  <div>
-    <div>
-      <!-- ユーザーカード：アバター -->
-      <div>
-        <% if user.avatar? %>
-          <%= link_to image_tag(user.avatar.url, size: "250x250",
-                                class: "#{ "logged_in" if user_signed_in? && !current_user.admin? } rounded-circle z-depth-0",alt: "avatar image"), user_path(user) %>
-        <% else %>
-          <%= link_to image_tag("no_user.png", size: "250x250",
-                                class: "#{ "logged_in" if user_signed_in? && !current_user.admin? } rounded-circle z-depth-0", alt: "avatar image"), user_path(user) %>
-        <% end %>
-      </div>
-      <!-- ユーザーカード：名前とユーザーネーム -->
-      <div>
-        <div>
-          <div>@<%= user.username %></div>
-        </div>
-      </div>
+  <div class="user">
+    <!-- ユーザーカード：アバター -->
+    <div class="user-image-cover">
+      <% if user.avatar? %>
+        <%= link_to image_tag(user.avatar.url, size: "250x250", alt: "avatar image", class: "user-image"), user_path(user) %>
+      <% else %>
+        <%= link_to image_tag("no_user.png", size: "250x250", alt: "avatar image", class: "user-image"), user_path(user) %>
+      <% end %>
+    </div>
+
+    <!-- ユーザーカード：名前とユーザーネーム -->
+    <div class="user-username">
+      @<%= user.username %>
     </div>
   </div>
 <% end %>

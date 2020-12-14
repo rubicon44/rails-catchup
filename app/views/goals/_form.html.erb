@@ -1,20 +1,20 @@
-<%= form_with(model: @goal, local: true) do |form| %>
-  <p>
-    <%= form.label :name, "題名" %><br>
-    <%= form.text_field :name %>
-  </p>
+<%= form_with(model: @goal, local: true, class: "goal-form") do |form| %>
+  <div class="goal-form-title">
+    <%= form.hidden_field :name %>
+    <%= form.text_field :name, placeholder: "題名" %>
+  </div>
 
-  <p>
-    <%= form.label :description, "内容" %><br>
-    <%= form.text_area :description %>
-  </p>
+  <div class="goal-form-content">
+    <%= form.hidden_field :description %>
+    <%= form.text_area :description, placeholder: "内容" %>
+  </div>
 
-  <p>
-    <%= form.label :status %><br>
+  <div class="goal-form-status">
+    <%= form.label :status, "状態" %>
     <%= form.select :status, [['未対応',0],['処理中',1],['処理済み',2],['完了',3]] %>
-  </p>
+  </div>
 
-  <p>
-    <%= form.submit "登録" %>
-  </p>
+  <div class="goal-form-button-cover">
+    <%= form.submit "登録", class: "goal-form-button" %>
+  </div>
 <% end %>

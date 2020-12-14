@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ // Custom SCSS
+@import 'reset';
+@import 'base';
+@import 'common';
+@import 'header';
+@import 'footer';

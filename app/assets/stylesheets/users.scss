@@ -1,3 +1,133 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// index
+.user {
+  min-width: 300px;
+  max-width: 300px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  &:not(:first-of-type) {
+    margin-top: 10px;
+  }
+
+  &-image {
+    border-radius: 50%;
+
+    &-cover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &-username {
+    font-weight: bold;
+    text-align: center;
+  }
+}
+
+// show
+.user-show-button {
+  height: 40px;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.user-show {
+  &-header {
+    position: relative;
+
+    &-head {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &-image-cover {
+    > img {
+      border-radius: 50%;
+    }
+  }
+
+  &-editbutton {
+    @extend .user-show-button;
+    color: #2c9a7a;
+    border: 1px solid #2c9a7a;
+
+    &:hover {
+      background: #2c9a7a;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+
+  &-logoutbutton {
+    @extend .user-show-button;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+
+    &:hover {
+      background: #ff0000;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    &-cover {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+    }
+  }
+
+  &-followbutton {
+    @extend .user-show-button;
+    width: 122px;
+    color: #2c9a7a;
+    border: 1px solid #2c9a7a;
+
+    &:hover {
+      background: #2c9a7a;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    &.is-active {
+      background: #2c9a7a;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    &-cover {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  &-deletebutton {
+    height: 40px;
+    background: #fff;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    border-radius: 4px;
+
+    &:hover {
+      background: #ff0000;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    &-cover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+  }
+}

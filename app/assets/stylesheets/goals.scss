@@ -1,3 +1,171 @@
 // Place all the styles related to the goals controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// index, show
+.goal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 205px;
+  max-width: 300px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+  &:not(:first-of-type) {
+    margin-top: 10px;
+  }
+
+  &-username {
+    font-weight: bold;
+  }
+
+  &-title {
+    font-size: 16px;
+    border-bottom: 1px solid #888;
+  }
+
+  &-content {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-height: 70px;
+  }
+
+  &-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    width: 64px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #fff;
+
+    &-not {
+      @extend .goal-status;
+      background: #ed8077;
+    }
+
+    &-process {
+      @extend .goal-status;
+      background: #4484c5;
+    }
+
+    &-processd {
+      @extend .goal-status;
+      background: #5eb5a6;
+    }
+
+    &-done {
+      @extend .goal-status;
+      background: #a1af2f;
+    }
+  }
+
+  &-button-cover {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    > div {
+      margin: 5px;
+    }
+  }
+
+  &-addbutton {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+    background: #2c9a7a;
+    border-radius: 100px;
+
+    > a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+// show
+.goal-footer {
+  border-top: 1px solid #aaa;
+
+  &-head {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #aaa;
+  }
+
+  &-foot {
+    padding: 10px 0;
+  }
+}
+
+// new
+.goal-form {
+  min-width: 205px;
+  max-width: 300px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+  &-title {
+    > input {
+      min-height: 20px;
+      width: 100%;
+      min-width: 165px;
+      max-width: 260px;
+      padding: 5px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+
+  }
+
+  &-content {
+    margin-top: 12px;
+
+    > textarea {
+      min-height: 200px;
+      width: 100%;
+      min-width: 165px;
+      max-width: 260px;
+      padding: 5px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      resize: none;
+    }
+
+  }
+
+  &-status {
+    display: flex;
+    margin-top: 12px;
+
+    > select {
+      display: block;
+      margin-left: auto;
+    }
+  }
+
+  &-button {
+    height: 40px;
+    width: 122px;
+    background: #2c9a7a;
+    color: #fff;
+    border: 1px solid #2c9a7a;
+    border-radius: 5px;
+
+    &-cover {
+      display: flex;
+      margin-top: 12px;
+      justify-content: flex-end;
+    }
+  }
+}

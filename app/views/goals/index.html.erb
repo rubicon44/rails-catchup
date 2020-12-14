@@ -1,40 +1,38 @@
 <%= render 'search_form', search: @search %>
 
-<h1>タスク一覧</h1>
-
 <% if user_signed_in? %>
-  <div><%= link_to '目標追加', new_goal_path %></div>
+  <div class="goal-addbutton">
+    <%= link_to '目標追加', new_goal_path %>
+  </div>
 <% end %>
 
-<table>
-  <tr>
-    <th>登録者</th>
-    <th>Title</th>
-    <th>Content</th>
-    <th>Status</th>
-  </tr>
-
+<div>
   <% @goals.each do |goal| %>
-    <tr>
-      <td>@<%= link_to goal.user.username, user_path(goal.user.username) unless goal.user.blank? %></td>
-      <td><%= goal.name %></td>
-      <td><%= goal.description %></td>
+    <div class="goal">
+      <div class="goal-username">
+        Created by @<%= link_to goal.user.username, user_path(goal.user.username) unless goal.user.blank? %>
+      </div>
+      <div class="goal-title"><%= goal.name %></div>
+      <div class="goal-content"><%= goal.description %></div>
+
       <% case goal.status %>
       <% when 0 then %>
-        <td>未対応</td>
+        <span class="goal-status-not">未対応</span>
       <% when 1 then %>
-        <td>処理中</td>
+        <span class="goal-status-process">処理中</span>
       <% when 2 then %>
-        <td>処理済み</td>
+        <span class="goal-status-processd">処理済み</span>
       <% when 3 then %>
-        <td>完了</td>
+        <span class="goal-status-done">完了</span>
       <% end %>
 
-      <td><%= link_to 'Show', goal_path(goal) %></td>
-      <% if goal.user == current_user %>
-        <td><%= link_to '編集', edit_goal_path(goal) %></td>
-        <td><%= link_to '削除', goal_path(goal), method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
-      <% end %>
-    </tr>
+      <div class="goal-button-cover">
+        <div><%= link_to 'Show', goal_path(goal) %></div>
+        <% if goal.user == current_user %>
+          <div><%= link_to '編集', edit_goal_path(goal) %></div>
+          <div><%= link_to '削除', goal_path(goal), method: :delete, data: { confirm: '本当に削除しますか？' } %></div>
+        <% end %>
+      </div>
+    </div>
   <% end %>
-</table>
+</div>

@@ -1,54 +1,74 @@
-<h1>プロフィール</h1>
+<div class="user-show">
+  <%= link_to 'Back', goals_path %>
 
-<p><%= image_tag(@user.avatar.url, size: "250x250", alt: "avatar image") %></p>
-<p>名前：<%= @user.username %></p>
-<p>メールアドレス : <%= @user.email %></p>
-<p>自己紹介 : <%= @user.profile %></p>
+  <div class="user-show-header">
+    <div class="user-show-header-head">
+      <div class="user-show-image-cover">
+        <%= image_tag(@user.avatar.url, size: "68x68", alt: "avatar image", class: "user-show-image") %>
+      </div>
 
-<% if user_signed_in? %>
-  <% if current_user.admin? %>
+      <% if user_signed_in? %>
+          <% if @user == current_user %>
+            <div class="user-show-logoutbutton-cover">
+              <%= button_to "プロフィール編集", edit_user_registration_path, method: :get, class: "user-show-editbutton" %>
+              <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "user-show-logoutbutton" %>
+            </div>
+          <% elsif @user.guest? %>
+            <!-- なにも表示しない -->
+          <% end %>
+      <% end %>
+    </div>
+
+    <div>@<%= @user.username %></div>
+    <div><%= @user.profile %></div>
+
+    <% if user_signed_in? %>
+      <div>
+        <%=link_to "フォロー", follows_user_path(@user.id) %>
+        <%=link_to "フォロワー", followers_user_path(@user.id) %>
+      </div>
+
+      <div class="user-show-followbutton-cover">
+        <% @users.each do |user| %>
+          <% if current_user != user %>
+            <% if user.already_followed?(current_user) %>
+              <%=button_to "フォロー中", user_relationships_path(user.id), method: :delete, class: "user-show-followbutton is-active" %>
+            <% else %>
+              <%=button_to "フォローする", user_relationships_path(user.id), method: :goal, class: "user-show-followbutton" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="user-show-body">
+    <div>
+      <h3>目標：<%= @goals.count %>件</h3>
+      <% if @user.goals.any? %>
+        <%= render 'show_goals', group: @goals %>
+      <% else %>
+        <div>投稿がありません</div>
+      <% end %>
+    </div>
+
+    <div>
+      <h3>いいね：<%= @likes.count %>件</h3>
+      <% if @user.likes.any? %>
+        <%= render 'show_likes', group: @likes %>
+      <% else %>
+        <div>"いいね！" した投稿がありません</div>
+      <% end %>
+    </div>
+  </div>
+
+  <% if user_signed_in? %>
     <% if @user == current_user %>
       <!-- なにも表示しない -->
-    <% elsif @user.guest? %>
-      <!-- なにも表示しない -->
-    <% else %>
-      <%= button_to "このユーザーを削除する", @user, method: :delete, data: {confirm: "このユーザーを削除してもよろしいですか?"} %>
-      ※「このユーザーを削除する」ボタンは管理者のみに表示されています。
+    <% elsif current_user.admin? %>
+      <div class="user-show-deletebutton-cover">
+        <%= button_to "このユーザーを削除する", @user, method: :delete, data: {confirm: "このユーザーを削除してもよろしいですか?"}, class: "user-show-deletebutton" %>
+      </div>
     <% end %>
   <% end %>
-<% end %>
-
-<% if user_signed_in? %>
-  <p><%=link_to "フォロー", follows_user_path(@user.id) %>
-  <%=link_to "フォロワー", followers_user_path(@user.id) %></p>
-
-  <% @users.each do |user| %>
-    <% if current_user != user %>
-        <% if user.already_followed?(current_user) %>
-            <p><%=button_to "フォロー中", user_relationships_path(user.id), method: :delete %></p>
-        <% else %>
-            <p><%=button_to "フォローする", user_relationships_path(user.id), method: :goal %></p>
-        <% end %>
-    <% end %>
-  <% end %>
-<% end %>
-
-<div>
-  <h3>目標：<%= @goals.count %>件</h3>
-  <% if @user.goals.any? %>
-    <%= render 'show_goals', group: @goals %>
-  <% else %>
-    <div>投稿がありません</div>
-  <% end %>
 </div>
-
-<div>
-  <h3>いいね：<%= @likes.count %>件</h3>
-  <% if @user.likes.any? %>
-    <%= render 'show_likes', group: @likes %>
-  <% else %>
-    <div>"いいね！" した投稿がありません</div>
-  <% end %>
-</div>
-
-<%= link_to 'Back', goals_path %>

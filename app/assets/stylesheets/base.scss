@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/* -----------------------------------------------------------------
+Base
+----------------------------------------------------------------- */
+
+html {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  background: #ffffff;
+  color: #000000;
+  font-family: "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+button {
+  border: 0;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: #105fbb;
+}
+
+input, button {
+  cursor: pointer;
+}
+
+form, input, textarea {
+  display: block;
+  box-sizing: border-box;
+}

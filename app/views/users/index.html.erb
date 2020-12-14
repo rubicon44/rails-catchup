@@ -1,20 +1,15 @@
-<%= search_form_for @search do |f| %>
-  <%= f.label :name, "ユーザー名検索" %>
-  <%= f.search_field :username_cont %>
-  <%= f.submit "検索" %>
-<% end %>
-
-<h1>ユーザー一覧</h1>
-
-<% provide(:title, 'すべてのユーザー') %>
+<%= render 'search_form', search: @search %>
 
 <div>
+  <h2>ユーザー一覧</h2>
+  <% provide(:title, 'すべてのユーザー') %>
+
   <%= render 'users/user_cards', group: @users %>
-</div>
 
-<div>
-  <%= paginate @user %>
   <div>
-    <button>さらに表示</button>
+    <%= paginate @user %>
+    <div>
+      <button>さらに表示</button>
+    </div>
   </div>
 </div>

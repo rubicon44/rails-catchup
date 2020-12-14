@@ -1,5 +1,7 @@
-<%= search_form_for search do |f| %>
-  <%= f.label :name, 'タイトル&内容検索' %>
-  <%= f.search_field :name_or_description_cont %>
-  <%= f.submit "検索" %>
-<% end %>
+<div class="search-cover">
+  <%= search_form_for search, class: "search" do |f| %>
+    <%= f.hidden_field :name, class: "search-title" %>
+    <%= f.search_field :name_or_description_cont, placeholder: "タイトル/内容検索", class: "search-input" %>
+    <%= f.submit "検索", class: "search-button" %>
+  <% end %>
+</div>

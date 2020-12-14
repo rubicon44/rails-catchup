@@ -1,39 +1,50 @@
-<h1>タスク詳細</h1>
-
-<p>
-  <strong>投稿者</strong>
-  @<%= link_to @goal.user.username, user_path(@goal.user.username) unless @goal.user.blank? %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @goal.name %>
-</p>
-<p>
-  <strong>Text:</strong>
-  <%= @goal.description %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <% case @goal.status %>
-  <% when 0 then %>
-    <td>未対応</td>
-  <% when 1 then %>
-    <td>処理中</td>
-  <% when 2 then %>
-    <td>処理済み</td>
-  <% when 3 then %>
-    <td>完了</td>
-  <% end %>
-</p>
-
-<% if @goal.user == current_user %>
-  <td><%= link_to '編集', edit_goal_path(@goal) %></td>
-  <td><%= link_to '削除', goal_path(@goal), method: :delete, data: { confirm: '投稿を削除しますか？' } %></td>
-<% end %>
-
-<%= render 'like', goal: @goal %>
-<%= render 'comment', comments: @comments %>
-
 <%= link_to 'Back', goals_path %>
+
+<div class="goal">
+  <div class="goal-username">
+    Created by @<%= link_to @goal.user.username, user_path(@goal.user.username) unless @goal.user.blank? %>
+  </div>
+
+  <div class="goal-title">
+    <%= @goal.name %>
+  </div>
+
+  <div class="goal-content">
+    <%= @goal.description %>
+  </div>
+
+  <div class="goal-status">
+    <div>状態</div>
+    <% case @goal.status %>
+    <% when 0 then %>
+      <div>未対応</div>
+    <% when 1 then %>
+      <div>処理中</div>
+    <% when 2 then %>
+      <div>処理済み</div>
+    <% when 3 then %>
+      <div>完了</div>
+    <% end %>
+  </div>
+
+  <% if @goal.user == current_user %>
+    <div class="goal-button-cover">
+      <div><%= link_to '編集', edit_goal_path(@goal) %></div>
+      <div><%= link_to '削除', goal_path(@goal), method: :delete, data: { confirm: '投稿を削除しますか？' } %></div>
+    </div>
+  <% end %>
+
+  <div class="goal-footer">
+    <div class="goal-footer-head">
+      <div>いいね件数：<%= @goal.likes.count %></div>
+      <% if @comments.any? %>
+        <div>コメント件数：<%= @comments.count %></div>
+      <% end %>
+    </div>
+
+    <div class="goal-footer-foot">
+      <%= render 'like', goal: @goal %>
+      <%= render 'comment', comments: @comments %>
+    </div>
+  </div>
+</div>
