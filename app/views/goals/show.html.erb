@@ -2,7 +2,7 @@
 
 <div class="goal">
   <div class="goal-username">
-    Created by @<%= link_to @goal.user.username, user_path(@goal.user.username) unless @goal.user.blank? %>
+    @<%= link_to @goal.user.username, user_path(@goal.user.username) unless @goal.user.blank? %>
   </div>
 
   <div class="goal-title">
@@ -13,19 +13,16 @@
     <%= @goal.description %>
   </div>
 
-  <div class="goal-status">
-    <div>状態</div>
-    <% case @goal.status %>
-    <% when 0 then %>
-      <div>未対応</div>
-    <% when 1 then %>
-      <div>処理中</div>
-    <% when 2 then %>
-      <div>処理済み</div>
-    <% when 3 then %>
-      <div>完了</div>
-    <% end %>
-  </div>
+  <% case @goal.status %>
+  <% when 0 then %>
+    <span class="goal-status-not">未対応</span>
+  <% when 1 then %>
+    <span class="goal-status-process">処理中</span>
+  <% when 2 then %>
+    <span class="goal-status-processd">処理済み</span>
+  <% when 3 then %>
+    <span class="goal-status-done">完了</span>
+  <% end %>
 
   <% if @goal.user == current_user %>
     <div class="goal-button-cover">

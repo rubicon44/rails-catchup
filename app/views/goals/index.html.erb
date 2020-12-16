@@ -10,10 +10,16 @@
   <% @goals.each do |goal| %>
     <div class="goal">
       <div class="goal-username">
-        Created by @<%= link_to goal.user.username, user_path(goal.user.username) unless goal.user.blank? %>
+        @<%= link_to goal.user.username, user_path(goal.user.username) unless goal.user.blank? %>
       </div>
-      <div class="goal-title"><%= goal.name %></div>
-      <div class="goal-content"><%= goal.description %></div>
+
+      <div class="goal-title">
+        <%= goal.name %>
+      </div>
+
+      <div class="goal-content">
+        <%= goal.description %>
+      </div>
 
       <% case goal.status %>
       <% when 0 then %>
