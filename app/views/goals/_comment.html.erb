@@ -7,22 +7,29 @@
     </div>
   <% end %>
 
-  <div class="comment">
     <% if comments.any? %>
       <% comments.each do |comment| %>
-        <div class="comment-username">
-          <%= link_to comment.user.username, user_path(comment.user.username) unless comment.user.blank? %>
-        </div>
-        <div><%= comment.content %></div>
-        <div>
-          <%= comment.created_at %>
-          <% if comment.user == current_user %>
-            <%= link_to "削除", goal_comment_path(@goal, comment), method: :delete, data: { confirm: "コメントを削除しますか？" } %>
-          <% end %>
+        <div class="comment">
+          <div class="comment-username">
+            <%= link_to "@#{comment.user.username}", user_path(comment.user.username) unless comment.user.blank? %>
+          </div>
+
+          <div class="comment-content">
+            <%= comment.content %>
+          </div>
+
+          <div class="comment-createdAt">
+            <%= comment.created_at %>
+          </div>
+
+          <div class="comment-deleteButton-cover">
+            <% if comment.user == current_user %>
+              <%= link_to "削除", goal_comment_path(@goal, comment), method: :delete, data: { confirm: "コメントを削除しますか？" }, class: "comment-deleteButton" %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     <% else %>
       <div>まだコメントがありません。</div>
     <% end %>
-  </div>
 <% end %>

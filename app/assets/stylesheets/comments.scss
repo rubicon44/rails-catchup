@@ -23,6 +23,13 @@
 
 // comment
 .comment {
+  position: relative;
+
+  &:not(:last-of-type) {
+    padding: 10px 0;
+    border-bottom: 1px solid #bbb;
+  }
+
   &-username {
     font-weight: bold;
   }
@@ -42,6 +49,20 @@
     &-cover {
       display: flex;
       justify-content: flex-end;
+    }
+  }
+
+  &-deleteButton {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+
+    &:hover {
+      color: #ff0000;
+      font-weight: bold;
+    }
+
+    &-cover {
     }
   }
 }
