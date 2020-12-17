@@ -1,8 +1,12 @@
+<div class="back-button-cover">
+  <%= link_to goals_path, class: "back-button" do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+</div>
+
 <% if @notification.exists? %>
   <%= render 'notification', notification: @notification %>
   <%= paginate @notifications %>
-  <%= link_to 'Back', goals_path %>
 <% else %>
   <p>通知はありません</p>
-  <%= link_to 'Back', goals_path %>
 <% end %>

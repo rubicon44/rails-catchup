@@ -6,13 +6,13 @@
   </div>
 <% end %>
 
-<div>
-  <% @goals.each do |goal| %>
-    <div class="goal">
-      <div class="goal-username">
-        @<%= link_to goal.user.username, user_path(goal.user.username) unless goal.user.blank? %>
-      </div>
+<% @goals.each do |goal| %>
+  <div class="goal">
+    <div class="goal-username">
+      <%= link_to "@#{goal.user.username}", user_path(goal.user.username) unless goal.user.blank? %>
+    </div>
 
+    <%= link_to goal_path(goal) do %>
       <div class="goal-title">
         <%= goal.name %>
       </div>
@@ -31,14 +31,6 @@
       <% when 3 then %>
         <span class="goal-status-done">完了</span>
       <% end %>
-
-      <div class="goal-button-cover">
-        <div><%= link_to 'Show', goal_path(goal) %></div>
-        <% if goal.user == current_user %>
-          <div><%= link_to '編集', edit_goal_path(goal) %></div>
-          <div><%= link_to '削除', goal_path(goal), method: :delete, data: { confirm: '本当に削除しますか？' } %></div>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>

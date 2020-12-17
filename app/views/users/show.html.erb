@@ -1,6 +1,10 @@
-<div class="user-show">
-  <%= link_to 'Back', goals_path %>
+<div class="back-button-cover">
+  <%= link_to users_path, class: "back-button" do %>
+    <i class="fas fa-chevron-left"></i>
+  <% end %>
+</div>
 
+<div class="user-show">
   <div class="user-show-header">
     <div class="user-show-header-head">
       <div class="user-show-image-cover">
