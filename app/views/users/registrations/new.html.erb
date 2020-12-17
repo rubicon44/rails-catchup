@@ -34,6 +34,7 @@
       </div>
     <% end %>
 
-    <%= render "users/shared/links" %>
+    <%= link_to "アカウントをお持ちの方はこちら", new_session_path(resource_name) %><br />
+    <%= link_to "アカウントの認証が済んでいない方はこちら", new_confirmation_path(resource_name) %>
   </div>
 </div>

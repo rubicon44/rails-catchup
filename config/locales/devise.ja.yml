@@ -7,6 +7,10 @@ ja:
       confirmed: "おめでとうございます。メールアドレスは正常に承認されました。"
       send_instructions: "確認メールを再発行致しました（メールの到着には数分かかる可能性があります）"
       send_paranoid_instructions: "ご登録のメールアドレスが保存されている場合、アカウントの確認方法をメールでご連絡します。"
+      new:
+        forgot_your_password: "パスワードの再設定"
+        resend_confirmation_instructions: "アカウント確認メール再送"
+        send_me_reset_password_instructions: "再設定用のメールを送信する"
     failure:
       already_authenticated: "既にログインしています。"
       inactive: 'アカウントがまだ有効になっていません。'
@@ -33,6 +37,9 @@ ja:
       send_paranoid_instructions: ""
       updated: "パスワードを変更しました。"
       updated_not_active: "パスワードを変更しました。"
+      new:
+        forgot_your_password: "パスワードの再設定"
+        send_me_reset_password_instructions: "再設定用のメールを送信する"
     registrations:
       destroyed: "アカウントを削除しました。またのご利用をお待ちしております。"
       signed_up: "アカウント登録を受け付けました。"
@@ -44,6 +51,12 @@ ja:
     sessions:
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
+    shared:
+      links:
+        didn_t_receive_confirmation_instructions: "アカウントの認証が済んでいない方はこちら"
+        forgot_your_password: "パスワードをお忘れの方はこちら"
+        sign_in: "アカウントをお持ちの方はこちら"
+        sign_up: "新規登録の方はこちら"
     unlocks:
       send_instructions: "アカウントのロックを解除する方法を数分以内にメールでご連絡します。"
       send_paranoid_instructions: "アカウントが存在する場合、ロックを解除する方法をメールでご連絡します。"

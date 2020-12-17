@@ -1,16 +1,22 @@
-<h2>Forgot your password?</h2>
+<div class="auth">
+  <h2 class="auth-title">パスワードの再設定</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+  <div class="auth-form">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <div class="auth-form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+
+      <div class="auth-button-cover">
+        <%= f.submit "再設定用のメールを送信する", class: "auth-button" %>
+      </div>
+    <% end %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  <%= link_to "アカウントをお持ちの方はこちら", new_session_path(resource_name) %><br />
+  <%= link_to "新規登録の方はこちら", new_registration_path(resource_name) %><br />
+  <%= link_to "アカウントの認証が済んでいない方はこちら", new_confirmation_path(resource_name) %>
+</div>
