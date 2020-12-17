@@ -1,8 +1,10 @@
 <% if user_signed_in? %>
-  <%= form_with(model:[@goal, @comment], local: true) do |f| %>
+  <%= form_with(model:[@goal, @comment], local: true, class: "comment-form js-modal") do |f| %>
     <%= f.text_area :content %>
     <br>
-    <%= f.submit 'コメントする' %>
+    <div class="comment-button-cover">
+      <%= f.submit 'コメントする', class: "comment-button" %>
+    </div>
   <% end %>
 
   <div class="comment">

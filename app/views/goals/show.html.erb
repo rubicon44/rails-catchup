@@ -1,3 +1,5 @@
+<div class="modal-bg js-modalBg" data-keyboard="false" data-backdrop="static"></div>
+
 <div class="back-button-cover">
   <%= link_to goals_path, class: "back-button" do %>
     <i class="fas fa-chevron-left"></i>
@@ -45,7 +47,7 @@
       </div>
 
       <ul class="goal-footer-body">
-        <li class="active-comment">コメント</li>
+        <li class="active-comment js-modalOn">コメント</li>
         <li class="active-like">
           <%= render 'likes', goal: @goal %>
         </li>
