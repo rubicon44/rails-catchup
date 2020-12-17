@@ -13,18 +13,18 @@ header {
   }
 }
 
-nav {
-  margin: 0 0 0 auto;
+.nav {
+  display: flex;
 
-  > ul {
+  &-item {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 10px;
+    list-style: none;
 
-    > li {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin: 0 10px;
-      list-style: none;
+    > a {
+      color: #2c9a7a;
     }
   }
 }

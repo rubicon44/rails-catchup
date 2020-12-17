@@ -2,43 +2,47 @@
   <h1 class="header-logo">
     <%= link_to website_name, root_path %>
   </h1>
-  <nav class="navbar">
-    <ul class="navbar-nav">
-      <li>
+  <nav class="nav-cover">
+    <ul class="nav">
+      <li class="nav-item">
         <%= link_to goals_path do %>
           <i class="fas fa-tasks fa-2x"></i>
         <% end %>
       </li>
-      <li>
+      <li class="nav-item">
         <%= link_to users_path do %>
           <i class="fas fa-users fa-2x"></i>
         <% end %>
       </li>
       <% if user_signed_in? && current_user.admin? %>
-        <li>
+        <li class="nav-item">
           <%= link_to user_path(current_user) do %>
             <i class="fas fa-user fa-2x"></i>
           <% end %>
         </li>
-        <li>
+        <li class="nav-item">
           <%= link_to notifications_path do %>
             <i class="fa fa-bell fa-2x"></i>
           <% end %>
         </li>
       <% elsif user_signed_in? %>
-        <li>
+        <li class="nav-item">
           <%= link_to user_path(current_user) do %>
             <i class="fas fa-user fa-2x"></i>
           <% end %>
         </li>
-        <li>
+        <li class="nav-item">
           <%= link_to notifications_path do %>
             <i class="fa fa-bell fa-2x"></i>
           <% end %>
         </li>
       <% else %>
-        <li><%= link_to "ログイン", new_user_session_path %></li>
-        <li><%= link_to "新規登録", new_user_registration_path %></li>
+        <li class="nav-item">
+          <%= link_to "ログイン", new_user_session_path %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規登録", new_user_registration_path %>
+        </li>
       <% end %>
     </ul>
   </nav>

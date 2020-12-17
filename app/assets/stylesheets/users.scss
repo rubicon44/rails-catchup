@@ -304,4 +304,50 @@
       height: 100px;
     }
   }
+
+  &-body {
+    margin: 10px 0;
+  }
+
+  &-tabs {
+    display: flex;
+    justify-content: space-evenly;
+    height: 50px;
+    border-bottom: 1px solid #bbb;
+    text-align: center;
+
+    > li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+
+      &.active {
+        border-bottom: 2px solid #2c9a7a;
+        color: #2c9a7a;
+        box-sizing: border-box;
+      }
+
+      &.active-likes.active {
+        border-bottom: 2px solid #e0245e;
+        color: #e0245e;
+        box-sizing: border-box;
+      }
+    }
+  }
+
+  &-tabContents {
+    margin: 10px 0;
+
+    > li {
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
 }

@@ -102,6 +102,43 @@
     border-bottom: 1px solid #aaa;
   }
 
+  &-body {
+    display: flex;
+    justify-content: space-evenly;
+    height: 50px;
+    border-bottom: 1px solid #bbb;
+    text-align: center;
+
+    > li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+
+      &.active-comment:hover {
+        border-bottom: 2px solid #2c9a7a;
+        color: #2c9a7a;
+        box-sizing: border-box;
+      }
+
+      &.active-like > a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+
+        &:hover {
+          border-bottom: 2px solid #e0245e;
+          color: #e0245e;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+
   &-foot {
     padding: 10px 0;
   }

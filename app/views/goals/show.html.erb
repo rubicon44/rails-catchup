@@ -39,9 +39,16 @@
       <% end %>
     </div>
 
+    <ul class="goal-footer-body">
+      <li class="active-comment">コメント</li>
+      <li class="active-like">
+        <%= render 'likes', goal: @goal %>
+      </li>
+    </ul>
+
     <div class="goal-footer-foot">
-      <%= render 'like', goal: @goal %>
       <%= render 'comment', comments: @comments %>
+      <%= render 'like', goal: @goal %>
     </div>
   </div>
 </div>

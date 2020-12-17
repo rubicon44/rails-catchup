@@ -31,7 +31,9 @@ button {
 }
 
 a {
-  color: #105fbb;
+  // color: #105fbb;
+  color: #000;
+  text-decoration: none;
 }
 
 input, button {
@@ -41,4 +43,8 @@ input, button {
 form, input, textarea {
   display: block;
   box-sizing: border-box;
+}
+
+nav {
+  margin: 0 0 0 auto;
 }

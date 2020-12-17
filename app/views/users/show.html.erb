@@ -43,23 +43,28 @@
   </div>
 
   <div class="user-show-body">
-    <div>
-      <h3>目標：<%= @goals.count %>件</h3>
-      <% if @user.goals.any? %>
-        <%= render 'show_goals', group: @goals %>
-      <% else %>
-        <div>投稿がありません</div>
-      <% end %>
-    </div>
+    <ul class="user-show-tabs js-tab">
+      <li class="active">目標</li>
+      <li class="active-likes">いいね</li>
+    </ul>
 
-    <div>
-      <h3>いいね：<%= @likes.count %>件</h3>
-      <% if @user.likes.any? %>
-        <%= render 'show_likes', group: @likes %>
-      <% else %>
-        <div>"いいね！" した投稿がありません</div>
-      <% end %>
-    </div>
+    <ul class="user-show-tabContents js-tabContents">
+      <li class="active">
+        <% if @user.goals.any? %>
+          <%= render 'show_goals', group: @goals %>
+        <% else %>
+          <div>投稿がありません</div>
+        <% end %>
+      </li>
+
+      <li>
+        <% if @user.likes.any? %>
+          <%= render 'show_likes', group: @likes %>
+        <% else %>
+          <div>"いいね！" した投稿がありません</div>
+        <% end %>
+      </li>
+    </ul>
   </div>
 
   <% if user_signed_in? %>
