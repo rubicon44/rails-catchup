@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :goals
   resources :goals, only: [:index, :show, :create] do
     resources :comments, only: [:create, :destroy]
-    resources :likes, only: [:create, :destroy]
+    resources :likes, only: [:index, :create, :destroy]
   end
 
   constraints(UrlConstrainer.new) do

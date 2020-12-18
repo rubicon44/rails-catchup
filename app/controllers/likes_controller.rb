@@ -1,6 +1,10 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @goal = Goal.find(params[:goal_id])
+  end
+
   def create
     @like = current_user.likes.create(goal_id: params[:goal_id])
     redirect_back(fallback_location: root_path)
