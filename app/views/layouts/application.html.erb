@@ -18,9 +18,15 @@
       <%= render 'layouts/header' %>
       <%= render 'layouts/flash_messages' %>
 
-      <main>
-        <%= yield %>
-      </main>
+      <% unless current_page?(root_path) %>
+        <main class="main-loggedIn">
+          <%= yield %>
+        </main>
+      <% else %>
+        <main class="main-notLoggedIn">
+          <%= yield %>
+        </main>
+      <% end %>
     </div>
   </body>
 </html>

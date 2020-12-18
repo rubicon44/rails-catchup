@@ -1,5 +1,18 @@
 @import 'mixin';
 
+// main
+.main {
+  &-loggedIn {
+    margin: 20px;
+    padding-bottom: 40px;
+  }
+
+  &-notLoggedIn {
+    padding-bottom: 40px;
+  }
+}
+
+
 // sign_in
 .guest-login {
   position: fixed;

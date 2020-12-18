@@ -1,0 +1,58 @@
+.home {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 300px;
+  background-color: #edf4f0;
+  text-align: center;
+
+  &-title {
+    position: absolute;
+    top: 10%;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &-content {
+    position: absolute;
+    top: 25%;
+    font-size: 1.4rem;
+  }
+
+  &-mainVisual {
+    position: absolute;
+    bottom: 0;
+    height: 180px;
+    width: 288px;
+  }
+}
+
+.function {
+  width: 280px;
+  max-width: 300px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &-cover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &-desc {
+    margin-top: 10px;
+
+    > li {
+      list-style: circle;
+      list-style-position: inside;
+    }
+  }
+}

@@ -1,11 +1,11 @@
 <%= render 'search_form', search: @search %>
 
 <% if user_signed_in? %>
-  <div class="goal-addbutton">
-    <%= link_to new_goal_path do %>
+  <%= link_to new_goal_path do %>
+    <div class="goal-addbutton">
       <i class="fas fa-plus"></i>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
 
 <% @goals.each do |goal| %>

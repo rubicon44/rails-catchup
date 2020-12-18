@@ -336,10 +336,24 @@
         box-sizing: border-box;
       }
 
-      &.active-likes.active {
-        border-bottom: 2px solid #e0245e;
-        color: #e0245e;
+      &.active-goals:hover {
+        border-bottom: 2px solid #2c9a7a;
+        color: #2c9a7a;
         box-sizing: border-box;
+      }
+
+      &.active-likes {
+        &.active {
+          border-bottom: 2px solid #e0245e;
+          color: #e0245e;
+          box-sizing: border-box;
+        }
+
+        &:hover {
+          border-bottom: 2px solid #e0245e;
+          color: #e0245e;
+          box-sizing: border-box;
+        }
       }
     }
   }

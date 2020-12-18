@@ -1,7 +1,5 @@
-<% if user_signed_in? %>
-  <p>いいねしたユーザー</p>
+<p>いいねしたユーザー</p>
 
-  <% goal.liked_users.each do |user| %>
-    <li><%= user.username %></li>
-  <% end %>
+<% goal.liked_users.each do |user| %>
+  <li><%= user.username %></li>
 <% end %>

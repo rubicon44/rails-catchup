@@ -130,6 +130,7 @@
     padding: 10px;
     border-radius: 50%;
     background: #2c9a7a;
+    color: #fff;
     font-size: 3rem;
 
     > a {
@@ -157,6 +158,7 @@
     text-align: center;
 
     > li {
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -169,6 +171,49 @@
         border-bottom: 2px solid #2c9a7a;
         color: #2c9a7a;
         box-sizing: border-box;
+      }
+
+      &.comment-toolTip {
+        &::before, &::after {
+          position: absolute;
+          opacity: 0;
+          visibility: hidden;
+          z-index: 10;
+          transition: all 0.2s;
+        }
+
+        &::before {
+          position: absolute;
+          left: calc(80% + 6px);
+          top: 50%;
+          content: "";
+          height: 0;
+          width: 0;
+          transform: translateY(-50%);
+          border-style: solid;
+          border-width: 3px 7px 3px 0;
+          border-color: transparent #5f6368 transparent transparent;
+        }
+
+        &::after {
+          position: absolute;
+          left: calc(80% + 13px);
+          top: 50%;
+          content: attr(data-tooltip);
+          transform: translateY(-50%);
+          padding: 5px 10px;
+          border-radius: 3px;
+          background: #5f6368;
+          color: #fff;
+          font-size: 11px;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+
+        &:hover::before, &:hover::after {
+          opacity: 1;
+          visibility: visible;
+        }
       }
 
       &.active-like > a {
