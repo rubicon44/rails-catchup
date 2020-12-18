@@ -141,11 +141,18 @@
 }
 
 // show
+.goal-count {
+  > a:hover {
+    color: #e0245e;
+  }
+}
+
 .goal-footer {
   border-top: 1px solid #aaa;
 
   &-head {
     display: flex;
+    justify-content: space-evenly;
     padding: 10px 0;
     border-bottom: 1px solid #aaa;
   }

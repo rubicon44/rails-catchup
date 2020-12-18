@@ -42,11 +42,13 @@
 
     <div class="goal-footer">
       <div class="goal-footer-head">
-        <div>
+        <span class="goal-count">
           <%= link_to "いいね件数", goal_likes_path(@goal) %>：<%= @goal.likes.count %>
-        </div>
+        </span>
         <% if @comments.any? %>
-          <div>コメント件数：<%= @comments.count %></div>
+          <span>
+            コメント件数：<%= @comments.count %>
+          </span>
         <% end %>
       </div>
 
