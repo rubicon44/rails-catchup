@@ -40,6 +40,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px 0;
+
+    > h2 {
+      // todo: 「> h2」をもっと汎用性高く修正。
+      font-size: 1.8rem;
+    }
   }
 
   &-title {

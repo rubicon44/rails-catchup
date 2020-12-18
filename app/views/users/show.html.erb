@@ -77,8 +77,8 @@
     <% elsif @user.guest? %>
       <!-- なにも表示しない -->
     <% elsif current_user.admin? %>
-      <div class="user-show-deletebutton-cover">
-        <%= button_to "このユーザーを削除する", @user, method: :delete, data: {confirm: "このユーザーを削除してもよろしいですか?"}, class: "user-show-deletebutton" %>
+      <div class="user-deletebutton-cover">
+        <%= button_to "このユーザーを削除する", @user, method: :delete, data: {confirm: "このユーザーを削除してもよろしいですか?"}, class: "user-deletebutton" %>
       </div>
     <% end %>
   <% end %>
