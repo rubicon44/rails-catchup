@@ -2,7 +2,9 @@
 
 <% if user_signed_in? %>
   <div class="goal-addbutton">
-    <%= link_to '目標追加', new_goal_path %>
+    <%= link_to new_goal_path do %>
+      <i class="fas fa-plus"></i>
+    <% end %>
   </div>
 <% end %>
 
