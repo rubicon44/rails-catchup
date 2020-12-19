@@ -2,8 +2,8 @@
   <% visitor = noti.visitor %>
   <% visited = noti.visited %>
 
-  <div class="col-md-6.mx-auto">
-    <div class="form-inline">
+  <div>
+    <div>
       <span>
         <%= link_to user_path(visitor) do %>
           <strong>
@@ -29,15 +29,15 @@
               </span>
             <% end %>
             <%= "にコメントしました" %>
-            <p class="text-muted.mb-0">
+            <p>
               <%= Comment.find_by(id: noti.comment_id)&.content %>
           　</p>
         <% end %>
       </span>
     </div>
 
-    <small class="text-muted text-right">
-      <%= time_ago_in_words(noti.created_at).upcase %>
+    <small>
+      <%= time_ago_in_words(noti.created_at).upcase %>前
     </small>
     <hr>
   </div>
