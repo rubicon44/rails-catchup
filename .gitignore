@@ -29,7 +29,6 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 .env
-/environments/db.env
 /public
 
 # Ignore local db data.
