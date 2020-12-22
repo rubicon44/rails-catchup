@@ -1,0 +1,8 @@
+branch-defaults:
+  master:
+    environment: rails-catchup
+global:
+  application_name: <rails-catchup
+  default_platform: rails-catchup
+  default_region: $AWS_REGION
+  sc: git
