@@ -65,6 +65,7 @@ jobs:
               eb init
               eb use rails-catchup --profile eb-cli
               eb deploy -v --staged --profile eb-cli
+            no_output_timeout: 20m
 
 workflows:
   rails_test_and_deploy:
