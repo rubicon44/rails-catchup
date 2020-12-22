@@ -81,4 +81,6 @@ workflows:
           dockerfile: ./Dockerfile
           repo: "${CIRCLE_PROJECT_REPONAME}"
           tag: app
-      - deploy
+      - deploy:
+          requires:
+            - aws-ecr/build-and-push-image
