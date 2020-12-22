@@ -82,5 +82,5 @@ workflows:
           repo: "${CIRCLE_PROJECT_REPONAME}"
           tag: app
       - deploy:
-        requires:
-          - aws-ecr/build-and-push-image
+          requires:
+            - aws-ecr/build-and-push-image
