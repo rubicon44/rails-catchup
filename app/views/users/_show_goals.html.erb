@@ -1,0 +1,33 @@
+<h3>目標：<%= @goals.count %>件</h3>
+
+<% group.each do |goal| %>
+  <div class="goal">
+    <%= link_to goal_path(goal) do %>
+      <div class="goal-title">
+        <%= goal.name unless goal.user.blank? %>
+      </div>
+
+      <div class="goal-content">
+        <%= goal.description %>
+      </div>
+
+      <% case goal.status %>
+      <% when 0 then %>
+        <span class="goal-status-not">未対応</span>
+      <% when 1 then %>
+        <span class="goal-status-process">処理中</span>
+      <% when 2 then %>
+        <span class="goal-status-processd">処理済み</span>
+      <% when 3 then %>
+        <span class="goal-status-done">完了</span>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
+
+<div>
+  <%= paginate group %>
+  <div>
+    <button>さらに表示</button>
+  </div>
+</div>

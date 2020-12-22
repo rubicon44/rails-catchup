@@ -1,0 +1,32 @@
+<div class="signin">
+  <h2 class="signin-title">ログイン</h2>
+
+  <div class="signin-form">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="signin-form-group">
+        <%= f.label :login, "ユーザーネーム/メールアドレス" %><br />
+        <%= f.text_field :login %>
+      </div>
+
+      <div class="signin-form-group">
+        <%= f.label :password, "パスワード" %><br />
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="signin-form-remember">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end %>
+
+      <div class="signin-button-cover">
+        <%= f.submit "ログイン", class: "signin-button" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "新規登録の方はこちら", new_registration_path(resource_name) %><br />
+  <%= link_to "パスワードをお忘れの方はこちら", new_password_path(resource_name) %><br />
+  <%= link_to "アカウントの認証が済んでいない方はこちら", new_confirmation_path(resource_name) %>
+</div>

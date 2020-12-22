@@ -1,0 +1,86 @@
+@import 'mixin';
+
+// main
+.main {
+  &-loggedIn {
+    margin: 20px;
+    padding-bottom: 40px;
+  }
+
+  &-notLoggedIn {
+    padding-bottom: 40px;
+  }
+}
+
+
+// sign_in
+.guest-login {
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 68px;
+  width: 100%;
+  background-color: #ee8800;
+  font-weight: bold;
+  text-align: center;
+
+  > a {
+    color: #fff;
+  }
+}
+
+// flash
+.success {
+  @include flash(#155724, #d4edda, #c3e6cb);
+}
+.notice {
+  @include flash(#0c5460, #d1ecf1, #bee5eb);
+}
+
+// back-button
+.back-button {
+  display: inline-block;
+  width: 30px;
+  color: #2c9a7a;
+  font-size: 2rem;
+  text-align: center;
+
+  &:hover {
+    border-radius: 50%;
+    background-color: #edf4f0;
+  }
+}
+
+// search
+.search {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  &-cover {
+    padding-bottom: 10px;
+  }
+
+  &-title {
+  }
+
+  &-input {
+    height: 25px;
+    margin: 0 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+  }
+
+  &-button {
+    border: 1px solid #aaa;
+    border-radius: 12px;
+  }
+}
+
+// like
+.liked-button {
+  color: #e0245e;
+}

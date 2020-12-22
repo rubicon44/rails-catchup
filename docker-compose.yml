@@ -1,0 +1,47 @@
+version: "3"
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    command:
+      - --sql-mode=NO_ENGINE_SUBSTITUTION
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - "3306:${DB_PORT}"
+
+  app:
+    build: .
+    environment:
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+    command: bundle exec puma -C config/puma.rb
+    volumes:
+      - .:/rails-catchup
+      - public-data:/rails-catchup/public
+      - tmp-data:/rails-catchup/tmp
+      - log-data:/rails-catchup/log
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+
+  web:
+    build:
+      context: containers/nginx
+    volumes:
+      - public-data:/rails-catchup/public
+      - tmp-data:/rails-catchup/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - app
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:

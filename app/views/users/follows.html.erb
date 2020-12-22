@@ -1,0 +1,18 @@
+<h1>フォロー中：<%= @users.count %>人</h1>
+
+<% if @users.empty? %>
+  <p>フォローしているユーザーはいません</p>
+<% end %>
+
+<% @users.each do |user| %>
+  <hr>
+  <p><span>名前:</span><%= link_to user.username, user_path(user.username) %></p>
+
+  <% if current_user != user %>
+    <% if user.already_followed?(current_user) %>
+      <p><%=link_to "フォロー中", user_relationships_path(user.id), method: :delete %></p>
+    <% else %>
+      <p><%=link_to "フォローする", user_relationships_path(user.id), method: :post %></p>
+    <% end %>
+  <% end %>
+<% end %>

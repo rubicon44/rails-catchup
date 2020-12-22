@@ -1,0 +1,10 @@
+{
+  "name": "rails-catchup",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "stylelint": "^13.7.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.18.0"
+  }
+}

@@ -1,0 +1,22 @@
+.user {
+  &-deletebutton {
+    height: 40px;
+    background: #fff;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    border-radius: 4px;
+
+    &:hover {
+      background: #ff0000;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    &-cover {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+    }
+  }
+}

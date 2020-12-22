@@ -1,0 +1,15 @@
+<%= render 'search_form', search: @search %>
+
+<div>
+  <h2>ユーザー一覧</h2>
+  <% provide(:title, 'すべてのユーザー') %>
+
+  <%= render 'users/user_cards', group: @users %>
+
+  <div>
+    <%= paginate @user %>
+    <div>
+      <button>さらに表示</button>
+    </div>
+  </div>
+</div>

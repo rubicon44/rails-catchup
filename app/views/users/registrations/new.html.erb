@@ -1,0 +1,40 @@
+<div class="signup">
+  <h2 class="signup-title">会員登録（無料）</h2>
+
+  <div class="signup-form">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="signup-form-group">
+        <%= f.label :username %><br />
+        <p>※小文字の半角英数字と'_'(アンダーバー)のみ</p>
+        <%= f.text_field :username, autofocus: true %>
+      </div>
+
+      <div class="signup-form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autocomplete: "email" %>
+      </div>
+
+      <div class="signup-form-group">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+
+      <div class="signup-form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      </div>
+
+      <div class="signup-button-cover">
+        <%= f.submit "アカウントを作成する", class: "signup-button" %>
+      </div>
+    <% end %>
+
+    <%= link_to "アカウントをお持ちの方はこちら", new_session_path(resource_name) %><br />
+    <%= link_to "アカウントの認証が済んでいない方はこちら", new_confirmation_path(resource_name) %>
+  </div>
+</div>

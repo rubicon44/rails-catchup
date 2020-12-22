@@ -1,0 +1,7 @@
+<div class="search-cover">
+  <%= search_form_for search, class: "search" do |f| %>
+    <%= f.hidden_field :username, class: "search-title" %>
+    <%= f.search_field :username_cont, placeholder: "ユーザー名検索", class: "search-input" %>
+    <%= f.submit "検索", class: "search-button" %>
+  <% end %>
+</div>

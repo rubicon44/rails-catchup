@@ -1,0 +1,314 @@
+// Place all the styles related to the goals controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// index, show
+.goal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 205px;
+  max-width: 300px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+  &:not(:first-of-type) {
+    margin-top: 16px;
+  }
+
+  > a {
+    padding: 10px;
+    padding-top: 35px;
+  }
+
+  &-inner {
+    padding: 10px;
+    padding-top: 35px;
+  }
+
+  &-username {
+    position: absolute;
+    top: 0;
+    padding: 10px 10px 0;
+    font-weight: bold;
+  }
+
+  &-title {
+    font-size: 16px;
+    border-bottom: 1px solid #888;
+  }
+
+  &-content {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-height: 70px;
+    padding: 12px 0;
+  }
+
+  &-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    width: 64px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 12px;
+    color: #fff;
+
+    &-not {
+      @extend .goal-status;
+      background: #ed8077;
+    }
+
+    &-process {
+      @extend .goal-status;
+      background: #4484c5;
+    }
+
+    &-processd {
+      @extend .goal-status;
+      background: #5eb5a6;
+    }
+
+    &-done {
+      @extend .goal-status;
+      background: #a1af2f;
+    }
+  }
+
+  &-button {
+    height: 30px;
+    width: 60px;
+    padding: 5px;
+    margin: 5px 0;
+    margin-left: 5px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    box-sizing: border-box;
+    text-align: center;
+
+    &-cover {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    &-edit {
+      @extend .goal-button;
+
+      &:hover {
+        border: 1px solid #2c9a7a;
+        background-color: #2c9a7a;
+        color: #fff;
+      }
+    }
+
+    &-delete {
+      @extend .goal-button;
+
+      &:hover {
+        border: 1px solid #ff0000;
+        background-color: #ff0000;
+        color: #fff;
+      }
+    }
+  }
+
+  &-addbutton {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50%;
+    background: #2c9a7a;
+    color: #fff;
+    font-size: 3rem;
+
+    > a {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+// show
+.goal-count {
+  > a:hover {
+    color: #e0245e;
+  }
+}
+
+.goal-footer {
+  border-top: 1px solid #aaa;
+
+  &-head {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px 0;
+    border-bottom: 1px solid #aaa;
+  }
+
+  &-body {
+    display: flex;
+    justify-content: space-evenly;
+    height: 50px;
+    border-bottom: 1px solid #bbb;
+    text-align: center;
+
+    > li {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+
+      &.active-comment:hover {
+        border-bottom: 2px solid #2c9a7a;
+        color: #2c9a7a;
+        box-sizing: border-box;
+      }
+
+      &.comment-toolTip {
+        &::before, &::after {
+          position: absolute;
+          opacity: 0;
+          visibility: hidden;
+          z-index: 10;
+          transition: all 0.2s;
+        }
+
+        &::before {
+          position: absolute;
+          left: calc(80% + 6px);
+          top: 50%;
+          content: "";
+          height: 0;
+          width: 0;
+          transform: translateY(-50%);
+          border-style: solid;
+          border-width: 3px 7px 3px 0;
+          border-color: transparent #5f6368 transparent transparent;
+        }
+
+        &::after {
+          position: absolute;
+          left: calc(80% + 13px);
+          top: 50%;
+          content: attr(data-tooltip);
+          transform: translateY(-50%);
+          padding: 5px 10px;
+          border-radius: 3px;
+          background: #5f6368;
+          color: #fff;
+          font-size: 11px;
+          font-weight: 600;
+          white-space: nowrap;
+        }
+
+        &:hover::before, &:hover::after {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      &.active-like > a {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+
+        &:hover {
+          border-bottom: 2px solid #e0245e;
+          color: #e0245e;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+
+  &-foot {
+    padding: 10px 0;
+  }
+}
+
+// new
+.goal-form {
+  min-width: 205px;
+  max-width: 300px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+
+  &-title {
+    > input {
+      min-height: 20px;
+      width: 100%;
+      min-width: 165px;
+      max-width: 260px;
+      padding: 5px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+    }
+
+  }
+
+  &-content {
+    margin-top: 12px;
+
+    > textarea {
+      min-height: 200px;
+      width: 100%;
+      min-width: 165px;
+      max-width: 260px;
+      padding: 5px;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      resize: none;
+    }
+
+  }
+
+  &-status {
+    display: flex;
+    margin-top: 12px;
+
+    > select {
+      display: block;
+      margin-left: auto;
+    }
+  }
+
+  &-button {
+    height: 40px;
+    width: 122px;
+    background: #2c9a7a;
+    color: #fff;
+    border: 1px solid #2c9a7a;
+    border-radius: 5px;
+
+    &:hover {
+      border: 2px solid #2c9a7a;
+      background: #fff;
+      color: #2c9a7a;
+      font-weight: bold;
+    }
+
+    &-cover {
+      display: flex;
+      margin-top: 12px;
+      justify-content: flex-end;
+    }
+  }
+}
