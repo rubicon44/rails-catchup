@@ -1,44 +1,44 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2
-  aws-ecr: circleci/aws-ecr@6.15.2
+  # ruby: circleci/ruby@0.1.2
+  # aws-ecr: circleci/aws-ecr@6.15.2
   eb: circleci/aws-elastic-beanstalk@1.0.0
 
-jobs:
+# jobs:
 # Rspecテスト
-  test:
-    docker:
-      - image: circleci/ruby:2.6.3-node-browsers-legacy
-        environment:
-          - PGUSER: circleci-demo-ruby
-          - RAILS_ENV: 'test'
-      - image: circleci/mysql:5.7
-        environment:
-          - MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          - MYSQL_ROOT_HOST: '%'
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-      - run:
-          name: Install Dependencies
-          command: |
-            gem install bundler
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+  # test:
+  #   docker:
+  #     - image: circleci/ruby:2.6.3-node-browsers-legacy
+  #       environment:
+  #         - PGUSER: circleci-demo-ruby
+  #         - RAILS_ENV: 'test'
+  #     - image: circleci/mysql:5.7
+  #       environment:
+  #         - MYSQL_ALLOW_EMPTY_PASSWORD: yes
+  #         - MYSQL_ROOT_HOST: '%'
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys:
+  #           - v1-dependencies-{{ checksum "Gemfile.lock" }}
+  #           - v1-dependencies-
+  #     - run:
+  #         name: Install Dependencies
+  #         command: |
+  #           gem install bundler
+  #           bundle install --jobs=4 --retry=3 --path vendor/bundle
+  #     - save_cache:
+  #         paths:
+  #           - ./vendor/bundle
+  #         key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      - run: mv config/database.yml config/database.yml.org
-      - run: mv config/database.yml.ci config/database.yml
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-      - run:
-          name: Run RSpec
-          command: bundle -v
+  #     - run: mv config/database.yml config/database.yml.org
+  #     - run: mv config/database.yml.ci config/database.yml
+  #     - run: bundle exec rake db:create
+  #     - run: bundle exec rake db:schema:load
+  #     - run:
+  #         name: Run RSpec
+  #         command: bundle -v
 # EBへのデプロイ
   deploy:
       docker:
@@ -70,18 +70,18 @@ jobs:
 workflows:
   rails_test_and_deploy:
     jobs:
-      - test
-      - aws-ecr/build-and-push-image:
-          requires:
-            - test
-          filters:
-            branches:
-              only: master
-          region: AWS_REGION
-          account-url: AWS_ECR_ACCOUNT_URL
-          dockerfile: ./Dockerfile
-          repo: "${CIRCLE_PROJECT_REPONAME}"
-          tag: app
+      # - test
+      # - aws-ecr/build-and-push-image:
+      #     requires:
+      #       - test
+      #     filters:
+      #       branches:
+      #         only: master
+      #     region: AWS_REGION
+      #     account-url: AWS_ECR_ACCOUNT_URL
+      #     dockerfile: ./Dockerfile
+      #     repo: "${CIRCLE_PROJECT_REPONAME}"
+      #     tag: app
       - deploy:
           requires:
             - aws-ecr/build-and-push-image
