@@ -63,7 +63,7 @@ jobs:
             name: Deploy to EB if branch is Master
             command: |
               eb init rails-catchup -r $AWS_REGION --profile eb-cli
-              eb create rails-catchup --profile eb-cli
+              eb create rails-catchup --cfg config --profile eb-cli
               eb use rails-catchup --profile eb-cli
               eb tabs rails-catchup --add tag=app --profile eb-cli
               eb deploy rails-catchup -v --staged --profile eb-cli
