@@ -65,7 +65,7 @@ jobs:
               eb init rails-catchup -r $AWS_REGION --profile eb-cli
               eb create rails-catchup --profile eb-cli
               eb use rails-catchup --profile eb-cli
-              eb tabs add rails-catchup tag=app
+              eb tabs rails-catchup --add tag=app --profile eb-cli
               eb deploy rails-catchup -v --staged --profile eb-cli
             no_output_timeout: 60m
 
