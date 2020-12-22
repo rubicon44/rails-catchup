@@ -33,12 +33,9 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run: mv config/database.yml config/database.yml.org
-
       - run: mv config/database.yml.ci config/database.yml
-
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
-
       - run:
           name: Run RSpec
           command: bundle -v
@@ -65,6 +62,7 @@ jobs:
         - run:
             name: Deploy to EB if branch is Master
             command: |
+              eb init <<parameters.environment-name>> -r $AWS_REGION -p <<parameters.platform-version>>
               eb use rails-catchup --profile eb-cli
               eb deploy -v --staged --profile eb-cli
 
