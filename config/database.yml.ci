@@ -4,6 +4,6 @@ test:
   pool: 5
   username: <%= ENV['DB_USER'] || 'root' %>
   password: <%= ENV['DB_PASSWORD'] || '' %>
-  host: <%= ENV['DB_HOST'] || 'localhost' %>
+  host: '127.0.0.1'
   port: <%= ENV['DB_PORT'] || '3306' %>
   database: ci_test
