@@ -1,24 +1,68 @@
-# README
+# 概要
+Growは、転職のポートフォリオ用に制作したタスク管理SNSです。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## アピールポイント
+- Ruby・Railsによる基本的なCRUDを実装できている
+- 開発環境・本番環境にDockerを用いて開発を行っている
+- テストをしっかりと記述している
+- CI/CDパイプラインを構築している
+- AWSで、基本的な本番環境を構築している
 
-Things you may want to cover:
+## 使用技術
+### 開発環境
+【バックエンド】
+- Ruby
+- Ruby on Rails
 
-* Ruby version
+【フロントエンド】
+- Sass
+- jQuery
 
-* System dependencies
+【テスト】
+- Rspec
+- Roubocop
 
-* Configuration
+【CI/CD】
+- Circle CI
 
-* Database creation
+【その他】
+- Docker
+- Docker Compose
 
-* Database initialization
+### 本番環境
+【AWS】
+- VPC
+- ECR
+- Elastic Beanstalk
+- RDS
+- Route 53
+- ALB
+- S3
 
-* How to run the test suite
+## AWS構成図
 
-* Services (job queues, cache servers, search engines, etc.)
+## 機能一覧
+- ログイン機能/ユーザー登録機能（Devise）
+- タスク管理機能
+  - 登録（Title、Content、Statusの3つを登録可能）
+  - 一覧表示
+  - 詳細表示
+  - 編集
+  - 削除
+- コメント機能
+- いいね機能
+- 通知機能
+- フォロー機能
+- 検索機能（Ransack）
+  - タスク検索
+  - ユーザー検索
+~~- ページネーション機能（Kaminari）~~→未実装
+- 管理ユーザー機能（一般ユーザーのアカウントを削除可能）
 
-* Deployment instructions
+# 今回の開発を終えての所感
+今回はRuby on Railsを用いた基本的なアプリケーション作成方法を学ぶことができた。
+一番大変だったことは、運用を考えながら保守性の高いソースコードを書くこと。
+まだまだ自分には運用の力が足りないと思ったため、もっと保守性の高いサービスを作れるようになりたいと思った。
+また、Rails以外にLaravelやDjango等のフレームワーク/言語にも触れ、状況に応じた技術選定/開発ができるようになりたい。
 
-* ...
+次回は、Rails API + React（Vue.js）によるSPA開発/API開発を行いたい。
