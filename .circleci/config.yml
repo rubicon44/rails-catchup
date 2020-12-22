@@ -1,15 +1,86 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@0.1.2
+  aws-ecr: circleci/aws-ecr@6.15.2
+  eb: circleci/aws-elastic-beanstalk@1.0.0
 
 jobs:
-  build:
+# Rspecテスト
+  test:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+      - image: circleci/ruby:2.6.3-node-browsers-legacy
+        environment:
+          - PGUSER: circleci-demo-ruby
+          - RAILS_ENV: 'test'
+      - image: circleci/mysql:5.7
+        environment:
+          - MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          - MYSQL_ROOT_HOST: '%'
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
       - run:
-          name: Which bundler?
+          name: Install Dependencies
+          command: |
+            gem install bundler
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run: mv config/database.yml config/database.yml.org
+
+      - run: mv config/database.yml.ci config/database.yml
+
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+
+      - run:
+          name: Run RSpec
           command: bundle -v
-      - ruby/bundle-install
+# EBへのデプロイ
+  deploy:
+      docker:
+        - image: circleci/python:2.7
+      working_directory: ~/repo
+      steps:
+        - checkout
+        - run:
+            name: Install awscli
+            command: |
+              sudo pip install awsebcli --upgrade
+        - run:
+            name: Create AWS credentials manually
+            command: |
+              mkdir ~/.aws
+              touch ~/.aws/config
+              chmod 600 ~/.aws/config
+              echo "[profile eb-cli]" > ~/.aws/config
+              echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
+              echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+        - run:
+            name: Deploy to EB if branch is Master
+            command: |
+              eb use [your app name] --profile eb-cli
+              eb deploy -v --staged --profile eb-cli
+
+workflows:
+  rails_test_and_deploy:
+    jobs:
+      - test
+      - aws-ecr/build-and-push-image:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+          region: AWS_REGION
+          account-url: AWS_ECR_ACCOUNT_URL
+          dockerfile: ./Dockerfile
+          repo: "${CIRCLE_PROJECT_REPONAME}"
+          tag: app
+      - deploy
