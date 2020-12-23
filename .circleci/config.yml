@@ -67,6 +67,7 @@ jobs:
             command: |
               eb use RailsCatchup-env-3 --profile eb-cli
               eb deploy -v --staged --profile eb-cli
+              eb status --verbose
             no_output_timeout: 60m
 
 workflows:
