@@ -41,31 +41,41 @@ jobs:
   #         command: bundle -v
 # EBへのデプロイ
   deploy:
+      # docker:
+      #   - image: circleci/python:2.7
+      # working_directory: ~/repo
+      # steps:
+      #   - checkout
+      #   - run:
+      #       name: Install awscli
+      #       command: |
+      #         sudo pip install awsebcli --upgrade
+      #   - run:
+      #       name: Create AWS credentials manually
+      #       command: |
+      #         mkdir ~/.aws
+      #         touch ~/.aws/config
+      #         chmod 600 ~/.aws/config
+      #         echo "[profile eb-cli]" > ~/.aws/config
+      #         echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
+      #         echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+        # - run:
+        #     name: Deploy to EB if branch is Master
+        #     command: |
+        #       eb init rails-catchup -r $AWS_REGION
+      #         eb create RailsCatchup-env -r $AWS_REGION --profile eb-cli
+      #         eb use RailsCatchup-env --profile eb-cli
+      #       no_output_timeout: 60m
       docker:
-        - image: circleci/python:2.7
-      working_directory: ~/repo
+        - image: 'cimg/base:stable'
       steps:
         - checkout
+        - eb/setup
         - run:
-            name: Install awscli
             command: |
-              sudo pip install awsebcli --upgrade
-        - run:
-            name: Create AWS credentials manually
-            command: |
-              mkdir ~/.aws
-              touch ~/.aws/config
-              chmod 600 ~/.aws/config
-              echo "[profile eb-cli]" > ~/.aws/config
-              echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
-              echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
-        - run:
-            name: Deploy to EB if branch is Master
-            command: |
-              eb init rails-catchup -r $AWS_REGION
-              eb create RailsCatchup-env -r $AWS_REGION --profile eb-cli
-              eb use RailsCatchup-env --profile eb-cli
-            no_output_timeout: 60m
+              eb use RailsCatchup-env
+              eb deploy RailsCatchup-env
+              eb status
 
 workflows:
   rails_test_and_deploy:
