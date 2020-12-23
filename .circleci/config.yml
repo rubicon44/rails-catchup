@@ -65,7 +65,7 @@ jobs:
         - run:
             name: Deploy to EB if branch is Master
             command: |
-              eb use RailsCatchup-env-3 --profile eb-cli
+              eb use RailsCatchup-env-4 --profile eb-cli
               eb deploy -v --staged --profile eb-cli
               eb status --verbose
             no_output_timeout: 60m
