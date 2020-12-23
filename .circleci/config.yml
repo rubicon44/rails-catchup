@@ -46,6 +46,7 @@ jobs:
       working_directory: ~/repo
       steps:
         - checkout
+        - eb/setup
         - run:
             name: Install awscli
             command: |
@@ -66,9 +67,6 @@ jobs:
       #         eb create RailsCatchup-env -r $AWS_REGION --profile eb-cli
       #         eb use RailsCatchup-env --profile eb-cli
       #       no_output_timeout: 60m
-      steps:
-        - checkout
-        - eb/setup
         - run:
             command: |
               eb use RailsCatchup-env
