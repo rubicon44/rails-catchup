@@ -40,30 +40,32 @@ jobs:
   #         name: Run RSpec
   #         command: bundle -v
 # EBへのデプロイ
-  deploy:
-      docker:
-        - image: circleci/python:2.7
-      working_directory: ~/repo
-      steps:
-        - checkout
-        - run:
-            name: Install awscli
-            command: |
-              sudo pip install awsebcli --upgrade
-        - run:
-            name: Create AWS credentials manually
-            command: |
-              mkdir ~/.aws
-              touch ~/.aws/config
-              chmod 600 ~/.aws/config
-              echo "[profile eb-cli]" > ~/.aws/config
-              echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
-              echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
-        - run:
-            name: Deploy to EB if branch is Master
-            command: |
-              eb init rails-catchup -r $AWS_REGION --profile eb-cli
-            no_output_timeout: 60m
+  # deploy:
+  #     docker:
+  #       - image: circleci/python:2.7
+  #     working_directory: ~/repo
+  #     steps:
+  #       - checkout
+  #       - run:
+  #           name: Install awscli
+  #           command: |
+  #             sudo pip install awsebcli --upgrade
+  #       - run:
+  #           name: Create AWS credentials manually
+  #           command: |
+  #             mkdir ~/.aws
+  #             touch ~/.aws/config
+  #             chmod 600 ~/.aws/config
+  #             echo "[profile eb-cli]" > ~/.aws/config
+  #             echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/config
+  #             echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/config
+  #       - run:
+  #           name: Deploy to EB if branch is Master
+  #           command: |
+  #             eb init rails-catchup -r $AWS_REGION --profile eb-cli
+  #             eb use rails-catchup --profile eb-cli
+  #             eb deploy rails-catchup -v --staged --profile eb-cli
+  #           no_output_timeout: 60m
 
 workflows:
   rails_test_and_deploy:
@@ -80,6 +82,13 @@ workflows:
       #     dockerfile: ./Dockerfile
       #     repo: "${CIRCLE_PROJECT_REPONAME}"
       #     tag: app
-      - deploy
+      # - deploy
           # requires:
           #   - aws-ecr/build-and-push-image
+      - eb/deploy:
+          context: aws-creds
+          environment-name: rails-catchup
+          filters:
+            branches:
+              only:
+                - master
