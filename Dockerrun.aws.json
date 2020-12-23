@@ -1,0 +1,7 @@
+{
+  "AWSEBDockerrunVersion": "3",
+  "Image": {
+    "Name": "${ECR_IMAGE_NAME}",
+    "Update": "true"
+  }
+}
