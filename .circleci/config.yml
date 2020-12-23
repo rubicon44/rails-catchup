@@ -40,7 +40,6 @@ jobs:
   #         name: Run RSpec
   #         command: bundle -v
 # EBへのデプロイ
-# テスト
   deploy:
       docker:
         - image: circleci/python:2.7
