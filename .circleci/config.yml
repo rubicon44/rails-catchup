@@ -65,7 +65,6 @@ jobs:
               eb init rails-catchup -r $AWS_REGION
               eb create RailsCatchup-env -r $AWS_REGION --profile eb-cli
               eb use RailsCatchup-env --profile eb-cli
-              eb deploy -v --staged --profile eb-cli
             no_output_timeout: 60m
 
 workflows:
