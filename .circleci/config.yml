@@ -86,7 +86,7 @@ workflows:
           # requires:
           #   - aws-ecr/build-and-push-image
       - eb/deploy:
-          context: aws-creds
+          context: aws
           environment-name: rails-catchup
           filters:
             branches:
