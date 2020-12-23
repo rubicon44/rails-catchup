@@ -62,8 +62,8 @@ jobs:
         - run:
             name: Deploy to EB if branch is Master
             command: |
-              eb use RailsCatchup-env --profile eb-cli
-              eb deploy RailsCatchup-env -v --staged --profile eb-cli
+              eb use RailsCatchup-env -r $AWS_REGION --profile eb-cli
+              eb deploy RailsCatchup-env -r $AWS_REGION -v --staged --profile eb-cli
             no_output_timeout: 60m
 
 workflows:
