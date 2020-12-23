@@ -4,7 +4,7 @@ orbs:
   # aws-ecr: circleci/aws-ecr@6.15.2
   eb: circleci/aws-elastic-beanstalk@1.0.0
 
-jobs:
+# jobs:
 # Rspecテスト
   # test:
   #   docker:
@@ -86,7 +86,6 @@ workflows:
           # requires:
           #   - aws-ecr/build-and-push-image
       - eb/deploy:
-          context: aws
           environment-name: rails-catchup
           filters:
             branches:
