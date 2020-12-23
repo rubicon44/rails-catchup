@@ -64,6 +64,7 @@ jobs:
             command: |
               eb init -r $AWS_REGION
               eb use rails-catchup --profile eb-cli
+              eb create rails-catchup --profile eb-cli
               eb deploy rails-catchup -v --staged --profile eb-cli
             no_output_timeout: 60m
 
