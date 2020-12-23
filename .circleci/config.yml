@@ -68,7 +68,7 @@ jobs:
       #       no_output_timeout: 60m
         - run:
             command: |
-              eb use RailsCatchup-env
+              eb use RailsCatchup-env -r $AWS_REGION
               eb deploy RailsCatchup-env
               eb status
 
