@@ -62,4 +62,4 @@ workflows:
           family: "rails-catchup-task"
           cluster-name: "rails-catchup"
           service-name: "rails-catchup-service"
-          container-image-name-updates: "container=rails-catchup,tag=app"
+          container-image-name-updates: "container=app,tag=app"
