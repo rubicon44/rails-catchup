@@ -58,6 +58,7 @@ workflows:
       - aws-ecs/deploy-service-update:
           # requires:
           #   - aws-ecr/build-and-push-image
-          # family: "rails-catchup-service"
+          family: "rails-catchup"
           cluster-name: "rails-catchup"
+          service-name: "rails-catchup"
           container-image-name-updates: "container=rails-catchup,tag=app"
