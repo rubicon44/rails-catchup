@@ -8,8 +8,9 @@ RUN apk update && \
     build-base \
     imagemagick \
     mariadb-dev \
-    tzdata \
     nodejs \
+    tzdata \
+    vim \
     yarn
 
 RUN mkdir /rails-catchup
