@@ -50,8 +50,8 @@ workflows:
           region: AWS_REGION
           account-url: AWS_ECR_ACCOUNT_URL
           dockerfile: ./containers/nginx/Dockerfile
-          repo: nginx
-          tag: "${CIRCLE_SHA1}"
+          repo: "${CIRCLE_PROJECT_REPONAME}"
+          tag: web
       # - aws-ecs/deploy-service-update:
       #     requires:
       #       - aws-ecr/build-and-push-image
@@ -72,7 +72,7 @@ workflows:
           account-url: AWS_ECR_ACCOUNT_URL
           dockerfile: ./Dockerfile
           repo: "${CIRCLE_PROJECT_REPONAME}"
-          tag: "${CIRCLE_SHA1}"
+          tag: app
       # - aws-ecs/deploy-service-update:
       #     requires:
       #       - aws-ecr/build-and-push-image
