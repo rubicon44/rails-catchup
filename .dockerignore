@@ -1,7 +1,8 @@
 .rspec
-log
-tmp
+containers/nginx/nginx.conf
 db/*.sqlite3
 db/*.sqlite3-journal
-vendor/assets
+log
 node_modules
+tmp
+vendor/assets
