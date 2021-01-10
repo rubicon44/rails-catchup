@@ -41,17 +41,17 @@ jobs:
 
 workflows:
   version: 2
-  nginx-deploy:
-    jobs:
-      - aws-ecr/build-and-push-image:
-          filters:
-            branches:
-              only: master
-          region: AWS_REGION
-          account-url: AWS_ECR_ACCOUNT_URL
-          dockerfile: ./containers/nginx/Dockerfile
-          repo: "${CIRCLE_PROJECT_REPONAME}"
-          tag: web
+  # nginx-deploy:
+  #   jobs:
+  #     - aws-ecr/build-and-push-image:
+  #         filters:
+  #           branches:
+  #             only: master
+  #         region: AWS_REGION
+  #         account-url: AWS_ECR_ACCOUNT_URL
+  #         dockerfile: ./containers/nginx/Dockerfile
+  #         repo: "${CIRCLE_PROJECT_REPONAME}"
+  #         tag: web
       # - aws-ecs/deploy-service-update:
       #     requires:
       #       - aws-ecr/build-and-push-image
