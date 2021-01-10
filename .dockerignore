@@ -1,5 +1,5 @@
 .rspec
-containers/nginx/nginx.conf
+!/containers/nginx/nginx.conf
 db/*.sqlite3
 db/*.sqlite3-journal
 log
