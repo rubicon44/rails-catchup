@@ -32,8 +32,7 @@ services:
 
   web:
     build:
-      context: ./containers/nginx
-      dockerfile: Dockerfile
+      context: containers/nginx
     volumes:
       - public-data:/rails-catchup/public
       - tmp-data:/rails-catchup/tmp
