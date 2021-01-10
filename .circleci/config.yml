@@ -78,6 +78,6 @@ workflows:
       #       - aws-ecr/build-and-push-image
       #     aws-region: ${AWS_REGION}
       #     family: "rails-catchup-task"
-      #     cluster-name: "rails-catchup"
+      #     cluster-name: "rails-catchup-cluster2"
       #     service-name: "rails-catchup-service"
       #     container-image-name-updates: "container=app,tag=app"
