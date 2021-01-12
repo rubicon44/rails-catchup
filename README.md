@@ -1,5 +1,5 @@
 # 概要
-rails-catchupは、転職用にポートフォリオとして制作したタスク管理SNSです。
+rails-catchupは、転職用ポートフォリオとして制作したタスク管理SNSです。
 
 ## URL
 サービスURL：http://rails-catchup-lb-821719903.ap-northeast-1.elb.amazonaws.com
