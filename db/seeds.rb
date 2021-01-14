@@ -17,7 +17,7 @@ User.create!(
                guest: true
 )
 
-1.upto(99) do |n|
+1.upto(10) do |n|
   username = "sample#{n}"
   email = "sample-#{n}@example.com"
   password = "123456"
