@@ -17,8 +17,8 @@ services:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: ${DB_HOST}
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
-    # command: bundle exec puma -C config/puma.rb
+    # command: bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    command: bundle exec puma -C config/puma.rb
     volumes:
       - .:/rails-catchup
       - public-data:/rails-catchup/public
