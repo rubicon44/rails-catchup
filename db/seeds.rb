@@ -11,6 +11,9 @@ admin = User.create!(
   username:  "admin",
   email: "admin@admin.com",
   password:  "adminadmin",
+  password_confirmation: 'adminadmin',
+  confirmed_at: Time.zone.now,
+  confirmation_sent_at: Time.zone.now,
   admin: true
 )
 admin.avatar = open("#{Rails.root}/db/fixtures/admin.jpg")
@@ -33,7 +36,10 @@ guest.save
 user = User.create!(
    username: 'testtest',
    email: 'test@test.com',
-   password: 'testtest'
+   password: 'testtest',
+   password_confirmation: 'testtest',
+   confirmed_at: Time.zone.now,
+   confirmation_sent_at: Time.zone.now
 )
 user.avatar = open("#{Rails.root}/db/fixtures/avatar-1.jpg")
 user.save
