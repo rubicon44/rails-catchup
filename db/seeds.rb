@@ -40,14 +40,14 @@ users.each_with_index do |user, n|
 end
 
 # 管理者ユーザー作成
-# admin = User.create!(
-#   username:  "admin",
-#   email: "admin@admin.com",
-#   password:  "adminadmin",
-#   password_confirmation: 'adminadmin',
-#   confirmed_at: Time.zone.now,
-#   confirmation_sent_at: Time.zone.now,
-#   admin: true
-# )
-# admin.avatar = open("#{Rails.root}/db/fixtures/admin.jpg")
-# admin.save
+admin = User.create!(
+  username:  "admin",
+  email: "admin@admin.com",
+  password:  "adminadmin",
+  password_confirmation: 'adminadmin',
+  confirmed_at: Time.zone.now,
+  confirmation_sent_at: Time.zone.now,
+  admin: true
+)
+admin.avatar = open("#{Rails.root}/db/fixtures/admin.jpg")
+admin.save
