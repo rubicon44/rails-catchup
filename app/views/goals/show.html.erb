@@ -36,7 +36,7 @@
     <% if @goal.user == current_user %>
       <div class="goal-button-cover">
         <%= link_to '編集', edit_goal_path(@goal), class: "goal-button-edit" %>
-        <%= link_to '削除', goal_path(@goal), method: :delete, data: { confirm: '投稿を削除しますか？' }, class: "goal-button-delete" %>
+        <%= button_to '削除', goal_path(@goal), method: :delete, data: { confirm: '投稿を削除しますか？' }, class: "goal-button-delete" %>
       </div>
     <% end %>
 

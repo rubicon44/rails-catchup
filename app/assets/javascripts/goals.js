@@ -6,17 +6,26 @@ $(document).on('turbolinks:load', function () {
   // コメントModal
   Grow.modalControl = function() {
     switchModal({
+      $container: $('.js-container'),
       $modal: $('.js-modal'),
+      $modalBg: $('.js-modalBg'),
       $modalOn: $('.js-modalOn'),
-      $modalBg: $('.js-modalBg')
+      $modalOff: $('.js-modalOff')
     });
   };
 
   function switchModal(param) {
     param.$modalOn.on('click', function() {
       param.$modalBg.fadeIn();
-      param.$modalBg.css('pointer-events','none');
+      param.$container.css('pointer-events','none');
       param.$modal.fadeIn();
+      param.$modal.css('pointer-events','auto');
+    });
+
+    param.$modalOff.on('click', function() {
+      param.$modalBg.fadeOut();
+      param.$modal.fadeOut();
+      param.$container.css('pointer-events','auto');
     });
   }
 

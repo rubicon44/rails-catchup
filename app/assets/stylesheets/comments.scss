@@ -30,6 +30,15 @@
     border-bottom: 1px solid #bbb;
   }
 
+  &-modalOff {
+    font-size: 20px;
+    cursor: pointer;
+
+    &-cover {
+      text-align: right;
+    }
+  }
+
   &-username {
     font-weight: bold;
   }

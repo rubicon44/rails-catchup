@@ -1,5 +1,9 @@
 <% if user_signed_in? %>
   <%= form_with(model:[@goal, @comment], local: true, class: "comment-form js-modal") do |f| %>
+    <div class="comment-modalOff-cover">
+      <span class="comment-modalOff js-modalOff">✖︎<span>
+    </div>
+
     <%= f.text_area :content %>
     <br>
     <div class="comment-button-cover">
