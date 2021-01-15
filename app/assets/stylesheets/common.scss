@@ -15,20 +15,66 @@
 
 // sign_in
 .guest-login {
-  // position: fixed;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 68px;
-  width: 100%;
-  background-color: #ee8800;
-  font-weight: bold;
-  text-align: center;
+  &-cover {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 65px;
+  }
 
-  > a {
+  &-link {
     color: #fff;
+
+    &-cover {
+      position: fixed;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 68px;
+      width: 100%;
+      background-color: #ee8800;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+
+  &-modal {
+    z-index: 4;
+    position: fixed;
+    top: 30%;
+    display: none;
+    height: 120px;
+    min-width: 260px;
+    padding: 15px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #fff;
+
+    &-header {
+      text-align: center;
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 100%;
+    }
+  }
+
+  &-button {
+    border: 1px solid #ccc;
+    height: 48px;
+    width: 110px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+
+  &-cancel-button {
+    @extend .guest-login-button;
   }
 }
 

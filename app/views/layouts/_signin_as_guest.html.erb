@@ -1,28 +1,22 @@
-<div>
-  <div>
-    <nav>
-      <div class="guest-login">
-        <%= link_to "#" do %>
-          <div>すぐに全機能をお試しになりたい場合は、<div>こちらからゲストユーザーとしてログインできます。</div></div>
-        <% end %>
-      </div>
-    </nav>
+<div class="modal-bg js-modalBg" data-keyboard="false" data-backdrop="static"></div>
+
+<div class="guest-login-cover">
+  <div class="guest-login-link-cover js-modalOn">
+    <div class="guest-login-link">すぐに全機能をお試しになりたい場合は、<div>こちらからゲストユーザーとしてログインできます。</div></div>
   </div>
 
-  <div>
-    <div>
-      <div>
-        ゲストユーザーとしてログインしますか？
-      </div>
-      <div>
-        <button>キャンセル</button>
+  <div class="guest-login-modal js-modal">
+    <div class="guest-login-modal-header">
+      ゲストユーザーとしてログインしますか？
+    </div>
+    <div class="guest-login-modal-footer">
+      <button class="guest-login-cancel-button js-modalOff">キャンセル</button>
 
-        <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
-          <%= f.hidden_field :login, value: "guest" %>
-          <%= f.hidden_field :password, value: "123456" %>
-          <%= f.submit "ゲストログイン" %>
-        <% end %>
-      </div>
+      <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
+        <%= f.hidden_field :login, value: "guest" %>
+        <%= f.hidden_field :password, value: "123456" %>
+        <%= f.submit "ゲストログイン", class: "guest-login-button" %>
+      <% end %>
     </div>
   </div>
 </div>

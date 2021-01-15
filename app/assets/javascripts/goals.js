@@ -1,11 +1,12 @@
-// comment
+// comment｜static_pages
 var Grow = Grow || {};
 
-// show
+// show｜home
 $(document).on('turbolinks:load', function () {
-  // コメントModal
+  // コメントModal｜ゲストログインModal
   Grow.modalControl = function() {
     switchModal({
+      $body: $('.js-body'),
       $container: $('.js-container'),
       $modal: $('.js-modal'),
       $modalBg: $('.js-modalBg'),
@@ -17,6 +18,7 @@ $(document).on('turbolinks:load', function () {
   function switchModal(param) {
     param.$modalOn.on('click', function() {
       param.$modalBg.fadeIn();
+      param.$body.css('overflow','hidden');
       param.$container.css('pointer-events','none');
       param.$modal.fadeIn();
       param.$modal.css('pointer-events','auto');
