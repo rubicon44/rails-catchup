@@ -87,6 +87,7 @@
     margin-left: 5px;
     border: 1px solid #ddd;
     border-radius: 25px;
+    background-color: #fff;
     box-sizing: border-box;
     text-align: center;
 
@@ -108,6 +109,10 @@
 
     &-delete {
       @extend .goal-button;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
       &:hover {
         border: 1px solid #ff0000;
@@ -247,6 +252,7 @@
 .goal-form {
   min-width: 205px;
   max-width: 300px;
+  margin: 0 auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 5px;

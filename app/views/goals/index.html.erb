@@ -20,7 +20,7 @@
       </div>
 
       <div class="goal-content">
-        <%= goal.description %>
+        <%= markdown(goal.description) %>
       </div>
 
       <% case goal.status %>

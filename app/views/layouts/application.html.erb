@@ -12,12 +12,12 @@
     <meta http-equiv="content-language" content="ja" charset="utf-8">
   </head>
 
-  <body>
+  <body class="js-body">
     <% unless user_signed_in? %>
       <%= render 'layouts/signin_as_guest' %>
     <% end %>
 
-    <div class="container">
+    <div class="container js-container">
       <%= render 'layouts/header' %>
       <%= render 'layouts/flash_messages' %>
 

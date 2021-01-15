@@ -48,6 +48,7 @@ gem 'kaminari'
 gem 'mini_magick'
 gem 'rails-i18n'
 gem 'ransack'
+gem 'redcarpet'
 gem 'rubocop', require: false
 
 group :development, :test do

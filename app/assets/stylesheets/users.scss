@@ -133,6 +133,10 @@
   $parent: 'auth';
   @extend .#{$parent};
 
+  > a {
+    color: #2c9a7a;
+  }
+
   &-title {
     // todo: baseのfont-size決定後、「rem」で指定する。
     @extend .#{$parent}-title;
@@ -191,6 +195,10 @@
   $parent: 'auth';
   @extend .#{$parent};
 
+  > a {
+    color: #2c9a7a;
+  }
+
   &-title {
     // todo: baseのfont-size決定後、「rem」で指定する。
     @extend .#{$parent}-title;
@@ -241,14 +249,14 @@
   min-height: 260px;
   max-width: 280px;
   min-width: 280px;
+  margin: 10px auto;
   padding: 10px 10px 0 10px;
-  margin: 0 auto;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-sizing: border-box;
 
-  &:not(:first-of-type) {
-    margin-top: 10px;
+  &-cover {
+    margin-top: 16px;
   }
 
   &-image {
