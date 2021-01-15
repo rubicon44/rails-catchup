@@ -133,6 +133,10 @@
   $parent: 'auth';
   @extend .#{$parent};
 
+  > a {
+    color: #2c9a7a;
+  }
+
   &-title {
     // todo: baseのfont-size決定後、「rem」で指定する。
     @extend .#{$parent}-title;
@@ -190,6 +194,10 @@
 .signup {
   $parent: 'auth';
   @extend .#{$parent};
+
+  > a {
+    color: #2c9a7a;
+  }
 
   &-title {
     // todo: baseのfont-size決定後、「rem」で指定する。
