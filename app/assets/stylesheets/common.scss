@@ -61,22 +61,25 @@
   align-items: center;
 
   &-cover {
-    padding-bottom: 10px;
   }
 
   &-title {
   }
 
   &-input {
-    height: 25px;
+    height: 38px;
+    width: 158px;
     margin: 0 10px;
+    padding-left: 5px;
     border: 1px solid #aaa;
     border-radius: 4px;
   }
 
   &-button {
+    height: 38px;
+    width: 40px;
     border: 1px solid #aaa;
-    border-radius: 12px;
+    border-radius: 19px;
   }
 }
 
