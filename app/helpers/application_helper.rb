@@ -1,5 +1,5 @@
 module ApplicationHelper
   def website_name
-    'Grow'
+    'RailsCatchup'
   end
 end

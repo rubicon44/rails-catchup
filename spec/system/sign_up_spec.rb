@@ -48,7 +48,7 @@ RSpec.describe 'SignUp', type: :system do
 
     aggregate_failures do
       expect(mail.to).to eq ['alice@alice.com']
-      expect(mail.from).to eq ['info@grow.com']
+      expect(mail.from).to eq ['info@railsCatchup.com']
       expect(mail.subject).to eq 'アカウントの登録確認'
       expect(mail.body).to match '(@alice)'
       # expect(mail.body).to have_link 'メールアドレスを認証', href: confirmation_url

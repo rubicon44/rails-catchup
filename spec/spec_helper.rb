@@ -51,7 +51,7 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   # use DatabaseCleaner
-  DatabaseCleaner.strategy = :truncation
+  # DatabaseCleaner.strategy = :truncation
 
   # RSpecの実行前に1度、実行
   config.before(:suite) do

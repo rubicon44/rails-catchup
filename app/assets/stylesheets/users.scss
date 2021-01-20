@@ -283,6 +283,9 @@
 }
 
 .user-show {
+  max-width: 375px;
+  margin: 0 auto;
+
   &-header {
     position: relative;
 
@@ -412,4 +415,10 @@
       }
     }
   }
+}
+
+// follow
+.follow-cover {
+  max-width: 375px;
+  margin: 0 auto;
 }
