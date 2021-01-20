@@ -1,9 +1,9 @@
-var Grow = Grow || {};
+var RailsCatchup = RailsCatchup || {};
 
 // show
 $(document).on('turbolinks:load', function () {
   // タブ切り替え
-  Grow.tabControl = function() {
+  RailsCatchup.tabControl = function() {
     switchTab({
       $tabs: $('.js-tab').children(),
       $contents: $('.js-tabContents').children()
@@ -22,5 +22,5 @@ $(document).on('turbolinks:load', function () {
     });
   }
 
-  Grow.tabControl();
+  RailsCatchup.tabControl();
 });

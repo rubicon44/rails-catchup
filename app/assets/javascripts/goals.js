@@ -1,10 +1,10 @@
 // comment｜static_pages
-var Grow = Grow || {};
+var RailsCatchup = RailsCatchup || {};
 
 // show｜home
 $(document).on('turbolinks:load', function () {
   // コメントModal｜ゲストログインModal
-  Grow.modalControl = function() {
+  RailsCatchup.modalControl = function() {
     switchModal({
       $body: $('.js-body'),
       $container: $('.js-container'),
@@ -31,5 +31,5 @@ $(document).on('turbolinks:load', function () {
     });
   }
 
-  Grow.modalControl();
+  RailsCatchup.modalControl();
 });

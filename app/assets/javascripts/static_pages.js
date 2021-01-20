@@ -1,10 +1,10 @@
 // // static_pages
-// var Grow = Grow || {};
+// var RailsCatchup = RailsCatchup || {};
 
 // // home
 // $(document).on('turbolinks:load', function () {
 //   // ゲストログインModal
-//   Grow.modalControl = function() {
+//   RailsCatchup.modalControl = function() {
 //     switchModal({
 //       $container: $('.js-container'),
 //       $modal: $('.js-modal'),
@@ -29,5 +29,5 @@
 //     });
 //   }
 
-//   Grow.modalControl();
+//   RailsCatchup.modalControl();
 // });
