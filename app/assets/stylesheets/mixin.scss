@@ -1,23 +1,7 @@
 // media queries
-$tab: 768px; // タブレット以上(pc用)
-$sp: 767px; // タブレット以下(sp用)
-$sp_ss: 349px;
-
-@mixin pc {
-  @media (min-width: ($tab)) {
-    @content;
-  }
-}
-@mixin sp {
-  @media (max-width: ($sp)) {
-    @content;
-  }
-}
-@mixin sp_ss {
-  @media (max-width: ($sp_ss)) {
-    @content;
-  }
-}
+@mixin sm { @media (min-width: 576px) { @content; } }
+@mixin md { @media (min-width: 768px) { @content; } }
+@mixin lg { @media (min-width: 992px) { @content; } }
 
 // flash
 @mixin flash($color, $bgColor, $borderColor) {
