@@ -1,5 +1,8 @@
 .user {
   &-deletebutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 40px;
     background: #fff;
     color: #ff0000;

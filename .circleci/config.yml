@@ -36,8 +36,8 @@ jobs:
       - run: bundle exec rake db:schema:load
       - run:
           name: Run RSpec
-          command: bundle -v
-          # command: bundle exec rspec spec/system/goals_spec.rb
+          command: bundle exec rspec
+          # command: bundle -v
 
 workflows:
   version: 2

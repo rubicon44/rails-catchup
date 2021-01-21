@@ -8,7 +8,7 @@
   <% end %>
 </div>
 
-<div class="goal">
+<div class="goal" id="goal">
   <div class="goal-username">
     @<%= link_to @goal.user.username, user_path(@goal.user.username) unless @goal.user.blank? %>
   </div>
@@ -36,7 +36,7 @@
     <% if @goal.user == current_user %>
       <div class="goal-button-cover">
         <%= link_to '編集', edit_goal_path(@goal), class: "goal-button-edit" %>
-        <%= button_to '削除', goal_path(@goal), method: :delete, data: { confirm: '投稿を削除しますか？' }, class: "goal-button-delete" %>
+        <%= link_to '削除', goal_path(@goal), method: :delete, data: { confirm: '投稿を削除しますか？' }, class: "goal-button-delete" %>
       </div>
     <% end %>
 
@@ -54,9 +54,9 @@
 
       <ul class="goal-footer-body">
         <% if user_signed_in? %>
-          <li class="active-comment js-modalOn">コメント</li>
+          <li class="active-comment js-modalOn" id="comment">コメント</li>
         <% else %>
-          <li class="active-comment comment-toolTip" data-tooltip="ログイン後に利用できます。">コメント</li>
+          <li class="active-comment comment-toolTip" id="comment" data-tooltip="ログイン後に利用できます。">コメント</li>
         <% end %>
         <li class="active-like">
           <%= render 'likes', goal: @goal %>

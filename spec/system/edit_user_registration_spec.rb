@@ -16,10 +16,11 @@ RSpec.describe 'EditUserRegistration', type: :system do
     fill_in 'メールアドレス', with: 'sample@sample.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
-    expect(page).to have_content 'タスク一覧'
+    expect(page).to have_content 'ログインしました。'
 
     # パスワード以外の変更であれば、現在のパスワードの入力を求められないこと
-    click_link 'プロフィール編集'
+    visit user_path(user)
+    click_button 'プロフィール編集'
     attach_file 'user[avatar]', "#{Rails.root}/spec/fixtures/test.jpg", make_visible: true
     fill_in 'ユーザーネーム', with: 'alice'
     fill_in 'メールアドレス', with: 'alice@alice.com'
@@ -40,7 +41,7 @@ RSpec.describe 'EditUserRegistration', type: :system do
     fill_in 'パスワード', with: 'abcdef'
     fill_in 'パスワードの再入力', with: 'abcdef'
     click_button '変更を保存する'
-    expect(page).to have_content '現在のパスワードを入力してください'
+    expect(page).to have_content '現在のパスワードを入力してください。'
     expect(user.reload.valid_password?('abcdef')).to_not eq true
 
     visit edit_user_registration_path # リロード
@@ -48,7 +49,7 @@ RSpec.describe 'EditUserRegistration', type: :system do
     fill_in 'パスワードの再入力', with: 'abcdef'
     fill_in '現在のパスワード', with: '123456'
     click_button '変更を保存する'
-    expect(page).to have_content '変更が保存されました'
+    expect(page).to have_content '変更が保存されました。'
     expect(user.reload.valid_password?('abcdef')).to eq true
   end
 end

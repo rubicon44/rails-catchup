@@ -49,7 +49,7 @@
   <div class="user-show-body">
     <ul class="user-show-tabs js-tab">
       <li class="active-goals active">目標</li>
-      <li class="active-likes">いいね</li>
+      <li class="active-likes" id="like">いいね</li>
     </ul>
 
     <ul class="user-show-tabContents js-tabContents">
@@ -78,7 +78,7 @@
       <!-- なにも表示しない -->
     <% elsif current_user.admin? %>
       <div class="user-deletebutton-cover">
-        <%= button_to "このユーザーを削除する", @user, method: :delete, data: {confirm: "このユーザーを削除してもよろしいですか?"}, class: "user-deletebutton" %>
+        <%= link_to "このユーザーを削除する", @user, method: :delete, data: {confirm: "このユーザーを削除してもよろしいですか?"}, class: "user-deletebutton" %>
       </div>
     <% end %>
   <% end %>

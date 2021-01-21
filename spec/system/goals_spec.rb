@@ -12,10 +12,10 @@ RSpec.describe 'Goals', type: :system, js: true do
     fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
-    expect(page).to have_content 'タスク一覧'
+    expect(page).to have_content 'ログインしました。'
 
     # 新規の投稿をする
-    click_link '目標追加'
+    find('#goal-addbutton').click
     expect(current_path).to eq new_goal_path
     fill_in '題名', with: 'テスト タイトル'
     fill_in '内容', with: 'テスト コンテント'
@@ -23,15 +23,13 @@ RSpec.describe 'Goals', type: :system, js: true do
       click_button '登録'
     end.to change(Goal, :count).by(1)
 
-    # expect(current_path).to eq user_path(user)
-    # expect(page).to have_content '投稿が送信されました'
+    expect(current_path).to eq user_path(user)
+    expect(page).to have_content '投稿が送信されました。'
 
     goal = Goal.first
     expect(goal.name).to eq 'テスト タイトル'
     expect(goal.description).to eq 'テスト コンテント'
-    expect(page).to have_link "Show", href: "/goals/#{goal.id}"
-
-    click_link "Show", href: "/goals/#{goal.id}"
+    find('#goal').click
     expect(current_path).to eq goal_path(goal)
     expect(page).to have_content 'テスト タイトル'
     expect(page).to have_content 'テスト コンテント'
@@ -47,7 +45,7 @@ RSpec.describe 'Goals', type: :system, js: true do
     click_button '登録'
 
     expect(current_path).to eq goal_path(goal)
-    # expect(page).to have_content '投稿が更新されました'
+    expect(page).to have_content '投稿が更新されました。'
     expect(page).to_not have_content 'テスト タイトル'
     expect(page).to_not have_content 'テスト コンテント'
     expect(page).to have_content "タイトル"
@@ -59,10 +57,11 @@ RSpec.describe 'Goals', type: :system, js: true do
 
     expect do
       page.driver.browser.switch_to.alert.accept
-      expect(page).to have_content '投稿は正常に削除されました'
+      expect(page).to have_content '投稿は正常に削除されました。'
     end.to change(Goal, :count).by(-1)
 
     expect(current_path).to eq goals_path
-    expect(page).to_not have_link 'Show', href: "/goals/#{goal.id}"
+    expect(page).to_not have_content 'タイトル'
+    expect(page).to_not have_content 'コンテント'
   end
 end

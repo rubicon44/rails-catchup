@@ -7,6 +7,10 @@
   max-width: 260px;
   margin: 0 auto;
 
+  > a {
+    color: #2c9a7a;
+  }
+
   &-title {
     // todo: baseのfont-size決定後、「rem」で指定する。
     font-size: 20px;

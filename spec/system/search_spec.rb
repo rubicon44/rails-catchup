@@ -15,7 +15,7 @@ RSpec.describe 'Search', type: :system do
 
     # 未ログイン状態でも検索できること
     ## 目標検索
-    visit root_path
+    visit goals_path
     fill_in 'q[name_or_description_cont]', with: 'title'
     click_button '検索'
     expect(page).to have_content 'test title1'
@@ -23,7 +23,7 @@ RSpec.describe 'Search', type: :system do
     expect(page).to_not have_content 'テスト タイトル3'
 
     ## ユーザー検索
-    click_link 'ユーザー一覧'
+    visit users_path
     expect(current_path).to eq users_path
     fill_in 'q[username_cont]', with: 'a'
     click_button '検索'
@@ -39,10 +39,10 @@ RSpec.describe 'Search', type: :system do
     fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
-    expect(page).to have_content 'タスク一覧'
+    expect(page).to have_content 'ログインしました。'
 
     ## 投稿を検索
-    visit root_path # リロード
+    visit goals_path # リロード
     fill_in 'q[name_or_description_cont]', with: 'title'
     click_button '検索'
     expect(page).to have_content 'test title1'
@@ -50,7 +50,7 @@ RSpec.describe 'Search', type: :system do
     expect(page).to_not have_content 'テスト タイトル3'
 
     ## ユーザーを検索
-    click_link 'ユーザー一覧'
+    visit users_path
     expect(current_path).to eq users_path
     fill_in 'q[username_cont]', with: 'a'
     click_button '検索'

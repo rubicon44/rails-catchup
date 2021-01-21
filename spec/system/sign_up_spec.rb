@@ -24,10 +24,9 @@ RSpec.describe 'SignUp', type: :system do
     fill_in 'パスワードの再入力', with: 'abcdef'
 
     click_button 'アカウントを作成する'
-    # expect(page).to have_content 'ユーザーネームが未入力です'
-    expect(page).to have_content 'ユーザーネームが未入力です'
-    expect(page).to have_content 'メールアドレスは有効でありません'
-    expect(page).to have_content 'パスワードの再入力が一致しません'
+    expect(page).to have_content 'ユーザーネームが未入力です。'
+    expect(page).to have_content 'メールアドレスは有効でありません。'
+    expect(page).to have_content 'パスワードの再入力が一致しません。'
 
     # 登録に成功する場合
     fill_in 'ユーザーネーム', with: 'alice'
@@ -45,23 +44,25 @@ RSpec.describe 'SignUp', type: :system do
 
     mail = ActionMailer::Base.deliveries.last
     confirmation_url = extract_url(mail)
+    # link = mail.body.raw_source.match(/href="(?<url>.+?)">/)[:url]
 
     aggregate_failures do
-      expect(mail.to).to eq ['alice@alice.com']
       expect(mail.from).to eq ['info@railsCatchup.com']
       expect(mail.subject).to eq 'アカウントの登録確認'
+      expect(mail.to).to eq ['alice@alice.com']
       expect(mail.body).to match '(@alice)'
-      # expect(mail.body).to have_link 'メールアドレスを認証', href: confirmation_url
+      expect(mail.body).to have_link 'アカウント確認', href: confirmation_url
     end
 
+    # visit link
     # visit confirmation_url
-    # expect(current_path).to eq new_user_session_path
     # expect(page).to have_content 'おめでとうございます。メールアドレスは正常に承認されました。'
 
+    # visit new_user_session_path
     # fill_in 'ユーザーネーム/メールアドレス', with: 'alice'
     # fill_in 'パスワード', with: '123456'
-    # click_button 'ログインする'
-    # expect(page).to have_content 'フィード'
+    # click_button 'ログイン'
+    # expect(page).to have_content 'ログインしました。'
   end
 
   # it '再送信された確認メールからアカウントを有効化してログインする' do
@@ -75,7 +76,7 @@ RSpec.describe 'SignUp', type: :system do
 
   #   fill_in 'ユーザーネーム/メールアドレス', with: 'alice'
   #   fill_in 'パスワード', with: '123456'
-  #   click_button 'ログインする'
+  #   click_button 'ログイン'
   #   expect(page).to have_content 'アカウントが有効化されていません。'
 
   #   click_link 'こちら'
@@ -97,7 +98,7 @@ RSpec.describe 'SignUp', type: :system do
 
   #   fill_in 'ユーザーネーム/メールアドレス', with: 'alice'
   #   fill_in 'パスワード', with: '123456'
-  #   click_button 'ログインする'
+  #   click_button 'ログイン'
   #   expect(page).to have_content 'フィード'
   # end
 end
