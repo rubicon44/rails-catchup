@@ -8,7 +8,8 @@ RSpec.describe 'Comments', type: :system do
 
     # 未ログイン状態ではコメントのフォームが表示されないこと
     visit goal_path(goal)
-    expect(page).to_not have_content 'コメント'
+    find('#comment').click
+    expect(page).to_not have_content 'コメントする'
 
     # ログインする
     visit root_path

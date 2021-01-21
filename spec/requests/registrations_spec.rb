@@ -10,7 +10,7 @@ RSpec.describe 'Registrations', type: :request do
 
       it 'タスク一覧ページが表示されること' do
         get goals_path
-        expect(response).to have_http_status '200'
+        expect(response).to have_http_status '302'
       end
     end
 

@@ -56,7 +56,7 @@
         <% if user_signed_in? %>
           <li class="active-comment js-modalOn" id="comment">コメント</li>
         <% else %>
-          <li class="active-comment comment-toolTip" data-tooltip="ログイン後に利用できます。">コメント</li>
+          <li class="active-comment comment-toolTip" id="comment" data-tooltip="ログイン後に利用できます。">コメント</li>
         <% end %>
         <li class="active-like">
           <%= render 'likes', goal: @goal %>
