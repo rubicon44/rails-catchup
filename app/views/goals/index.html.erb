@@ -2,14 +2,14 @@
 
 <% if user_signed_in? %>
   <%= link_to new_goal_path do %>
-    <div class="goal-addbutton">
+    <div class="goal-addbutton" id="goal-addbutton">
       <i class="fas fa-plus"></i>
     </div>
   <% end %>
 <% end %>
 
 <% @goals.each do |goal| %>
-  <div class="goal">
+  <div class="goal" id="goal">
     <div class="goal-username">
       <%= link_to "@#{goal.user.username}", user_path(goal.user.username) unless goal.user.blank? %>
     </div>

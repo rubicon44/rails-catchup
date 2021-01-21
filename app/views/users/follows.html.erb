@@ -7,7 +7,7 @@
 <div class="follow-cover">
   <% @users.each do |user| %>
     <hr>
-    <p><span>名前:</span><%= link_to user.username, user_path(user.username) %></p>
+    <p><span>@</span><%= link_to user.username, user_path(user.username) %></p>
 
     <% if current_user != user %>
       <% if user.already_followed?(current_user) %>

@@ -47,7 +47,7 @@ ja:
       signed_up_but_locked: "アカウントは登録されていますが、ロックされているため利用できません。"
       signed_up_but_unconfirmed: "確認メールを登録したメールアドレス宛に送信しました。リンクを開いてアカウントを有効にして下さい。"
       update_needs_confirmation: "アカウント情報が更新されました。更新の確認メールを新しいメールアドレス宛に送信しましたので、リンクを開いて更新を有効にして下さい。"
-      updated: "変更が保存されました"
+      updated: "変更が保存されました。"
     sessions:
       signed_in: "ログインしました。"
       signed_out: "ログアウトしました。"
@@ -67,17 +67,17 @@ ja:
       already_confirmed: "は既に確認済みです"
       confirmation_period_expired: "%{period}以内に確認する必要がありますので、新しくリクエストしてください。"
       expired: "有効期限切れです。新規登録してください。"
-      not_found: "が見つかりませんでした"
+      not_found: "が見つかりませんでした。"
       not_locked: "ロックされていません。"
       not_saved:
         one: "入力が正しくありません。確認してやりなおしてください。"
         other: "入力が正しくありません。確認してやりなおしてください。"
-      taken: "は既に使用されています"
-      blank: "が入力されていません"
-      too_short: "は%{count}文字以上に設定して下さい"
-      too_long: "は%{count}文字以下に設定して下さい"
-      invalid: "は有効でありません"
-      confirmation: "が内容とあっていません"
+      taken: "は既に使用されています。"
+      blank: "を入力してください。"
+      too_short: "は%{count}文字以上に設定して下さい。"
+      too_long: "は%{count}文字以下に設定して下さい。"
+      invalid: "は有効でありません。"
+      confirmation: "が内容とあっていません。"
 
   activerecord:
     attributes:
@@ -98,34 +98,34 @@ ja:
         user:
           attributes:
             name:
-              blank: "が未入力です"
-              too_short: "は%{count}文字以上に設定して下さい"
-              too_long: "は%{count}文字以下に設定して下さい"
-              invalid: "は有効でありません"
+              blank: "が未入力です。"
+              too_short: "は%{count}文字以上に設定して下さい。"
+              too_long: "は%{count}文字以下に設定して下さい。"
+              invalid: "は有効でありません。"
             username:
-              blank: "が未入力です"
-              too_short: "は%{count}文字以上に設定して下さい"
-              too_long: "は%{count}文字以下に設定して下さい"
-              invalid: "には小文字の半角英数字と'_'(アンダーバー)しか使用できません"
+              blank: "が未入力です。"
+              too_short: "は%{count}文字以上に設定して下さい。"
+              too_long: "は%{count}文字以下に設定して下さい。"
+              invalid: "には小文字の半角英数字と'_'(アンダーバー)しか使用できません。"
             email:
-              blank: "が未入力です"
-              too_short: "は%{count}文字以上に設定して下さい"
-              too_long: "は%{count}文字以下に設定して下さい"
-              invalid: "は有効でありません"
+              blank: "が未入力です。"
+              too_short: "は%{count}文字以上に設定して下さい。"
+              too_long: "は%{count}文字以下に設定して下さい。"
+              invalid: "は有効でありません。"
             password:
-              blank: "が未入力です"
-              too_short: "は%{count}文字以上に設定して下さい"
-              too_long: "は%{count}文字以下に設定して下さい"
+              blank: "が未入力です。"
+              too_short: "は%{count}文字以上に設定して下さい。"
+              too_long: "は%{count}文字以下に設定して下さい。"
               invalid: "は有効でありません"
             password_confirmation:
-              blank: "が未入力です"
-              too_short: "は%{count}文字以上に設定して下さい"
-              too_long: "は%{count}文字以下に設定して下さい"
-              invalid: "は有効でありません"
-              confirmation: "が一致しません"
+              blank: "が未入力です。"
+              too_short: "は%{count}文字以上に設定して下さい。"
+              too_long: "は%{count}文字以下に設定して下さい。"
+              invalid: "は有効でありません。"
+              confirmation: "が一致しません。"
         post:
           attributes:
             image:
-              blank: "が選択されていません"
+              blank: "が選択されていません。"
             caption:
-              too_long: "は%{count}文字以下に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい。"

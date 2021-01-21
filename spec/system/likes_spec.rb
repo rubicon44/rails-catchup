@@ -13,7 +13,7 @@ RSpec.describe 'Likes', type: :system do
     fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
-    expect(page).to have_content 'タスク一覧'
+    expect(page).to have_content 'ログインしました。'
 
     # 投稿にいいねをする
     visit goal_path(goal)
@@ -21,33 +21,37 @@ RSpec.describe 'Likes', type: :system do
     expect(page).to have_content 'いいね件数：0'
 
     expect do
-      click_button 'いいね'
+      click_link 'いいね'
       expect(page).to have_content 'いいね件数：1'
-      expect(page).to have_button 'いいねを取り消す'
+      expect(page).to have_link 'いいねを取り消す'
     end.to change(goal.likes, :count).by(1)
 
     visit goal_path(goal) # リロード
 
     # 現在のユーザーのプロフィールページに遷移
     visit user_path(user)
-    expect(page).to have_content "名前：#{user.username}"
-    expect(page).to have_content 'いいね：1件'
+    expect(page).to have_content "@#{user.username}"
+    expect(page).to have_content '投稿がありません'
+    find('#like').click
+    expect(page).to have_content 'いいね件数：1'
 
     # 投稿のいいねを解除する
     visit goal_path(goal)
     expect(page).to have_content 'テスト タイトル'
 
     expect do
-      click_button 'いいねを取り消す'
+      click_link 'いいねを取り消す'
       expect(page).to have_content 'いいね件数：0'
-      expect(page).to have_button 'いいね'
+      expect(page).to have_link 'いいね'
     end.to change(goal.likes, :count).by(-1)
 
     visit goal_path(goal) # リロード
 
     # 現在のユーザーのプロフィールページに遷移
     visit user_path(user)
-    expect(page).to have_content "名前：#{user.username}"
-    expect(page).to have_content 'いいね：0件'
+    expect(page).to have_content "@#{user.username}"
+    expect(page).to have_content '投稿がありません'
+    find('#like').click
+    expect(page).to have_content '"いいね！" した投稿がありません'
   end
 end

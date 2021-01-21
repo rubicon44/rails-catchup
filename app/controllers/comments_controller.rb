@@ -10,10 +10,10 @@ class CommentsController < ApplicationController
       # コメント通知用メソッドの呼び出し
       @goal.create_notification_comment!(current_user, @comment.id)
 
-      flash[:success] = "コメントしました"
+      flash[:success] = "コメントしました。"
       redirect_back(fallback_location: root_path)
     else
-      flash[:success] = "コメントできませんでした"
+      flash[:success] = "コメントできませんでした。"
       redirect_back(fallback_location: root_path)
     end
   end

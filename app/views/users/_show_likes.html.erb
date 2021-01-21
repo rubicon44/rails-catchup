@@ -1,7 +1,7 @@
-<h3>いいね：<%= @likes.count %>件</h3>
+<h3>いいね件数：<%= @likes.count %></h3>
 
 <% group.each do |goal| %>
-  <div class="goal">
+  <div class="goal" id="goal">
     <div class="goal-username">
       <%= link_to "@#{goal.user.username}", user_path(goal.user.username) unless goal.user.blank? %>
     </div>

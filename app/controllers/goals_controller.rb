@@ -23,7 +23,7 @@ class GoalsController < ApplicationController
     @goal.save
 
     if @goal.save
-      flash[:success] = '投稿が送信されました'
+      flash[:success] = '投稿が送信されました。'
       redirect_to user_path(current_user)
     else
       render 'goals/new'
@@ -38,7 +38,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
 
     if @goal.update(goal_params)
-      flash[:success] = '投稿が更新されました'
+      flash[:success] = '投稿が更新されました。'
       redirect_to @goal
     else
       render 'edit'
@@ -49,7 +49,7 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
     @goal.destroy
 
-    flash[:success] = '投稿は正常に削除されました'
+    flash[:success] = '投稿は正常に削除されました。'
     redirect_to goals_path
   end
 

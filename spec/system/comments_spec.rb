@@ -8,7 +8,7 @@ RSpec.describe 'Comments', type: :system do
 
     # 未ログイン状態ではコメントのフォームが表示されないこと
     visit goal_path(goal)
-    expect(page).to_not have_content 'コメント一覧'
+    expect(page).to_not have_content 'コメント'
 
     # ログインする
     visit root_path
@@ -17,12 +17,12 @@ RSpec.describe 'Comments', type: :system do
     fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
     fill_in 'パスワード', with: '123456'
     click_button 'ログイン'
-    expect(page).to have_content 'タスク一覧'
+    expect(page).to have_content 'ログインしました。'
     visit goal_path(goal)
     expect(page).to have_content 'テスト タイトル'
 
-    # ログイン状態ならコメントのフォームが表示されること
-    expect(page).to have_content 'コメント一覧'
+    # ログイン状態ならコメントボタンが表示されること
+    expect(page).to have_content 'コメント'
 
     # todo: 下記jQuery実装時のテスト（Modelのvalidateにより、240時以上のコメントはシステム上登録されないが、やはりjQuery等が欲しい。）
     # # 制限内の文字数を入力した場合
@@ -32,16 +32,19 @@ RSpec.describe 'Comments', type: :system do
 
     # コメントする
     expect do
+      find('#comment').click
       fill_in 'comment_content', with: 'テスト コメント1'
       click_button 'コメントする'
       expect(page).to have_content 'テスト コメント1'
       expect(page).to have_content 'コメント件数：1'
 
+      find('#comment').click
       fill_in 'comment_content', with: 'テスト コメント2'
       click_button 'コメントする'
       expect(page).to have_content 'テスト コメント2'
       expect(page).to have_content 'コメント件数：2'
 
+      find('#comment').click
       fill_in 'comment_content', with: 'テスト コメント3'
       click_button 'コメントする'
       expect(page).to have_content 'テスト コメント3'

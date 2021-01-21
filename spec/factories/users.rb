@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :user do
     sequence(:username) { |n| "sample#{n}" }
-    sequence(:email) { |n| "test#{n}@example.com" }
+    sequence(:email) { |n| "sample#{n}@example.com" }
     password { '123456' }
     profile { 'はじめまして！' }
+    # confirmed_at { Date.today }
 
     trait :invalid do
       username { 'users' } # 既存のルーティング("/users")と重複するユーザーネーム
