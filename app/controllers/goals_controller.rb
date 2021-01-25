@@ -10,7 +10,6 @@ class GoalsController < ApplicationController
     @goal = Goal.find(params[:id])
     @comments = @goal.comments
     @comment = @goal.comments.build
-    @like = Like.new
   end
 
   def new
