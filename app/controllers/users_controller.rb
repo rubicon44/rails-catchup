@@ -23,8 +23,7 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
-  # フォロー機能
-  def follows
+  def followings
     user = User.find(params[:id])
     @users = user.followings
   end

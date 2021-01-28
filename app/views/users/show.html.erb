@@ -28,7 +28,7 @@
 
     <% if user_signed_in? %>
       <div>
-        <%=link_to "フォロー", follows_user_path(@user.id) %>
+        <%=link_to "フォロー", followings_user_path(@user.id) %>
         <%=link_to "フォロワー", followers_user_path(@user.id) %>
       </div>
 

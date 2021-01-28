@@ -8,9 +8,8 @@ class GoalsController < ApplicationController
 
   def show
     @goal = Goal.find(params[:id])
-    @comments = @goal.comments
     @comment = @goal.comments.build
-    @like = Like.new
+    @comments = @goal.comments
   end
 
   def new
