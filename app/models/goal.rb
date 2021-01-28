@@ -11,7 +11,7 @@ class Goal < ApplicationRecord
 
   before_create :set_untitled
 
-  # いいね通知用メソッド
+  # いいね通知
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
     temp = Notification.where(["visitor_id = ? and visited_id = ? and goal_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
@@ -30,7 +30,7 @@ class Goal < ApplicationRecord
     end
   end
 
-  # コメント通知用メソッド
+  # コメント通知
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
     temp_ids = Comment.select(:user_id).where(goal_id: id).where.not(user_id: current_user.id).distinct

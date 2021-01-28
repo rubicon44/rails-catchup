@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     @comment.user_id = current_user.id
 
     if @comment.save
-      # コメント通知用メソッドの呼び出し
+      # コメント通知
       @goal.create_notification_comment!(current_user, @comment.id)
 
       flash[:success] = "コメントしました。"

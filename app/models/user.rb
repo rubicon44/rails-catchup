@@ -42,7 +42,7 @@ class User < ApplicationRecord
     end
   end
 
-  # いいね判定用メソッド
+  # いいね判定
   def already_liked?(goal)
     self.likes.exists?(goal_id: goal.id)
   end
@@ -57,7 +57,7 @@ class User < ApplicationRecord
     likes.find_by(goal_id: goal.id).destroy
   end
 
-  # フォロー判定用メソッド
+  # フォロー判定
   def already_followed?(user)
     passive_relationships.find_by(following_id: user.id).present?
   end
@@ -72,7 +72,7 @@ class User < ApplicationRecord
     active_relationships.find_by(follower_id: user.id).destroy
   end
 
-  # フォロー通知用メソッド
+  # フォロー通知
   def create_notification_follow!(current_user)
     temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
     if temp.blank?
