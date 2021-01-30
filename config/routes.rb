@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home'
-  get 'static_pages/home'
 
   resources :goals do
     resources :comments, only: [:create, :destroy]
@@ -27,9 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index] do
-    collection do
-      get :search
-    end
+    get :search, on: :collection
   end
 
   resources :users, only: [:show] do
