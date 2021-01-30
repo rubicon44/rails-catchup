@@ -14,12 +14,10 @@ Rails.application.routes.draw do
     get "logout", :to => "users/sessions#destroy"
   end
 
-  # root 'goals#index'
   root 'static_pages#home'
   get 'static_pages/home'
 
-  resources :goals
-  resources :goals, only: [:index, :show, :create] do
+  resources :goals do
     resources :comments, only: [:create, :destroy]
     resources :likes, only: [:index, :create, :destroy]
   end
