@@ -2,8 +2,6 @@ class User < ApplicationRecord
   attr_accessor :login
   attr_accessor :current_password
   mount_uploader :avatar, AvatarUploader
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :validatable, :confirmable, authentication_keys: [:login]
 
@@ -42,9 +40,14 @@ class User < ApplicationRecord
     end
   end
 
-  # いいね判定用メソッド
+  # コメント解除
+  def uncomment(comment)
+    comments.find_by(id: comment.id).destroy
+  end
+
+  # いいね判定
   def already_liked?(goal)
-    self.likes.exists?(goal_id: goal.id)
+    likes.exists?(goal_id: goal.id)
   end
 
   # いいね
@@ -57,7 +60,7 @@ class User < ApplicationRecord
     likes.find_by(goal_id: goal.id).destroy
   end
 
-  # フォロー判定用メソッド
+  # フォロー判定
   def already_followed?(user)
     passive_relationships.find_by(following_id: user.id).present?
   end
@@ -72,7 +75,7 @@ class User < ApplicationRecord
     active_relationships.find_by(follower_id: user.id).destroy
   end
 
-  # フォロー通知用メソッド
+  # フォロー通知
   def create_notification_follow!(current_user)
     temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
     if temp.blank?

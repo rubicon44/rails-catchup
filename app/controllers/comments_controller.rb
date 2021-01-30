@@ -2,12 +2,13 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    # コメント
     @goal = Goal.find(params[:goal_id])
     @comment = @goal.comments.build(comment_params)
     @comment.user_id = current_user.id
 
     if @comment.save
-      # コメント通知用メソッドの呼び出し
+      # コメント通知
       @goal.create_notification_comment!(current_user, @comment.id)
 
       flash[:success] = "コメントしました。"
@@ -19,7 +20,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    Comment.find(params[:id]).destroy
+    # コメント解除
+    @comment = Comment.find(params[:id])
+    current_user.uncomment(@comment)
     flash[:success] = '投稿へのコメントを削除しました。'
     redirect_back(fallback_location: root_path)
   end
