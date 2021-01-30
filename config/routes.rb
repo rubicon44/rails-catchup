@@ -15,11 +15,14 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home'
-  get 'static_pages/home'
 
   resources :goals do
     resources :comments, only: [:create, :destroy]
     resources :likes, only: [:index, :create, :destroy]
+  end
+
+  constraints(UrlConstrainer.new) do
+    resources :users, param: :username, only: [:show, :edit, :update, :destroy]
   end
 
   resources :users, only: [:index] do
@@ -30,10 +33,6 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member
-  end
-
-  constraints(UrlConstrainer.new) do
-    resources :users, param: :username, only: [:show, :edit, :update, :destroy]
   end
 
   resources :notifications, only: [:index]
