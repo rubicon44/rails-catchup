@@ -40,11 +40,6 @@ class User < ApplicationRecord
     end
   end
 
-  # コメント解除
-  def uncomment(comment)
-    comments.find_by(id: comment.id).destroy
-  end
-
   # いいね判定
   def already_liked?(goal)
     likes.exists?(goal_id: goal.id)

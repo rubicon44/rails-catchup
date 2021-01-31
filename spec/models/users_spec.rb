@@ -183,15 +183,15 @@ RSpec.describe User, type: :model do
 
   #     # フォローしているユーザーの投稿を確認
   #     bob.goals.each do |goal_following|
-  #       expect(alice.feed).to include(goal_following)
+  #       expect(alice.goals).to include(goal_following)
   #     end
   #     # 自分自身の投稿を確認
   #     alice.goals.each do |goal_self|
-  #       expect(alice.feed).to include(goal_self)
+  #       expect(alice.goals).to include(goal_self)
   #     end
   #     # フォローしていないユーザーの投稿を確認
   #     carol.goals.each do |goal_unfollowed|
-  #       expect(alice.feed).to_not include(goal_unfollowed)
+  #       expect(alice.goals).to_not include(goal_unfollowed)
   #     end
   #   end
   # end

@@ -64,4 +64,38 @@ RSpec.describe 'Goals', type: :system, js: true do
     expect(page).to_not have_content 'タイトル'
     expect(page).to_not have_content 'コンテント'
   end
+
+  it '題名を入力せずに新規投稿すると、自動的に題名が「無題」となる' do
+    user = FactoryBot.create(:user, username: 'alice', email: 'alice@alice.com', password: '123456')
+    user.confirm
+
+    # ログインする
+    visit root_path
+    click_link 'ログイン'
+    expect(current_path).to eq new_user_session_path
+    fill_in 'ユーザーネーム/メールアドレス', with: 'alice@alice.com'
+    fill_in 'パスワード', with: '123456'
+    click_button 'ログイン'
+    expect(page).to have_content 'ログインしました。'
+
+    # 新規の投稿をする
+    find('#goal-addbutton').click
+    expect(current_path).to eq new_goal_path
+    fill_in '題名', with: ''
+    fill_in '内容', with: 'テスト コンテント'
+    expect do
+      click_button '登録'
+    end.to change(Goal, :count).by(1)
+
+    expect(current_path).to eq user_path(user)
+    expect(page).to have_content '投稿が送信されました。'
+
+    goal = Goal.first
+    expect(goal.name).to eq '無題'
+    expect(goal.description).to eq 'テスト コンテント'
+    find('#goal').click
+    expect(current_path).to eq goal_path(goal)
+    expect(page).to have_content '無題'
+    expect(page).to have_content 'テスト コンテント'
+  end
 end

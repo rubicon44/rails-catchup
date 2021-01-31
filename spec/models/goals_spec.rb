@@ -15,14 +15,13 @@ RSpec.describe Goal, type: :model do
     expect(goal).to be_valid
   end
 
-  # todo:一旦保留
-  # describe '存在性の検証' do
-  #   it 'ユーザーがなければ無効な状態であること' do
-  #     goal.user = nil
-  #     goal.valid?
-  #     expect(goal.errors).to be_added(:user, :blank)
-  #   end
-  # end
+  describe '存在性の検証' do
+    it 'ユーザーがなければ無効な状態であること' do
+      goal.user_id = nil
+      goal.valid?
+      expect(goal.errors).to be_added(:user_id, :blank)
+    end
+  end
 
   describe '文字数の検証' do
     it 'ディスクリプションが140文字以内なら有効であること' do
@@ -37,7 +36,19 @@ RSpec.describe Goal, type: :model do
     end
   end
 
-  # todo:一旦保留
+  describe 'メソッド' do
+    it '投稿をいいね/いいね解除できること' do
+      alice = FactoryBot.create(:user)
+      bob = FactoryBot.create(:user, :with_goals, goals_count: 1)
+      expect(bob.already_liked?(alice)).to eq false
+      bob.like(alice)
+      expect(bob.already_liked?(alice)).to eq true
+      bob.unlike(alice)
+      expect(bob.already_liked?(alice)).to eq false
+    end
+  end
+
+  # todo: 上記を下記のように修正（like）
   # describe 'メソッド' do
   #   it '投稿をいいね/いいね解除できること' do
   #     alice = FactoryBot.create(:user)
