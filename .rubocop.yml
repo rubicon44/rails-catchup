@@ -16,14 +16,24 @@ AllCops:
     - !ruby/regexp /old_and_unused\.rb$/
     - 'vendor/**/*'
 
-AsciiComments:
+Style/AsciiComments:
   Enabled: false
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
-ClassAndModuleChildren:
+Style/ClassAndModuleChildren:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 25
+
+Rails/InverseOf:
+  Enabled: false
+
+Metrics/MethodLength:
+  CountComments: true
+  Max: 11
