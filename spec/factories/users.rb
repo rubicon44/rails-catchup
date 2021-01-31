@@ -4,6 +4,7 @@ FactoryBot.define do
     sequence(:email) { |n| "sample#{n}@example.com" }
     password { '123456' }
     profile { 'はじめまして！' }
+    avatar { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/test.jpg')) }
     # confirmed_at { Date.today }
 
     trait :invalid do
