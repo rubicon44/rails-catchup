@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/e810fbc574e0fa186a6b/maintainability)](https://codeclimate.com/github/rubicon44/rails-catchup/maintainability)
+
 # 概要
 RailsCatchupは、転職用ポートフォリオとして制作したタスク管理SNSです。
 
