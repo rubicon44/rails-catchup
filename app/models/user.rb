@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  attr_accessor :login
-  attr_accessor :current_password
+  attr_accessor :login, :current_password
+
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :validatable, :confirmable, authentication_keys: [:login]
@@ -11,16 +11,18 @@ class User < ApplicationRecord
   has_many :like_goals, through: :likes, source: :goal
 
   ## 自分がフォローしているユーザーとの関連
-  has_many :active_relationships, class_name: "Relationship", foreign_key: :following_id
+  has_many :active_relationships, class_name: 'Relationship', foreign_key: :following_id, dependent: :destroy
   has_many :followings, through: :active_relationships, source: :follower
   ## 自分をフォローしているユーザーとの関連
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: :follower_id
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: :follower_id, dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :following
 
-  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy, inverse_of: 'visitor'
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy,
+                                  inverse_of: 'visitor'
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
-  validates :username, presence: true, namespace: true, uniqueness: true, length: { in: 4..20 }, format: { with: /\A[a-z0-9_]+\z/ }
+  validates :username, presence: true, namespace: true, uniqueness: true, length: { in: 4..20 },
+                       format: { with: /\A[a-z0-9_]+\z/ }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
   validates :password, presence: true, on: :create
@@ -34,9 +36,10 @@ class User < ApplicationRecord
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value', { value: login.downcase }]).first
+      where(conditions.to_h).find_by(['lower(username) = :value OR lower(email) = :value',
+                                      { value: login.downcase }])
     elsif conditions.key?(:username) || conditions.key?(:email)
-      where(conditions.to_h).first
+      find_by(conditions.to_h)
     end
   end
 
@@ -72,13 +75,13 @@ class User < ApplicationRecord
 
   # フォロー通知
   def create_notification_follow!(current_user)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
-    if temp.blank?
-      notification = current_user.active_notifications.new(
-        visited_id: id,
-        action: 'follow'
-      )
-      notification.save if notification.valid?
-    end
+    temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ', current_user.id, id, 'follow'])
+    return unless temp.blank?
+
+    notification = current_user.active_notifications.new(
+      visited_id: id,
+      action: 'follow'
+    )
+    notification.save if notification.valid?
   end
 end

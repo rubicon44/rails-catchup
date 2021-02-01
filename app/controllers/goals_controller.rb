@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
     @search = Goal.ransack(params[:q])
@@ -53,6 +53,7 @@ class GoalsController < ApplicationController
   end
 
   private
+
   def goal_params
     params.require(:goal).permit(:name, :description, :status)
   end
