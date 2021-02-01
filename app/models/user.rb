@@ -39,37 +39,30 @@ class User < ApplicationRecord
     end
   end
 
-  # いいね判定
   def already_liked?(goal)
     likes.exists?(goal_id: goal.id)
   end
 
-  # いいね
   def like(goal)
     likes.create(goal_id: goal.id)
   end
 
-  # いいね解除
   def unlike(goal)
     likes.find_by(goal_id: goal.id).destroy
   end
 
-  # フォロー判定
   def already_followed?(user)
     passive_relationships.find_by(following_id: user.id).present?
   end
 
-  # フォロー
   def follow(user)
     active_relationships.create(follower_id: user.id)
   end
 
-  # フォロー解除
   def unfollow(user)
     active_relationships.find_by(follower_id: user.id).destroy
   end
 
-  # フォロー通知
   def create_notification_follow!(current_user)
     temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ', current_user.id, id, 'follow'])
     return unless temp.blank?

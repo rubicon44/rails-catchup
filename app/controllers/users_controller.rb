@@ -11,8 +11,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by!(username: params[:username])
     @users = User.where(username: params[:username])
-
-    # プロフィール用
     @goals = @user.goals.page(params[:page]).per(24)
     @likes = @user.like_goals.page(params[:page]).per(24)
   end
