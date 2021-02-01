@@ -58,7 +58,7 @@ RailsCatchupは、転職用ポートフォリオとして制作したタスク�
   ~~- Route 53~~→未実装
 
 ## DB設計図（Cacoo使用）
-<img src="https://user-images.githubusercontent.com/47108632/104265806-bfefe480-54d1-11eb-9f46-d8c6e788f6e6.png" width="640px">
+準備中
 
 ## AWS構成図（Cacoo使用）
 準備中

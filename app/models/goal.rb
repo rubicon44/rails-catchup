@@ -1,5 +1,7 @@
 class Goal < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
+  before_create :set_untitled
+
   belongs_to :user, optional: true
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -8,8 +10,6 @@ class Goal < ApplicationRecord
 
   validates :description, length: { maximum: 240 }
   validates :user_id, presence: true
-
-  before_create :set_untitled
 
   # いいね通知
   def create_notification_like!(current_user)
