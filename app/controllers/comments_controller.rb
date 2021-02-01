@@ -10,13 +10,11 @@ class CommentsController < ApplicationController
     if @comment.save
       # コメント通知
       @goal.create_notification_comment!(current_user, @comment.id)
-
-      flash[:success] = "コメントしました。"
-      redirect_back(fallback_location: root_path)
+      flash[:success] = 'コメントしました。'
     else
-      flash[:success] = "コメントできませんでした。"
-      redirect_back(fallback_location: root_path)
+      flash[:success] = 'コメントできませんでした。'
     end
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
@@ -27,7 +25,8 @@ class CommentsController < ApplicationController
   end
 
   private
-    def comment_params
+
+  def comment_params
     params.require(:comment).permit(:content)
   end
 end

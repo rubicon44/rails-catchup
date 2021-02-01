@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show search]
-  before_action :admin_user,     only: :destroy
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :admin_user, only: :destroy
 
   def index
     @search = User.ransack(params[:q])
